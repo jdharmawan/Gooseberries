@@ -119,12 +119,6 @@ public class PlayerController : MonoBehaviour
         //Debug.Log("player state: " + pState.ToString());
     }
 
-    private void MoveCharacter()
-    {
-        force = new Vector2(moveSpeed, 0);
-        rb2d.AddForce(force);
-    }
-
     //below 2 functions might be enumerator, coz need to deal with eventual animations
     void Shoot()
     {
