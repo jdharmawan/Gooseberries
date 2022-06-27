@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 2f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
 
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Animator animator;
+
+    bool facingRight = true;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +98,13 @@ public class PlayerController : MonoBehaviour
                 //move left
                 moveSpeed = -2f;
                 rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+
+                //temp anim test
+                if (facingRight)
+                {
+                    sprite.flipX = true;
+                    facingRight = false;
+                }
             }
             else if (Input.GetKey(KeyCode.D))
             {
@@ -103,6 +114,13 @@ public class PlayerController : MonoBehaviour
                 //move right
                 moveSpeed = 2f;
                 rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+
+                //temp anim test
+                if (!facingRight)
+                {
+                    sprite.flipX = false;
+                    facingRight = true;
+                }
             }
             if (Input.GetKeyDown(KeyCode.Space))
             {
