@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 pState = playerState.Aiming;
+                animator.SetTrigger("aim");
                 Debug.Log("aiming");
             }
         }
@@ -175,6 +176,7 @@ public class PlayerController : MonoBehaviour
     {
         //reload then go back to idle
         Debug.Log("reloading");
+        animator.SetTrigger("idle");
         pState = playerState.Idle;
     }
 
