@@ -47,9 +47,9 @@ public class PlayerController : MonoBehaviour
     {
         GetPlayerInput();
 
-        //test quick deceleration
-        if (moveSpeed != 0)
-            moveSpeed = Mathf.Lerp(moveSpeed, 0, 1f);
+        ////test quick deceleration
+        //if (moveSpeed != 0)
+        //    moveSpeed = Mathf.Lerp(moveSpeed, 0, 1f);
 
     }
 
@@ -87,6 +87,7 @@ public class PlayerController : MonoBehaviour
             //release shield
         }
 
+        //consider saving last input so that can press A, then D, then move right
         if (pState != playerState.Aiming)
         {
             //need to consider if we want like jump A D movement
@@ -106,6 +107,10 @@ public class PlayerController : MonoBehaviour
                     facingRight = false;
                 }
             }
+            else if(Input.GetKeyUp(KeyCode.A))
+            {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
             else if (Input.GetKey(KeyCode.D))
             {
                 if (isGrounded)
@@ -122,6 +127,11 @@ public class PlayerController : MonoBehaviour
                     facingRight = true;
                 }
             }
+            else if (Input.GetKeyUp(KeyCode.D))
+            {
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+            }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (isGrounded)
