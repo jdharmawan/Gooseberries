@@ -7,6 +7,10 @@ using UnityEngine;
 //eg if we want to have a anim when recovering from fall, might need to have another state
 //wall jump? i just thought of the code, can just set isgrounded to true when touching walls or smth, of course the physics is more complex
 
+//TODO: Convert code from velocity to addforce, but need to limit max speed if not will keep accelerating
+//keep track of last input so that the latest one will override the previous one, can A D then move to D etc
+//figure out knight collider and shield rotation
+
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D groundedCol;
@@ -24,13 +28,14 @@ public class PlayerController : MonoBehaviour
 
     private int hp = 3;
     [SerializeField] private float moveSpeed = 2f;
-    [SerializeField] private float jumpForce = 2f;
+    [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
 
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
 
-    bool facingRight = true;
+    private bool facingRight = true;
+    private bool shield = false;
 
     // Start is called before the first frame update
     void Start()
@@ -66,29 +71,39 @@ public class PlayerController : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             //if left click
-            pState = playerState.Aiming;
+            if (isGrounded)
+            {
+                pState = playerState.Aiming;
+                Debug.Log("aiming");
+            }
         }
 
         if(Input.GetMouseButtonUp(0))
         {
             //when release mouse, shoot arrow and maybe idle, or reload
-            pState = playerState.Shooting;
-            Shoot();
+            //check just in case i guess
+            if (pState == playerState.Aiming)
+            {
+                pState = playerState.Shooting;
+                Shoot();
+            }
         }
 
+        //actually maybe shield can be toggle
         if(Input.GetMouseButtonDown(1))
         {
             //if right click do shield
-
+            shield = true;
         }
 
         if(Input.GetMouseButtonUp(1))
         {
             //release shield
+            shield = false;
         }
 
         //consider saving last input so that can press A, then D, then move right
-        if (pState != playerState.Aiming)
+        if (pState != playerState.Aiming)//temp just put aiming, consider putting shooting and reloading here also
         {
             //need to consider if we want like jump A D movement
             if (Input.GetKey(KeyCode.A))
@@ -136,7 +151,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (isGrounded)
                 {
-                    jumpForce = 5f;
+                    //jumpForce = 5f;
                     rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
                     isGrounded = false;
                     //pState = playerState.Jumping;
@@ -151,6 +166,7 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         //do shooting, handle anims then set to reloading
+        Debug.Log("shooting");
         pState = playerState.Reloading;
         Reload();
     }
@@ -158,6 +174,7 @@ public class PlayerController : MonoBehaviour
     void Reload()
     {
         //reload then go back to idle
+        Debug.Log("reloading");
         pState = playerState.Idle;
     }
 
