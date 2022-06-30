@@ -208,12 +208,12 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("mouse pos: " + mousePos);
             Debug.Log("bowpivot transform 1");
-            Debug.Log("bow pivot pos1 : " + bowPivot.transform.position.x);
+            Debug.Log("bow pivot pos1 : " + bowPivot.transform.localPosition.x);
             //then do bowpivot transforms
-            if (bowPivot.transform.position.x < 0)
+            if (bowPivot.transform.localPosition.x < 0)
             {
-                bowPivot.transform.position = new Vector3(0 - bowPivot.transform.position.x, bowPivot.transform.position.y);
-                Debug.Log("bow pivot pos2 : " + bowPivot.transform.position.x);
+                bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
             }
 
             Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
@@ -232,12 +232,12 @@ public class PlayerController : MonoBehaviour
 
             Debug.Log("mouse pos: " + Input.mousePosition);
             Debug.Log("bowpivot transform 2");
-            Debug.Log("bow pivot pos1 : " + bowPivot.transform.position.x);
+            Debug.Log("bow pivot pos1 : " + bowPivot.transform.localPosition.x);
             //then do bowpivot transforms
-            if (bowPivot.transform.position.x > 0)
+            if (bowPivot.transform.localPosition.x > 0)
             {
-                bowPivot.transform.position = new Vector3(0 - bowPivot.transform.position.x, bowPivot.transform.position.y);
-                Debug.Log("bow pivot pos2 : " + bowPivot.transform.position.x);
+                bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
             }
 
             Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
