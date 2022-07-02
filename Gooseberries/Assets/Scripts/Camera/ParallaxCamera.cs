@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ParallaxCamera : MonoBehaviour
 {
-    public Camera cam;
+    //public Camera cam;
+    public Cinemachine.CinemachineVirtualCamera cam;
     public Transform player;
 
     Vector2 startPosition;
@@ -12,7 +13,7 @@ public class ParallaxCamera : MonoBehaviour
 
     Vector2 travel => (Vector2)cam.transform.position - startPosition;
     float distanceFromPlayer => transform.position.z - player.position.z;
-    float clippingPlane => (cam.transform.position.z + (distanceFromPlayer > 0 ? cam.farClipPlane : cam.nearClipPlane));
+    float clippingPlane => (cam.transform.position.z + (distanceFromPlayer > 0 ? cam.m_Lens.FarClipPlane : cam.m_Lens.NearClipPlane));
 
     float parallaxFactor => Mathf.Abs(distanceFromPlayer) / clippingPlane;
 

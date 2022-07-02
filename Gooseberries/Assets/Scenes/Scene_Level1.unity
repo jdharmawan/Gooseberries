@@ -398,7 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4030b7bc4127044eac4713ec5157649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1309337502}
+  cam: {fileID: 760666690}
   player: {fileID: 1722146747}
 --- !u!1 &354717141
 GameObject:
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4030b7bc4127044eac4713ec5157649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1309337502}
+  cam: {fileID: 760666690}
   player: {fileID: 1722146747}
 --- !u!1 &435832634
 GameObject:
@@ -762,7 +762,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760666689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.00000059604645, y: 0.25199962, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -974,6 +974,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 683739876103559293, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
+      propertyPath: m_Mass
+      value: 55
+      objectReference: {fileID: 0}
+    - target: {fileID: 683739876103559293, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
+      propertyPath: m_GravityScale
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
 --- !u!1 &1074329624
@@ -1073,7 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4030b7bc4127044eac4713ec5157649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1309337502}
+  cam: {fileID: 760666690}
   player: {fileID: 1722146747}
 --- !u!1 &1078580216
 GameObject:
@@ -1172,7 +1180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4030b7bc4127044eac4713ec5157649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 1309337502}
+  cam: {fileID: 760666690}
   player: {fileID: 1722146747}
 --- !u!1 &1150624886
 GameObject:
@@ -7996,7 +8004,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309337500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: -0.00000059604645, y: 0.25199962, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8064,7 +8072,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1894789191}
   - component: {fileID: 1894789193}
-  - component: {fileID: 1894789192}
+  - component: {fileID: 1894789194}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -8087,7 +8095,19 @@ Transform:
   m_Father: {fileID: 760666691}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1894789192
+--- !u!114 &1894789193
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894789190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1894789194
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8099,18 +8119,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 1.47, z: 0}
-  m_LookaheadTime: 0.3
-  m_LookaheadSmoothing: 4.2
+  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
+  m_LookaheadTime: 0.15
+  m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 1
-  m_XDamping: 1
+  m_XDamping: 2
   m_YDamping: 1
-  m_ZDamping: 1
+  m_ZDamping: 0
   m_TargetMovementOnly: 1
   m_ScreenX: 0.5
-  m_ScreenY: 0.5
+  m_ScreenY: 0.65
   m_CameraDistance: 10
-  m_DeadZoneWidth: 0
+  m_DeadZoneWidth: 0.15
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
   m_UnlimitedSoftZone: 0
@@ -8130,18 +8150,6 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
---- !u!114 &1894789193
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894789190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1912787567
 GameObject:
   m_ObjectHideFlags: 0
