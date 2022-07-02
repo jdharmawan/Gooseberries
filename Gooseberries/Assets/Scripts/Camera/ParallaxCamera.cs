@@ -11,7 +11,7 @@ public class ParallaxCamera : MonoBehaviour
     Vector2 startPosition;
     float startZPosition;
 
-    Vector2 travel => (Vector2)cam.transform.position - startPosition;
+    Vector2 distBetweenCamAndObject => (Vector2)cam.transform.position - startPosition;
     float distanceFromPlayer => transform.position.z - player.position.z;
     float clippingPlane => (cam.transform.position.z + (distanceFromPlayer > 0 ? cam.m_Lens.FarClipPlane : cam.m_Lens.NearClipPlane));
 
@@ -36,7 +36,10 @@ public class ParallaxCamera : MonoBehaviour
 
     Vector2 ParallaxEffect()
     {
-        return startPosition + travel * parallaxFactor;
+        float horizontalParallax = startPosition.x + (distBetweenCamAndObject.x * parallaxFactor);
+        float verticalParallax = startPosition.y + (distBetweenCamAndObject.y * parallaxFactor);
+
+        return new Vector2(horizontalParallax, verticalParallax);
     }
     #endregion
 
