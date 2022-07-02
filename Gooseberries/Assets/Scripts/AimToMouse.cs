@@ -12,7 +12,7 @@ public class AimToMouse : MonoBehaviour
 
     private void Update()
     {
-        AimTowardMouse();
+        //AimTowardMouse();
     }
 
     //need to do some math to figure out the 180 angle to flip the sprite

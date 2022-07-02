@@ -219,7 +219,7 @@ GameObject:
   - component: {fileID: 908329705}
   - component: {fileID: 908329704}
   - component: {fileID: 908329707}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Floor (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -443,7 +443,7 @@ GameObject:
   - component: {fileID: 1367849597}
   - component: {fileID: 1367849596}
   - component: {fileID: 1367849595}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Floor
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1430983139}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -691,7 +691,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1656528717}
   - component: {fileID: 1656528718}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: ShieldPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +739,7 @@ GameObject:
   - component: {fileID: 1673625443}
   - component: {fileID: 1673625444}
   - component: {fileID: 1673625445}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: ShieldSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
