@@ -7,7 +7,8 @@ public class AimToMouse : MonoBehaviour
     Vector3 mouse_pos = new Vector3();
     Vector3 object_pos = new Vector3();
     float angle;
-    public Transform center;
+    public Transform bowPivotPos;
+    public Transform centerPos;
 
     private void Update()
     {
@@ -24,7 +25,7 @@ public class AimToMouse : MonoBehaviour
         //aim toward mouse
         mouse_pos = Input.mousePosition;
         //mouse_pos.z = -20;//not sure what this does but it works
-        object_pos = Camera.main.WorldToScreenPoint(center.position);
+        object_pos = Camera.main.WorldToScreenPoint(centerPos.position);
         //mouse_pos.x = mouse_pos.x - object_pos.x;
         //mouse_pos.y = mouse_pos.y - object_pos.y;
         mouse_pos.x -= object_pos.x;

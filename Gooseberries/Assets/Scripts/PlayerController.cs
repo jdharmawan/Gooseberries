@@ -14,6 +14,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D groundedCol;
+    public GameObject bowPivot;
 
     private BoxCollider2D col;
     private Rigidbody2D rb2d;
@@ -24,7 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
 
     private playerState pState;
-    private Vector2 force;
+    private Vector2 force = new Vector2();
+    private Vector3 mousePos = new Vector3();
 
     private int hp = 3;
     [SerializeField] private float moveSpeed = 2f;
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
         pState = playerState.Idle;
         isGrounded = true;
+
+        Debug.Log("bow pivot pos: " + bowPivot.transform.position);
     }
 
     // Update is called once per frame
@@ -56,6 +60,8 @@ public class PlayerController : MonoBehaviour
         //if (moveSpeed != 0)
         //    moveSpeed = Mathf.Lerp(moveSpeed, 0, 1f);
 
+        if (pState == playerState.Aiming)
+            FlipWithMouseAim();
     }
 
     private void GetPlayerInput()
@@ -70,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
+            //FlipWithMouseAim();
             //if left click
             if (isGrounded)
             {
@@ -180,7 +187,80 @@ public class PlayerController : MonoBehaviour
         pState = playerState.Idle;
     }
 
+    //check if mouse if left or right of sprite and flip accordingly
+    //try local position
+    void FlipWithMouseAim()
+    {
+        Debug.Log("flip here");
+        mousePos = Input.mousePosition;
+        //need to set z to 10f because https://answers.unity.com/questions/331558/screentoworldpoint-not-working.html
+        mousePos.z = 10f;
+        //Debug.Log("mouse pos: " + Camera.main.ScreenToWorldPoint(mousePos));
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        //first check the mouse x pos relative to sprite center
+        if (mousePos.x > transform.position.x)
+        {
+            facingRight = true;
+
+            if (sprite.flipX)
+                sprite.flipX = false;
+
+            Debug.Log("mouse pos: " + mousePos);
+            Debug.Log("bowpivot transform 1");
+            Debug.Log("bow pivot pos1 : " + bowPivot.transform.localPosition.x);
+            //then do bowpivot transforms
+            if (bowPivot.transform.localPosition.x < 0)
+            {
+                bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
+            }
+
+            Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
+            if (bowPivot.transform.localScale.y < 0)
+            {
+                bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
+            }
+        }
+        else
+        {
+            facingRight = false;
+
+            if (!sprite.flipX)
+                sprite.flipX = true;
+
+            Debug.Log("mouse pos: " + Input.mousePosition);
+            Debug.Log("bowpivot transform 2");
+            Debug.Log("bow pivot pos1 : " + bowPivot.transform.localPosition.x);
+            //then do bowpivot transforms
+            if (bowPivot.transform.localPosition.x > 0)
+            {
+                bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
+            }
+
+            Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
+            if (bowPivot.transform.localScale.y > 0)
+            {
+                bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
+            }
+        }
+
+        ////in case here is a check based on the bowpivot position
+        //if(mousePos.x > bowPivot.transform.position.x)
+        //{
+        //    facingRight = true;
+        //}
+        //else
+        //{
+        //    facingRight = false;
+        //}
+    }
+
     //for when anims are done
+    //maybe dont need, maybe can do in checks above, see how
     private void HandleAnimations()
     {
         if(isGrounded)
