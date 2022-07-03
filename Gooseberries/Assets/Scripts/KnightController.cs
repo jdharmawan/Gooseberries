@@ -11,14 +11,19 @@ using UnityEngine;
 //fk im dumb, can just apply counter force or just set his velocity to 0
 public class KnightController : MonoBehaviour
 {
+    public GameObject princess;
     public GameObject shieldPivot;
+    public GameObject shieldObject;
 
     private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
+    [SerializeField] private float moveSpeed = 2f;
 
     private Vector3 mousePos = new Vector3();
+    private float distToPrincess = 0f;
+
     private bool facingRight = true;
     private bool shieldOut = false;
 
@@ -33,6 +38,7 @@ public class KnightController : MonoBehaviour
     void Update()
     {
         //actually maybe shield can be toggle
+        //do some QOL where the knight teleports to the princess
         if (Input.GetMouseButtonDown(1))
         {
             //if right click do shield
@@ -66,8 +72,38 @@ public class KnightController : MonoBehaviour
             {
                 shieldPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
             }
+
+            FollowPrincess();
         }
     }
+
+    void FollowPrincess()
+    {
+        //try to stick to princess as much as possible, but only on the x axis
+        //oh yeah i think i did this before, need to have this small range where the knight will stop, otherwise he will keep moving back and forth
+        distToPrincess = princess.transform.position.x - transform.position.x;
+
+        if (-0.1f <= distToPrincess && distToPrincess <= 0.1f)
+        {
+            //do nothing
+            rb2d.velocity = Vector2.zero;
+        }
+        else if (distToPrincess > 0.1f)
+        {
+            rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+            facingRight = true;
+            if (sprite.flipX)
+                sprite.flipX = false;
+        }
+        else if(distToPrincess < 0.1f)
+        {
+            rb2d.velocity = new Vector2(-moveSpeed, rb2d.velocity.y);
+            facingRight = false;
+            if (!sprite.flipX)
+                sprite.flipX = true;
+        }
+    }
+
     void FlipWithMouseAim()
     {
         Debug.Log("flip here");
@@ -85,21 +121,15 @@ public class KnightController : MonoBehaviour
             if (sprite.flipX)
                 sprite.flipX = false;
 
-            Debug.Log("mouse pos: " + mousePos);
-            Debug.Log("shieldPivot transform 1");
-            Debug.Log("bow pivot pos1 : " + shieldPivot.transform.localPosition.x);
             //then do shieldPivot transforms
             if (shieldPivot.transform.localPosition.x < 0)
             {
                 shieldPivot.transform.localPosition = new Vector3(0 - shieldPivot.transform.localPosition.x, shieldPivot.transform.localPosition.y);
-                Debug.Log("bow pivot pos2 : " + shieldPivot.transform.localPosition.x);
             }
 
-            Debug.Log("bow pivot y1 : " + shieldPivot.transform.localScale.y);
             if (shieldPivot.transform.localScale.y < 0)
             {
                 shieldPivot.transform.localScale = new Vector3(shieldPivot.transform.localScale.x, shieldPivot.transform.localScale.y * -1, shieldPivot.transform.localScale.z);
-                Debug.Log("bow pivot y2 : " + shieldPivot.transform.localScale.y);
             }
         }
         else
@@ -109,21 +139,15 @@ public class KnightController : MonoBehaviour
             if (!sprite.flipX)
                 sprite.flipX = true;
 
-            Debug.Log("mouse pos: " + Input.mousePosition);
-            Debug.Log("shieldPivot transform 2");
-            Debug.Log("bow pivot pos1 : " + shieldPivot.transform.localPosition.x);
             //then do shieldPivot transforms
             if (shieldPivot.transform.localPosition.x > 0)
             {
                 shieldPivot.transform.localPosition = new Vector3(0 - shieldPivot.transform.localPosition.x, shieldPivot.transform.localPosition.y);
-                Debug.Log("bow pivot pos2 : " + shieldPivot.transform.localPosition.x);
             }
 
-            Debug.Log("bow pivot y1 : " + shieldPivot.transform.localScale.y);
             if (shieldPivot.transform.localScale.y > 0)
             {
                 shieldPivot.transform.localScale = new Vector3(shieldPivot.transform.localScale.x, shieldPivot.transform.localScale.y * -1, shieldPivot.transform.localScale.z);
-                Debug.Log("bow pivot y2 : " + shieldPivot.transform.localScale.y);
             }
         }
     }
