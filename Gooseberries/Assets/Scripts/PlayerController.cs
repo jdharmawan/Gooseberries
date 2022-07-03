@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D groundedCol;
     public GameObject bowPivot;
 
-    private BoxCollider2D col;
+    private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Animator animator;
 
     //might need states to keep track of like shooting arrow, deploying shield etc
     private enum playerState {Idle, Walking, Aiming, Shooting, Reloading};
@@ -33,16 +35,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
 
-    [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private Animator animator;
 
     private bool facingRight = true;
-    private bool shield = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        col = GetComponent<BoxCollider2D>();
+        col = GetComponent<CapsuleCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
 
         pState = playerState.Idle;
@@ -60,8 +59,10 @@ public class PlayerController : MonoBehaviour
         //if (moveSpeed != 0)
         //    moveSpeed = Mathf.Lerp(moveSpeed, 0, 1f);
 
-        if (pState == playerState.Aiming)
-            FlipWithMouseAim();
+        //if (pState == playerState.Aiming)
+        //    FlipWithMouseAim();
+
+        StateMachine();
     }
 
     private void GetPlayerInput()
@@ -97,19 +98,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //actually maybe shield can be toggle
-        if(Input.GetMouseButtonDown(1))
-        {
-            //if right click do shield
-            shield = true;
-        }
-
-        if(Input.GetMouseButtonUp(1))
-        {
-            //release shield
-            shield = false;
-        }
-
         //consider saving last input so that can press A, then D, then move right
         if (pState != playerState.Aiming)//temp just put aiming, consider putting shooting and reloading here also
         {
@@ -128,6 +116,23 @@ public class PlayerController : MonoBehaviour
                 {
                     sprite.flipX = true;
                     facingRight = false;
+
+                    ////ACTUALLY DONT REALLY NEED THIS COZ CAN JUST CHANGE TO IDLE OR WALK SPRITE////
+                    //reset bow sprite here
+                    //do bowpivot transforms
+                    bowPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
+                    if (bowPivot.transform.localPosition.x > 0)
+                    {
+                        bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                        Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
+                    }
+
+                    Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
+                    if (bowPivot.transform.localScale.y > 0)
+                    {
+                        bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                        Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
+                    }
                 }
             }
             else if(Input.GetKeyUp(KeyCode.A))
@@ -148,6 +153,22 @@ public class PlayerController : MonoBehaviour
                 {
                     sprite.flipX = false;
                     facingRight = true;
+
+                    //reset bow sprite here also
+                    //then do bowpivot transforms
+                    bowPivot.transform.rotation = Quaternion.identity;
+                    if (bowPivot.transform.localPosition.x < 0)
+                    {
+                        bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                        Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
+                    }
+
+                    Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
+                    if (bowPivot.transform.localScale.y < 0)
+                    {
+                        bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                        Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
+                    }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.D))
@@ -247,21 +268,11 @@ public class PlayerController : MonoBehaviour
                 Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
             }
         }
-
-        ////in case here is a check based on the bowpivot position
-        //if(mousePos.x > bowPivot.transform.position.x)
-        //{
-        //    facingRight = true;
-        //}
-        //else
-        //{
-        //    facingRight = false;
-        //}
     }
 
     //for when anims are done
     //maybe dont need, maybe can do in checks above, see how
-    private void HandleAnimations()
+    private void StateMachine()
     {
         if(isGrounded)
         {
@@ -275,6 +286,8 @@ public class PlayerController : MonoBehaviour
                     break;
                 case playerState.Aiming:
                     Debug.Log("Aiming");
+                    FlipWithMouseAim();
+                    bowPivot.GetComponent<AimToMouse>().AimTowardMouse();
                     break;
                 case playerState.Shooting:
                     Debug.Log("Shooting");
