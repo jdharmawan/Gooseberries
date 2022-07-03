@@ -406,12 +406,12 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 55
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -449,9 +449,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundedCol: {fileID: 683739875458905461}
   bowPivot: {fileID: 683739876039322316}
-  isGrounded: 0
-  moveSpeed: 0
-  jumpForce: 5
-  bowCharge: 0
   sprite: {fileID: 683739876103559295}
   animator: {fileID: 683739876103559266}
+  isGrounded: 0
+  moveSpeed: 0
+  jumpForce: 10
+  bowCharge: 0

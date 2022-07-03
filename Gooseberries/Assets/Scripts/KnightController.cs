@@ -14,6 +14,7 @@ public class KnightController : MonoBehaviour
     public GameObject princess;
     public GameObject shieldPivot;
     public GameObject shieldObject;
+    public GameObject shieldPlatform;
 
     private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
@@ -32,6 +33,8 @@ public class KnightController : MonoBehaviour
     {
         col = GetComponent<CapsuleCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
+
+        shieldPlatform.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,6 +48,8 @@ public class KnightController : MonoBehaviour
             shieldOut = true;
             rb2d.velocity = Vector3.zero;
             rb2d.isKinematic = true;
+            //activate shield platform
+            shieldPlatform.SetActive(true);
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -53,6 +58,8 @@ public class KnightController : MonoBehaviour
             shieldOut = false;
             rb2d.velocity = Vector3.zero;
             rb2d.isKinematic = false;
+            //deactivate shield platform
+            shieldPlatform.SetActive(false);
         }
 
         if(shieldOut)
