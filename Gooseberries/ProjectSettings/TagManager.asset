@@ -51,6 +51,9 @@ TagManager:
   - name: Interactables
     uniqueID: 296031241
     locked: 0
+  - name: Level
+    uniqueID: 3819973061
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

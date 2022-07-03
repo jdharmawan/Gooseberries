@@ -6,9 +6,12 @@ public class ParallaxCamera : MonoBehaviour
 {
     //public Camera cam;
     public Cinemachine.CinemachineVirtualCamera cam;
+    public Camera tempCam;
     public Transform player;
 
     Vector2 startPosition;
+    float startXPosition;
+    float startYPosition;
     float startZPosition;
 
     Vector2 distBetweenCamAndObject => (Vector2)cam.transform.position - startPosition;
@@ -31,15 +34,20 @@ public class ParallaxCamera : MonoBehaviour
     void Initialise_StartingPosition()
     {
         startPosition = transform.position;
+        startXPosition = transform.position.x;
+        startYPosition = distBetweenCamAndObject.y;
         startZPosition = transform.position.z;
     }
 
     Vector2 ParallaxEffect()
     {
+        Debug.Log($"{transform.name} {parallaxFactor}");
         float horizontalParallax = startPosition.x + (distBetweenCamAndObject.x * parallaxFactor);
         float verticalParallax = startPosition.y + (distBetweenCamAndObject.y * parallaxFactor);
+		//if (distanceFromPlayer != 0)
+		//	verticalParallax = startPosition.y + (distBetweenCamAndObject.y * 1);
 
-        return new Vector2(horizontalParallax, verticalParallax);
+		return new Vector2(horizontalParallax, verticalParallax);
     }
     #endregion
 
