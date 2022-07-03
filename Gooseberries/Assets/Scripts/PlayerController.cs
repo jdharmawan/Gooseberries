@@ -16,8 +16,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private BoxCollider2D groundedCol;
     public GameObject bowPivot;
 
-    private BoxCollider2D col;
+    private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Animator animator;
 
     //might need states to keep track of like shooting arrow, deploying shield etc
     private enum playerState {Idle, Walking, Aiming, Shooting, Reloading};
@@ -33,16 +35,13 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
 
-    [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private Animator animator;
 
     private bool facingRight = true;
-    private bool shield = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        col = GetComponent<BoxCollider2D>();
+        col = GetComponent<CapsuleCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
 
         pState = playerState.Idle;
@@ -99,19 +98,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //actually maybe shield can be toggle
-        if(Input.GetMouseButtonDown(1))
-        {
-            //if right click do shield
-            shield = true;
-        }
-
-        if(Input.GetMouseButtonUp(1))
-        {
-            //release shield
-            shield = false;
-        }
-
         //consider saving last input so that can press A, then D, then move right
         if (pState != playerState.Aiming)//temp just put aiming, consider putting shooting and reloading here also
         {
@@ -131,6 +117,7 @@ public class PlayerController : MonoBehaviour
                     sprite.flipX = true;
                     facingRight = false;
 
+                    ////ACTUALLY DONT REALLY NEED THIS COZ CAN JUST CHANGE TO IDLE OR WALK SPRITE////
                     //reset bow sprite here
                     //do bowpivot transforms
                     bowPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
