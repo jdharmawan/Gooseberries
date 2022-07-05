@@ -21,6 +21,7 @@ public class KnightController : MonoBehaviour
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
     [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private int arrowCount = 0;
 
     private Vector3 mousePos = new Vector3();
     private float distToPrincess = 0f;
