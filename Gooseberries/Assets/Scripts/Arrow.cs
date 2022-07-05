@@ -20,8 +20,11 @@ public class Arrow : Projectile
     void OnTriggerEnter2D(Collider2D collision)
     {
         //set parent to that thing that we collide with
-        rb2d.velocity = Vector2.zero;
-        transform.parent = collision.transform;
+        if(collision.tag == "TargetBoard")
+        {
+            rb2d.velocity = Vector2.zero;
+            transform.parent = collision.transform;
+        }
 
         //lots of bugs
     }
