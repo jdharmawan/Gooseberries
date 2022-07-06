@@ -227,21 +227,15 @@ public class PlayerController : MonoBehaviour
             if (sprite.flipX)
                 sprite.flipX = false;
 
-            Debug.Log("mouse pos: " + mousePos);
-            Debug.Log("bowpivot transform 1");
-            Debug.Log("bow pivot pos1 : " + bowPivot.transform.localPosition.x);
             //then do bowpivot transforms
             if (bowPivot.transform.localPosition.x < 0)
             {
                 bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
-                Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
             }
 
-            Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
             if (bowPivot.transform.localScale.y < 0)
             {
                 bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
-                Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
             }
         }
         else
@@ -251,21 +245,15 @@ public class PlayerController : MonoBehaviour
             if (!sprite.flipX)
                 sprite.flipX = true;
 
-            Debug.Log("mouse pos: " + Input.mousePosition);
-            Debug.Log("bowpivot transform 2");
-            Debug.Log("bow pivot pos1 : " + bowPivot.transform.localPosition.x);
             //then do bowpivot transforms
             if (bowPivot.transform.localPosition.x > 0)
             {
                 bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
-                Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
             }
 
-            Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
             if (bowPivot.transform.localScale.y > 0)
             {
                 bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
-                Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
             }
         }
     }
@@ -279,21 +267,21 @@ public class PlayerController : MonoBehaviour
             switch (pState)
             {
                 case playerState.Idle:
-                    Debug.Log("Idle");
+                    //Debug.Log("Idle");
                     break;
                 case playerState.Walking:
-                    Debug.Log("Walking");
+                    //Debug.Log("Walking");
                     break;
                 case playerState.Aiming:
-                    Debug.Log("Aiming");
+                    //Debug.Log("Aiming");
                     FlipWithMouseAim();
                     bowPivot.GetComponent<AimToMouse>().AimTowardMouse();
                     break;
                 case playerState.Shooting:
-                    Debug.Log("Shooting");
+                    //Debug.Log("Shooting");
                     break;
                 case playerState.Reloading:
-                    Debug.Log("Reloading");
+                    //Debug.Log("Reloading");
                     break;
                 default:
                     break;

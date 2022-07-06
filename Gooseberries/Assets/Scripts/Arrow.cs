@@ -20,6 +20,10 @@ public class Arrow : Projectile
     void OnTriggerEnter2D(Collider2D collision)
     {
         //set parent to that thing that we collide with
+        //rotation bugs were caused by scale. should not exist if the shield sprite is exact size
+        //got bugs when release shield, should be because of rotation or flip sprite
+        //kind of solved by set active to false for shield
+        //if problem re occurs then fix again, if not just use this
         if(collision.tag == "TargetBoard")
         {
             rb2d.velocity = Vector2.zero;

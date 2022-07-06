@@ -51,6 +51,7 @@ public class KnightController : MonoBehaviour
             rb2d.isKinematic = true;
             //activate shield platform
             shieldPlatform.SetActive(true);
+            shieldObject.SetActive(true);
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -61,9 +62,10 @@ public class KnightController : MonoBehaviour
             rb2d.isKinematic = false;
             //deactivate shield platform
             shieldPlatform.SetActive(false);
+            shieldObject.SetActive(false);
         }
 
-        if(shieldOut)
+        if (shieldOut)
         {
             shieldPivot.GetComponent<AimToMouse>().AimTowardMouse();
             FlipWithMouseAim();
