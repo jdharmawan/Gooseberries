@@ -14,9 +14,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D groundedCol;
+    public GameObject bowPivot;
 
-    private BoxCollider2D col;
+    private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
+    [SerializeField] private SpriteRenderer sprite;
+    [SerializeField] private Animator animator;
 
     //might need states to keep track of like shooting arrow, deploying shield etc
     private enum playerState {Idle, Walking, Aiming, Shooting, Reloading};
@@ -24,27 +27,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private bool isGrounded;
 
     private playerState pState;
-    private Vector2 force;
+    private Vector2 force = new Vector2();
+    private Vector3 mousePos = new Vector3();
 
     private int hp = 3;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
 
-    [SerializeField] private SpriteRenderer sprite;
-    [SerializeField] private Animator animator;
 
     private bool facingRight = true;
-    private bool shield = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        col = GetComponent<BoxCollider2D>();
+        col = GetComponent<CapsuleCollider2D>();
         rb2d = GetComponent<Rigidbody2D>();
 
         pState = playerState.Idle;
         isGrounded = true;
+
+        Debug.Log("bow pivot pos: " + bowPivot.transform.position);
     }
 
     // Update is called once per frame
@@ -56,6 +59,10 @@ public class PlayerController : MonoBehaviour
         //if (moveSpeed != 0)
         //    moveSpeed = Mathf.Lerp(moveSpeed, 0, 1f);
 
+        //if (pState == playerState.Aiming)
+        //    FlipWithMouseAim();
+
+        StateMachine();
     }
 
     private void GetPlayerInput()
@@ -70,6 +77,7 @@ public class PlayerController : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
+            //FlipWithMouseAim();
             //if left click
             if (isGrounded)
             {
@@ -90,19 +98,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        //actually maybe shield can be toggle
-        if(Input.GetMouseButtonDown(1))
-        {
-            //if right click do shield
-            shield = true;
-        }
-
-        if(Input.GetMouseButtonUp(1))
-        {
-            //release shield
-            shield = false;
-        }
-
         //consider saving last input so that can press A, then D, then move right
         if (pState != playerState.Aiming)//temp just put aiming, consider putting shooting and reloading here also
         {
@@ -121,6 +116,23 @@ public class PlayerController : MonoBehaviour
                 {
                     sprite.flipX = true;
                     facingRight = false;
+
+                    ////ACTUALLY DONT REALLY NEED THIS COZ CAN JUST CHANGE TO IDLE OR WALK SPRITE////
+                    //reset bow sprite here
+                    //do bowpivot transforms
+                    bowPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
+                    if (bowPivot.transform.localPosition.x > 0)
+                    {
+                        bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                        Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
+                    }
+
+                    Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
+                    if (bowPivot.transform.localScale.y > 0)
+                    {
+                        bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                        Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
+                    }
                 }
             }
             else if(Input.GetKeyUp(KeyCode.A))
@@ -141,6 +153,22 @@ public class PlayerController : MonoBehaviour
                 {
                     sprite.flipX = false;
                     facingRight = true;
+
+                    //reset bow sprite here also
+                    //then do bowpivot transforms
+                    bowPivot.transform.rotation = Quaternion.identity;
+                    if (bowPivot.transform.localPosition.x < 0)
+                    {
+                        bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                        Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
+                    }
+
+                    Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
+                    if (bowPivot.transform.localScale.y < 0)
+                    {
+                        bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                        Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
+                    }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.D))
@@ -180,27 +208,80 @@ public class PlayerController : MonoBehaviour
         pState = playerState.Idle;
     }
 
+    //check if mouse if left or right of sprite and flip accordingly
+    //try local position
+    void FlipWithMouseAim()
+    {
+        Debug.Log("flip here");
+        mousePos = Input.mousePosition;
+        //need to set z to 10f because https://answers.unity.com/questions/331558/screentoworldpoint-not-working.html
+        mousePos.z = 10f;
+        //Debug.Log("mouse pos: " + Camera.main.ScreenToWorldPoint(mousePos));
+        mousePos = Camera.main.ScreenToWorldPoint(mousePos);
+
+        //first check the mouse x pos relative to sprite center
+        if (mousePos.x > transform.position.x)
+        {
+            facingRight = true;
+
+            if (sprite.flipX)
+                sprite.flipX = false;
+
+            //then do bowpivot transforms
+            if (bowPivot.transform.localPosition.x < 0)
+            {
+                bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+            }
+
+            if (bowPivot.transform.localScale.y < 0)
+            {
+                bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+            }
+        }
+        else
+        {
+            facingRight = false;
+
+            if (!sprite.flipX)
+                sprite.flipX = true;
+
+            //then do bowpivot transforms
+            if (bowPivot.transform.localPosition.x > 0)
+            {
+                bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+            }
+
+            if (bowPivot.transform.localScale.y > 0)
+            {
+                bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+            }
+        }
+    }
+
     //for when anims are done
-    private void HandleAnimations()
+    //maybe dont need, maybe can do in checks above, see how
+    private void StateMachine()
     {
         if(isGrounded)
         {
             switch (pState)
             {
                 case playerState.Idle:
-                    Debug.Log("Idle");
+                    //Debug.Log("Idle");
                     break;
                 case playerState.Walking:
-                    Debug.Log("Walking");
+                    //Debug.Log("Walking");
                     break;
                 case playerState.Aiming:
-                    Debug.Log("Aiming");
+                    //Debug.Log("Aiming");
+                    FlipWithMouseAim();
+                    bowPivot.GetComponent<AimToMouse>().AimTowardMouse();
                     break;
                 case playerState.Shooting:
-                    Debug.Log("Shooting");
+                    //Debug.Log("Shooting");
                     break;
                 case playerState.Reloading:
-                    Debug.Log("Reloading");
+                    //Debug.Log("Reloading");
                     break;
                 default:
                     break;
