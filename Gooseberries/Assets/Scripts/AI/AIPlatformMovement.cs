@@ -86,7 +86,7 @@ public class AIPlatformMovement : MonoBehaviour
         {        
             if (direction.y > jumpNodeHeightRequirement)
             {
-                Debug.Log("JUMP " + Physics2D.Raycast(transform.position, -Vector3.up, 1f, obstacleMask.value).collider.name);
+                //Debug.Log("JUMP " + Physics2D.Raycast(transform.position, -Vector3.up, 1f, obstacleMask.value).collider.name);
                 rb.AddForce(Vector2.up * speed * jumpModifier);
                 lastJumpTime = Time.time;
             }
@@ -97,7 +97,7 @@ public class AIPlatformMovement : MonoBehaviour
         if (rb.velocity.x < maxVelocity)
         {
             rb.AddForce(force);
-            Debug.Log("AddForce");
+            //Debug.Log("AddForce");
         }
         
         //rb.velocity = new Vector2(force.x/5f,rb.velocity.y);
