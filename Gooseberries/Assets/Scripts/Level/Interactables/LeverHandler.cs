@@ -29,7 +29,7 @@ namespace Interactables
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Player")
+            if (collision.tag == "Player" && !isActive)
             {
                 inputPromptTag.SetActive(true);
                 isPlayerWithinCollider = true;
@@ -50,7 +50,10 @@ namespace Interactables
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (isPlayerWithinCollider)
+                {
                     isActive = true;
+                    inputPromptTag.SetActive(false);
+                }
             }
         }
     }

@@ -10,7 +10,7 @@ public class GameManager_Level : MonoBehaviour
     int lastBonfireIndex = 0;
 
     [SerializeField] Cinemachine.CinemachineVirtualCamera virtualCamera;
-    public Transform player;
+    public PlayerController player;
 
     [Header("Interactables")]
     [SerializeField] List<GameObject> bonfires;
@@ -71,12 +71,14 @@ public class GameManager_Level : MonoBehaviour
     #region Bonfire Functions
     public void TriggerUpgrade()
     {
+        UpgradingUIDisplay display = upgradingUi.GetComponent<UpgradingUIDisplay>();
         upgradingUi.SetActive(true);
+        display.DisplayUpgrades(player);
     }
 
-    public void UpdateBonfireData()
+    public void UpdateBonfireData(int index)
     {
-
+        lastBonfireIndex = index;
     }
     #endregion
 
@@ -100,8 +102,6 @@ public class GameManager_Level : MonoBehaviour
             diceDisplay.UpdateDiceFaceQuantity(GetNumberOfDiceOfFace(i + 1));
         }
     }
-
-    
     #endregion
 
     public void B_ProceedLevel()

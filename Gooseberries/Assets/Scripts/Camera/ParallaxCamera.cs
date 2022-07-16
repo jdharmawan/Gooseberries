@@ -41,7 +41,6 @@ public class ParallaxCamera : MonoBehaviour
 
     Vector2 ParallaxEffect()
     {
-        Debug.Log($"{transform.name} {parallaxFactor}");
         float horizontalParallax = startPosition.x + (distBetweenCamAndObject.x * parallaxFactor);
         float verticalParallax = startPosition.y + (distBetweenCamAndObject.y * parallaxFactor);
 		//if (distanceFromPlayer != 0)

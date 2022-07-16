@@ -361,5 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c48f913d6a672984d8f6206b6366461b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  diceFace: 0
   inactiveColor: {r: 0.5568628, g: 0.5568628, b: 0.5568628, a: 1}
+  diceFaceNumber: {fileID: 4077204783855593262}
   diceFaceQuantity: {fileID: 4077204784257034199}

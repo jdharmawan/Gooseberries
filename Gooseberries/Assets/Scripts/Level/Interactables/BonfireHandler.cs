@@ -18,6 +18,8 @@ namespace Interactables
         //Counters
         float lerpTime = 0f;
 
+        [SerializeField] List<Enemy> enemies;
+
         private void Start()
         {
             bonfireCollider = GetComponent<Collider2D>();
@@ -28,6 +30,7 @@ namespace Interactables
             if (collision.tag == "Player" && isActive == false && bonfireIndex != 0)
             {
                 levelManager.TriggerUpgrade();
+                levelManager.UpdateBonfireData(bonfireIndex);
                 UpdateLatestCheckpoint();
                 Time.timeScale = 0f;
                 GameManager_Level.isGamePaused = true;
@@ -56,7 +59,10 @@ namespace Interactables
 
         public void SpawnEnemies(int numberOfEnemies)
         {
-
+            for (int i = 0; i < numberOfEnemies; i++)
+            {
+                enemies[i].gameObject.SetActive(true);
+            }
         }
 
         #endregion

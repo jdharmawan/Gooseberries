@@ -57,7 +57,7 @@ namespace Interactables
                     transform.localPosition = targetPosition;
                     isActivating = false;
                     isEngaged = true;
-                    virtualCamera.Follow = levelManager.player;
+                    virtualCamera.Follow = levelManager.player.transform;
                     StopCoroutine(cor);
                 }
                 yield return null;

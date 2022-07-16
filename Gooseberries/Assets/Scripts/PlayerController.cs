@@ -29,9 +29,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos = new Vector3();
     private bool facingRight = true;
 
-    [SerializeField] private int hp = 3;
-    [SerializeField] private int arrows = 3;
-    [SerializeField] private float moveSpeed = 2f;
+    public int skillPoints = 0;
+    public int hp = 3;
+    public int arrows = 3;
+    public float moveSpeed = 2f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
     [SerializeField] private bool isGrounded;//gonna need to set up a seperate smaller collider below the player collider to keep track of grounded
