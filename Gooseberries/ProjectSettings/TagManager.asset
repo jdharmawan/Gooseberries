@@ -48,11 +48,11 @@ TagManager:
   - name: Background_OnTile
     uniqueID: 2457345853
     locked: 0
-  - name: Interactables
-    uniqueID: 296031241
-    locked: 0
   - name: Level
     uniqueID: 3819973061
+    locked: 0
+  - name: Interactables
+    uniqueID: 296031241
     locked: 0
   - name: Default
     uniqueID: 0
