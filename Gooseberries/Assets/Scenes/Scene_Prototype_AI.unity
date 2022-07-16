@@ -981,7 +981,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
-  shootCooldown: 2
+  stats: {fileID: 11400000, guid: 23320b24960c12e4bbe7bb64c860596b, type: 2}
   detectionTrigger: {fileID: 582505959}
   rangeTrigger: {fileID: 1155138131}
   meleeTrigger: {fileID: 72970583}

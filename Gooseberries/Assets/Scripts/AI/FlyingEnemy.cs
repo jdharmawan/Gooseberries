@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class FlyingEnemy : Enemy
 {
@@ -8,14 +9,14 @@ public class FlyingEnemy : Enemy
     [SerializeField] private AISearchCollider rangeTrigger;
     [SerializeField] private AISearchCollider meleeTrigger;
     [SerializeField] private Transform aim;
-    [SerializeField] private Transform seekTarget;
     [SerializeField] private GameObject arrowPrefab;
     private Transform playerTrf;
     private EnemyAIState curState = EnemyAIState.Idle;
     private float lastPlayerDetectedTime;
     [SerializeField] private float loseInterestDuration;
     private bool exited = false;
-
+    private Transform seekTarget;
+    private AIDestinationSetter destinationSetter;
     //private bool inDetection = false;
     //private bool inRange = false;
     //private bool inMelee= false;
@@ -26,10 +27,15 @@ public class FlyingEnemy : Enemy
         rangeTrigger.Instantiate(InRangeEnter, InRangeStay, InRangeExit);
         meleeTrigger.Instantiate(InMeleeEnter, InMeleeStay, InMeleeExit);
         playerTrf = FindObjectOfType<PlayerController>().transform;
+        var seekGameobject = new GameObject("FlyingEnemySeek");
+        seekTarget = seekGameobject.transform;
+        destinationSetter = GetComponent<AIDestinationSetter>();
+        destinationSetter.target = seekTarget;
+
     }
     public void TryToShoot()
     {
-        if (Time.time - lastShootTime > shootCooldown)
+        if (Time.time - lastShootTime > stats.shootCooldown)
         {
             lastShootTime = Time.time;
             Shoot();
