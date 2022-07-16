@@ -19,7 +19,8 @@ public class PlayerArrow : Arrow
     //try smth funny
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Enemy")
+        //Debug.Log(collision.tag);
+        if(collision.CompareTag("Enemy"))
         {
             //minus enemy hp
             Debug.Log("Hit enemy");
