@@ -19,13 +19,14 @@ public class AISearchCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Trigger " + other.name);
+        //Debug.Log("Trigger " + other.name);
         if (other.CompareTag("Player")){
             var obstacleHit = Physics2D.Linecast(transform.position, other.transform.position, obstacleLayer);
             if (obstacleHit.transform == null)
             {
                 onEnterEvent.Invoke(other.transform);
                 playerInSight = true;
+                //Debug.Log("onEnterEvent " + other.name);
             }              
         }
     }
@@ -35,15 +36,27 @@ public class AISearchCollider : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             var obstacleHit = Physics2D.Linecast(transform.position, other.transform.position, obstacleLayer);
-            if (playerInSight && obstacleHit.transform != null)
+            //hit obtacle
+            if(obstacleHit.transform != null)
             {
-                onExitEvent.Invoke(other.transform);
-                playerInSight = false;
+                if (playerInSight)
+                {
+                    onExitEvent.Invoke(other.transform);
+                    playerInSight = false;
+                }
             }
             else
             {
-                onStayEvent.Invoke(other.transform);
-            }         
+                if (!playerInSight)
+                {
+                    onEnterEvent.Invoke(other.transform);
+                    playerInSight = true;
+                }
+                else
+                {
+                    onStayEvent.Invoke(other.transform);
+                }
+            }
         }
     }
 
