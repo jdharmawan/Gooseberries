@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
     [SerializeField] private bool isGrounded;//gonna need to set up a seperate smaller collider below the player collider to keep track of grounded
-
+    [SerializeField] private GameObject arrow;
+    [SerializeField] private Transform arrowSpawner;
 
     //polish
     //reset aim after moving, maybe add some delay after aiming so wont moonwalk
@@ -180,6 +181,7 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         //do shooting, handle anims then set to reloading
+        Instantiate(arrow, arrowSpawner, true);
         pState = playerState.Reloading;
         Reload();
     }
