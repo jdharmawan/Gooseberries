@@ -54,8 +54,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetPlayerInput();
-        StateMachine();
+        if (!GameManager_Level.isGamePaused)
+        {
+            GetPlayerInput();
+            StateMachine();
+        }
     }
 
     private void GetPlayerInput()
