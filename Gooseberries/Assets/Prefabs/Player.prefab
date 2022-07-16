@@ -459,7 +459,7 @@ MonoBehaviour:
   bowCharge: 0
   isGrounded: 0
   arrow: {fileID: 4278440316033852836, guid: 12b944f76f7947d4ea6196343bc35112, type: 3}
-  arrowSpawner: {fileID: 334413838812584577}
+  arrowSpawner: {fileID: 7369806799023225510}
 --- !u!1 &2907469762883422661
 GameObject:
   m_ObjectHideFlags: 0
