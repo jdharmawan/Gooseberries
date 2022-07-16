@@ -38,7 +38,7 @@ public class EnemyArrow : Arrow
                 break;
             case "Player":
                 //minus player hp
-                Debug.Log("Hit player");
+                collision.GetComponent<PlayerController>().TakeDamage(damage);
                 break;
             default:
                 break;

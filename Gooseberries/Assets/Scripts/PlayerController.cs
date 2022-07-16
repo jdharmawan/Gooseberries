@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Animator animator;
 
     //might need states to keep track of like shooting arrow, deploying shield etc
-    private enum playerState {Idle, Walking, Aiming, Shooting, Reloading};
+    private enum playerState {Idle, Walking, Aiming, Shooting, Reloading, Jumping};
 
     private playerState pState;
     private Vector2 force = new Vector2();
@@ -58,6 +58,12 @@ public class PlayerController : MonoBehaviour
         {
             GetPlayerInput();
             StateMachine();
+
+            //dunno what to do, just do jump check here
+            if(!isGrounded)
+            {
+                animator.SetTrigger("jump");
+            }
         }
     }
 
@@ -77,8 +83,8 @@ public class PlayerController : MonoBehaviour
             //if left click
             if (isGrounded)
             {
+                bowPivot.SetActive(true);
                 pState = playerState.Aiming;
-                animator.SetTrigger("aim");
             }
         }
 
@@ -90,6 +96,7 @@ public class PlayerController : MonoBehaviour
             {
                 pState = playerState.Shooting;
                 Shoot();
+                bowPivot.SetActive(false);
             }
         }
 
@@ -109,16 +116,16 @@ public class PlayerController : MonoBehaviour
                 ////ACTUALLY DONT REALLY NEED THIS COZ CAN JUST CHANGE TO IDLE OR WALK SPRITE////
                 //reset bow sprite here
                 //do bowpivot transforms
-                bowPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
-                if (bowPivot.transform.localPosition.x > 0)
-                {
-                    bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
-                }
+                //bowPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
+                //if (bowPivot.transform.localPosition.x > 0)
+                //{
+                //    bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                //}
 
-                if (bowPivot.transform.localScale.y > 0)
-                {
-                    bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
-                }
+                //if (bowPivot.transform.localScale.y > 0)
+                //{
+                //    bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                //}
 
                 //temp anim test
                 if (facingRight)
@@ -130,6 +137,7 @@ public class PlayerController : MonoBehaviour
             else if(Input.GetKeyUp(KeyCode.A))
             {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                pState = playerState.Idle;
             }
             else if (Input.GetKey(KeyCode.D))
             {
@@ -142,16 +150,16 @@ public class PlayerController : MonoBehaviour
 
                 //reset bow sprite here also
                 //then do bowpivot transforms
-                bowPivot.transform.rotation = Quaternion.identity;
-                if (bowPivot.transform.localPosition.x < 0)
-                {
-                    bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
-                }
+                //bowPivot.transform.rotation = Quaternion.identity;
+                //if (bowPivot.transform.localPosition.x < 0)
+                //{
+                //    bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                //}
 
-                if (bowPivot.transform.localScale.y < 0)
-                {
-                    bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
-                }
+                //if (bowPivot.transform.localScale.y < 0)
+                //{
+                //    bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                //}
 
                 //temp anim test
                 if (!facingRight)
@@ -163,6 +171,7 @@ public class PlayerController : MonoBehaviour
             else if (Input.GetKeyUp(KeyCode.D))
             {
                 rb2d.velocity = new Vector2(0, rb2d.velocity.y);
+                pState = playerState.Idle;
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -172,19 +181,17 @@ public class PlayerController : MonoBehaviour
                     //jumpForce = 5f;
                     rb2d.velocity = new Vector2(rb2d.velocity.x, jumpForce);
                     isGrounded = false;
-                    //pState = playerState.Jumping;
                 }
             }
         }
-
-        //Debug.Log("player state: " + pState.ToString());
     }
 
     //below 2 functions might be enumerator, coz need to deal with eventual animations
     void Shoot()
     {
         //do shooting, handle anims then set to reloading
-        Instantiate(arrow, arrowSpawner, true);
+        //Instantiate(arrow, arrowSpawner, true);
+        Instantiate(arrow, arrowSpawner.transform.position, arrowSpawner.transform.rotation);
         pState = playerState.Reloading;
         Reload();
     }
@@ -192,7 +199,6 @@ public class PlayerController : MonoBehaviour
     void Reload()
     {
         //reload then go back to idle
-        animator.SetTrigger("idle");
         pState = playerState.Idle;
     }
 
@@ -255,12 +261,15 @@ public class PlayerController : MonoBehaviour
             {
                 case playerState.Idle:
                     //Debug.Log("Idle");
+                    animator.SetTrigger("idle");
                     break;
                 case playerState.Walking:
                     //Debug.Log("Walking");
+                    animator.SetTrigger("walk");
                     break;
                 case playerState.Aiming:
                     //Debug.Log("Aiming");
+                    animator.SetTrigger("aim");
                     FlipWithMouseAim();
                     bowPivot.GetComponent<AimToMouse>().AimTowardMouse();
                     break;
@@ -270,7 +279,11 @@ public class PlayerController : MonoBehaviour
                 case playerState.Reloading:
                     //Debug.Log("Reloading");
                     break;
+                case playerState.Jumping:
+                    //Debug.Log("Jumping");
+                    break;
                 default:
+                    animator.SetTrigger("idle");
                     break;
             }
         }
@@ -283,5 +296,11 @@ public class PlayerController : MonoBehaviour
     public void SetIsGrounded(bool b)
     {
         isGrounded = b;
+    }
+
+    public void TakeDamage(int dmg)
+    {
+        hp -= dmg;
+        Debug.Log("HP: " + hp);
     }
 }
