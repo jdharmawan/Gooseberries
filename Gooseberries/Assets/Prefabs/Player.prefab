@@ -452,8 +452,8 @@ MonoBehaviour:
   bowPivot: {fileID: 683739876039322316}
   sprite: {fileID: 683739876103559295}
   animator: {fileID: 683739876103559266}
-  hp: 3
-  arrows: 3
+  hp: 1
+  arrows: 1
   moveSpeed: 0
   jumpForce: 10
   bowCharge: 0

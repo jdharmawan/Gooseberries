@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 530c69f2398896c4cb59b314d70dea01
+guid: 184e13da103b77b4da1c4cb26e93a8df
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 128
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -67,9 +67,9 @@ TextureImporter:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,97 +100,55 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gooseberry platform_0
+      name: Flat_Tile_Test 1_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 64
-        width: 32
-        height: 32
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -9, y: 8}
-        - {x: -13, y: 5}
-        - {x: -14, y: -4}
-        - {x: -8, y: -10}
-        - {x: 6, y: -10}
-        - {x: 16, y: -10}
-        - {x: 16, y: 8}
+      - - {x: -128, y: 53}
+        - {x: -128, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 53}
       tessellationDetail: 0
       bones: []
-      spriteID: b2ee9a2bfe6fe6b45828810a799cd627
-      internalID: -1594558186
+      spriteID: 898f812e676db544e80d16abc6de3f6b
+      internalID: 683847156
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gooseberry platform_1
+      name: Flat_Tile_Test 1_1
       rect:
         serializedVersion: 2
-        x: 32
-        y: 64
-        width: 32
-        height: 32
+        x: 256
+        y: 0
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape:
-      - - {x: -16, y: 8}
-        - {x: -16, y: -10}
-        - {x: 16, y: -10}
-        - {x: 16, y: 8}
+      - - {x: -128, y: 52}
+        - {x: -128, y: -128}
+        - {x: 128, y: -128}
+        - {x: 128, y: 54}
       tessellationDetail: 0
       bones: []
-      spriteID: 89daaf07b2edea542b83c862f6526611
-      internalID: -1046814354
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: gooseberry platform_2
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape:
-      - - {x: -16, y: 8}
-        - {x: -16, y: -10}
-        - {x: 7, y: -10}
-        - {x: 11, y: -7}
-        - {x: 14, y: 1}
-        - {x: 10, y: 8}
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5e0d0c2359a03ca4d9736f14b19b40c2
-      internalID: -943221506
+      spriteID: 76c885ea8e1a7894da1666aaf0bf5f9d
+      internalID: -1946139555
       vertices: []
       indices: 
       edges: []
@@ -198,7 +156,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: a815f055b6d7a604690835edf8b86e89
+    spriteID: b302a04608878744daf818b96d2a6ea6
     internalID: 0
     vertices: []
     indices: 
@@ -206,9 +164,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      gooseberry platform_0: -1594558186
-      gooseberry platform_2: -943221506
-      gooseberry platform_1: -1046814354
+      Flat_Tile_Test 1_0: 683847156
+      Flat_Tile_Test 1_1: -1946139555
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
