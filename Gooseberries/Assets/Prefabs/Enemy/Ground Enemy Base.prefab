@@ -15,9 +15,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7701175277560003842, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7701175277560003843, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7701175277560003844, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7701175277560003844, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
+      propertyPath: loseInterestDuration
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7701175277560003846, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
       propertyPath: m_RootOrder
@@ -89,14 +101,16 @@ MonoBehaviour:
   target: {fileID: 0}
   activateDistance: 50
   pathUpdateSeconds: 0.5
-  speed: 200
+  speed: 400
   nextWaypointDistance: 3
   jumpNodeHeightRequirement: 0.8
-  jumpModifier: 0.3
+  jumpModifier: 400
   jumpCheckOffset: 0.1
   followEnabled: 1
   jumpEnabled: 1
   directionLookEnabled: 1
   obstacleMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
+  maxVelocity: 9
+  flyingXdamp: 0.2

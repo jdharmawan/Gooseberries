@@ -9355,11 +9355,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2744910336020756705, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.62
+      value: 1.08
       objectReference: {fileID: 0}
     - target: {fileID: 2744910336020756705, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.36
+      value: -0.91
       objectReference: {fileID: 0}
     - target: {fileID: 2744910336020756705, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: m_LocalPosition.z
@@ -9393,41 +9393,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2744910336020756707, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744910336020756707, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: loseInterestDuration
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744910336020756709, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2744910336020756709, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: m_ColliderMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
     - target: {fileID: 2744910336020756731, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: m_Name
       value: Ground Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044690693672009853, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: speed
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044690693672009853, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: maxVelocity
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044690693672009853, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: jumpModifier
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 4044690693672009853, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
-      propertyPath: obstacleMask.m_Bits
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
