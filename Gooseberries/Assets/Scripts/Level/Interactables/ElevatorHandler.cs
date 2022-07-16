@@ -6,6 +6,8 @@ namespace Interactables
 {
     public class ElevatorHandler : MonoBehaviour
     {
+        Coroutine cor;
+
         [HideInInspector] public Cinemachine.CinemachineVirtualCamera virtualCamera;
         [HideInInspector] public GameManager_Level levelManager;
         [HideInInspector] public bool isActivating = false;
@@ -22,7 +24,7 @@ namespace Interactables
             if (!isActivating)
             {
                 if (IsActivated() && !isEngaged)
-                    StartCoroutine(ElevatorActivating());
+                    cor = StartCoroutine(ElevatorActivating());
             }
         }
 
@@ -56,6 +58,7 @@ namespace Interactables
                     isActivating = false;
                     isEngaged = true;
                     virtualCamera.Follow = levelManager.player;
+                    StopCoroutine(cor);
                 }
                 yield return null;
             }

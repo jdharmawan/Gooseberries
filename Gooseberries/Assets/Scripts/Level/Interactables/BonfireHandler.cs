@@ -7,9 +7,11 @@ namespace Interactables
     [RequireComponent(typeof(Collider2D))]
     public class BonfireHandler : MonoBehaviour
     {
+
         Collider2D bonfireCollider;
 
         [HideInInspector] public GameManager_Level levelManager;
+        [HideInInspector] public int bonfireIndex;
 
         bool isActive = false;
 
@@ -23,13 +25,14 @@ namespace Interactables
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Player" && isActive == false)
+            if (collision.tag == "Player" && isActive == false && bonfireIndex != 0)
             {
                 levelManager.TriggerUpgrade();
                 UpdateLatestCheckpoint();
                 Time.timeScale = 0f;
                 GameManager_Level.isGamePaused = true;
             }
+            if (bonfireIndex == 0) isActive = true;
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -49,6 +52,11 @@ namespace Interactables
         void UpdateLatestCheckpoint()
         {
             isActive = true;
+        }
+
+        public void SpawnEnemies(int numberOfEnemies)
+        {
+
         }
 
         #endregion

@@ -7,6 +7,8 @@ public class GameManager_Level : MonoBehaviour
     
     public static bool isGamePaused = false;
 
+    int lastBonfireIndex = 0;
+
     [SerializeField] Cinemachine.CinemachineVirtualCamera virtualCamera;
     public Transform player;
 
@@ -35,11 +37,14 @@ public class GameManager_Level : MonoBehaviour
         
     }
 
+    #region Initialise
     void Initialise_Interactables()
     {
         for (int i = 0; i < bonfires.Count; i++)
         {
-            bonfires[i].GetComponent<Interactables.BonfireHandler>().levelManager = this;
+            Interactables.BonfireHandler bonfireHandler = bonfires[i].GetComponent<Interactables.BonfireHandler>();
+            bonfireHandler.bonfireIndex = i;
+            bonfireHandler.levelManager = this;
         }
         for (int i = 0; i < levers.Count; i++)
         {
@@ -61,12 +66,21 @@ public class GameManager_Level : MonoBehaviour
     {
         UpdateDiceCollection();
     }
+    #endregion
 
+    #region Bonfire Functions
     public void TriggerUpgrade()
     {
         upgradingUi.SetActive(true);
     }
 
+    public void UpdateBonfireData()
+    {
+
+    }
+    #endregion
+
+    #region Dice-Related Functions
     int GetNumberOfDiceOfFace(int faceNumber)
     {
         int number = 0;
@@ -86,6 +100,9 @@ public class GameManager_Level : MonoBehaviour
             diceDisplay.UpdateDiceFaceQuantity(GetNumberOfDiceOfFace(i + 1));
         }
     }
+
+    
+    #endregion
 
     public void B_ProceedLevel()
     {
