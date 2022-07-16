@@ -27,7 +27,8 @@ public class KnightController : MonoBehaviour
     private float distToPrincess = 0f;
 
     private bool facingRight = true;
-    private bool shieldOut = false;
+    private enum KnightState {Follow, ShieldOut, Platform};
+    private KnightState knightState = KnightState.Follow;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class KnightController : MonoBehaviour
         rb2d = GetComponent<Rigidbody2D>();
 
         shieldPlatform.SetActive(false);
+        shieldObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,45 +47,73 @@ public class KnightController : MonoBehaviour
         //do some QOL where the knight teleports to the princess
         if (Input.GetMouseButtonDown(1))
         {
-            //if right click do shield
-            shieldOut = true;
-            rb2d.velocity = Vector3.zero;
-            rb2d.isKinematic = true;
-            //activate shield platform
-            shieldPlatform.SetActive(true);
-            shieldObject.SetActive(true);
+            if (knightState == KnightState.Follow)
+            {
+                //if right click do shield
+                knightState = KnightState.ShieldOut;
+                rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
+                rb2d.isKinematic = true;
+                shieldObject.SetActive(true);
+            }
         }
 
         if (Input.GetMouseButtonUp(1))
         {
-            //release shield
-            shieldOut = false;
-            rb2d.velocity = Vector3.zero;
-            rb2d.isKinematic = false;
-            //deactivate shield platform
-            shieldPlatform.SetActive(false);
-            shieldObject.SetActive(false);
+            if (knightState == KnightState.ShieldOut)
+            {
+                //release shield
+                knightState = KnightState.Follow;
+                rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
+                rb2d.isKinematic = false;
+                shieldObject.SetActive(false);
+            }
         }
 
-        if (shieldOut)
+        //do F input to make knight become platform
+        if(Input.GetKeyDown(KeyCode.F))
         {
-            shieldPivot.GetComponent<AimToMouse>().AimTowardMouse();
-            FlipWithMouseAim();
+            if (knightState == KnightState.Follow)
+            {
+                knightState = KnightState.Platform;
+                //activate shield platform
+                rb2d.velocity = Vector3.zero;
+                rb2d.isKinematic = true;
+                shieldPlatform.SetActive(true);
+            }
+            else if(knightState == KnightState.Platform)
+            {
+                knightState = KnightState.Follow;
+                //deactivate shield platform
+                rb2d.velocity = Vector3.zero;
+                rb2d.isKinematic = false;
+                shieldPlatform.SetActive(false);
+            }
         }
-        else
-        {
-            //revert to default rotation
-            //again, actually not required, just doing this for now coz we dont have the sprites
-            if(facingRight)
-            {
-                shieldPivot.transform.rotation = Quaternion.identity;
-            }
-            else
-            {
-                shieldPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
-            }
 
-            FollowPrincess();
+        switch(knightState)
+        {
+            //case KnightState.Follow:
+            //    break;
+            case KnightState.ShieldOut:
+                shieldPivot.GetComponent<AimToMouse>().AimTowardMouse();
+                FlipWithMouseAim();
+                break;
+            case KnightState.Platform:
+                break;
+            default:
+                //revert to default rotation
+                //again, actually not required, just doing this for now coz we dont have the sprites
+                if (facingRight)
+                {
+                    shieldPivot.transform.rotation = Quaternion.identity;
+                }
+                else
+                {
+                    shieldPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
+                }
+
+                FollowPrincess();
+                break;
         }
     }
 
@@ -96,7 +126,7 @@ public class KnightController : MonoBehaviour
         if (-0.1f <= distToPrincess && distToPrincess <= 0.1f)
         {
             //do nothing
-            rb2d.velocity = Vector2.zero;
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
         else if (distToPrincess > 0.1f)
         {
@@ -116,7 +146,6 @@ public class KnightController : MonoBehaviour
 
     void FlipWithMouseAim()
     {
-        Debug.Log("flip here");
         mousePos = Input.mousePosition;
         //need to set z to 10f because https://answers.unity.com/questions/331558/screentoworldpoint-not-working.html
         mousePos.z = 10f;
