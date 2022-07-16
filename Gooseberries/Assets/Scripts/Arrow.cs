@@ -13,7 +13,7 @@ public class Arrow : Projectile
         boxCol = GetComponent<BoxCollider2D>();
 
         //move bullet according to heading
-        rb2d.velocity = Vector2.right * speed;
+        rb2d.velocity = transform.right * speed;
     }
 
     //try smth funny
