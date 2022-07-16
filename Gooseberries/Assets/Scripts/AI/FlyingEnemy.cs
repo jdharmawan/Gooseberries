@@ -10,6 +10,9 @@ public class FlyingEnemy : Enemy
     [SerializeField] private AISearchCollider meleeTrigger;
     [SerializeField] private Transform aim;
     [SerializeField] private GameObject arrowPrefab;
+    [SerializeField] private SuicideTrigger suicideTrigger;
+    [SerializeField] private Suicide suicide;
+
     private Transform playerTrf;
     private EnemyAIState curState = EnemyAIState.Idle;
     private float lastPlayerDetectedTime;
@@ -21,6 +24,8 @@ public class FlyingEnemy : Enemy
     //private bool inDetection = false;
     //private bool inRange = false;
     //private bool inMelee= false;
+    private bool IsExploding = false;
+    
 
     private void Start()
     {
@@ -32,6 +37,7 @@ public class FlyingEnemy : Enemy
         seekTarget = seekGameobject.transform;
         destinationSetter = GetComponent<AIDestinationSetter>();
         destinationSetter.target = seekTarget;
+        suicideTrigger.Initialize(SuicideOnEnter);
 
     }
     public void TryToShoot()
@@ -48,6 +54,7 @@ public class FlyingEnemy : Enemy
         Debug.Log("Shoot");
         Debug.DrawLine(transform.position, transform.position + (transform.forward) * 10);
         var arrow = Instantiate(arrowPrefab, transform.position, aim.transform.rotation);
+        arrowShot += 1;
         //.transform.right = searchCollider.transform.right;
     }
 
@@ -67,7 +74,15 @@ public class FlyingEnemy : Enemy
         {
             seekTarget.position = transform.position;
             aim.transform.right = playerTrf.position - transform.position;
-            TryToShoot();
+            if(stats.ammo - arrowShot <= 0)
+            {
+                curState = EnemyAIState.MeleeAtk;
+            }
+            else
+            {
+                TryToShoot();
+            }
+            
         }
         else if (curState == EnemyAIState.MeleeAtk)
         {
@@ -83,23 +98,6 @@ public class FlyingEnemy : Enemy
             curState = EnemyAIState.Idle;
             exited = false;
         }
-
-        //if(inMelee == true && curState!=EnemyAIState.MeleeAtk)
-        //{
-        //    curState = EnemyAIState.MeleeAtk;
-        //}
-        //else if(inRange == true && curState != EnemyAIState.RangeAtk)
-        //{
-        //    curState = EnemyAIState.RangeAtk;
-        //}
-        //else if (inDetection == true && curState != EnemyAIState.Chase)
-        //{
-
-        //}
-        //else
-        //{
-
-        //}
     }
 
     public void InDetectionEnter(Transform player)
@@ -184,5 +182,19 @@ public class FlyingEnemy : Enemy
                 curState = EnemyAIState.MeleeAtk;
             }
         }
+    }
+
+    public void SuicideOnEnter()
+    {
+        Debug.Log("SUICIDE on enter");
+        var suicideObj = Instantiate(suicide.gameObject, transform.position, transform.rotation);
+        suicideObj.GetComponent<Suicide>()?.StartSuicide(Exploded, stats.suicideDmg, stats.disableDuration);
+        Destroy(gameObject);
+        
+    }
+
+    public void Exploded()
+    {
+
     }
 }
