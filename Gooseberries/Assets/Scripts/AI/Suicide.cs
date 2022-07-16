@@ -18,7 +18,7 @@ public class Suicide : MonoBehaviour
         var colliders = Physics2D.OverlapCircleAll(transform.position, radius);
         foreach (var collider in colliders)
         {
-            if (collider.CompareTag("Player"))
+            if (collider.CompareTag("Player") || collider.CompareTag("Knight"))
             {
                 collider.GetComponent<IEnemySuicide>()?.ExplodedOnPlayer(dmg, stunDuration);
             }
