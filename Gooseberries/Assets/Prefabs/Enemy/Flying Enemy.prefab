@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9105964696174189503
 Transform:
   m_ObjectHideFlags: 0
@@ -250,9 +250,10 @@ MonoBehaviour:
   meleeTrigger: {fileID: 7701175278152773668}
   aim: {fileID: 7701175278370719977}
   arrowPrefab: {fileID: 4278440316033852836, guid: 121eef775b3835c48be887f9eb305d44, type: 3}
-  suicideTrigger: {fileID: 0}
-  suicide: {fileID: 0}
+  suicideTrigger: {fileID: 8997468182973999048}
+  suicide: {fileID: 7518239795071631208, guid: 9ae0c2d834bcf6540bb15662b95ecac3, type: 3}
   loseInterestDuration: 1
+  aiPlatformMovement: {fileID: 0}
 --- !u!114 &7701175277560003847
 MonoBehaviour:
   m_ObjectHideFlags: 0

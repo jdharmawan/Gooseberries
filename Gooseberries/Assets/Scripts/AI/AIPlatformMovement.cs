@@ -30,7 +30,8 @@ public class AIPlatformMovement : MonoBehaviour
     [SerializeField] private LayerMask obstacleMask;
     private float lastJumpTime;
     private float jumpCooldown = 1f;
-    private float maxVelocity = 3f;
+    [SerializeField] private float maxVelocity = 1f;
+    [SerializeField] private float flyingXdamp = .2f;
     private float maxForceX;
     public void Start()
     {
@@ -79,7 +80,7 @@ public class AIPlatformMovement : MonoBehaviour
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 xDirection = new Vector2(direction.x,0);
         
-        Vector2 force = xDirection * speed * Time.deltaTime;
+        Vector2 force = xDirection.normalized * speed * Time.deltaTime;
 
         // Jump
         if (jumpEnabled && isGrounded && (Time.time-lastJumpTime)>jumpCooldown)
@@ -87,19 +88,26 @@ public class AIPlatformMovement : MonoBehaviour
             if (direction.y > jumpNodeHeightRequirement)
             {
                 //Debug.Log("JUMP " + Physics2D.Raycast(transform.position, -Vector3.up, 1f, obstacleMask.value).collider.name);
-                rb.AddForce(Vector2.up * speed * jumpModifier);
+                rb.AddForce(Vector2.up * jumpModifier);
                 lastJumpTime = Time.time;
             }
 
         }
 
         // Movement
-        if (rb.velocity.x < maxVelocity)
+        if (Mathf.Abs(rb.velocity.x) < maxVelocity)
         {
-            rb.AddForce(force);
+            var flyingXmodifier = !isGrounded ? flyingXdamp : 1;
+
+            rb.AddForce(flyingXmodifier* force * (maxVelocity - Mathf.Clamp(Mathf.Abs(rb.velocity.x),0, maxVelocity)) / maxVelocity);
+
             //Debug.Log("AddForce");
         }
-        
+        else if(Mathf.Abs(rb.velocity.x) > maxVelocity)
+        {
+            var flyingXmodifier = !isGrounded ? flyingXdamp : 1;
+            rb.AddForce(flyingXmodifier * -1*force * (maxVelocity - Mathf.Clamp(Mathf.Abs(rb.velocity.x), 0, maxVelocity)) / maxVelocity);
+        }
         //rb.velocity = new Vector2(force.x/5f,rb.velocity.y);
         //Debug.Log(rb.velocity.x);
 

@@ -13,6 +13,7 @@ public class FlyingEnemy : Enemy
     [SerializeField] private SuicideTrigger suicideTrigger;
     [SerializeField] private Suicide suicide;
 
+
     private Transform playerTrf;
     private EnemyAIState curState = EnemyAIState.Idle;
     private float lastPlayerDetectedTime;
@@ -25,8 +26,8 @@ public class FlyingEnemy : Enemy
     //private bool inRange = false;
     //private bool inMelee= false;
     private bool IsExploding = false;
-    
-
+    [Header("Ground enemies")]
+    private AIPlatformMovement aiPlatformMovement;
     private void Start()
     {
         detectionTrigger.Instantiate(InDetectionEnter, InDetectionStay, InDetectionExit);
@@ -36,8 +37,12 @@ public class FlyingEnemy : Enemy
         var seekGameobject = new GameObject("FlyingEnemySeek");
         seekTarget = seekGameobject.transform;
         destinationSetter = GetComponent<AIDestinationSetter>();
-        destinationSetter.target = seekTarget;
+        if(destinationSetter != null)
+            destinationSetter.target = seekTarget;
         suicideTrigger.Initialize(SuicideOnEnter);
+        aiPlatformMovement = GetComponent<AIPlatformMovement>();
+        if (aiPlatformMovement != null)
+            aiPlatformMovement.target = seekTarget;
 
     }
     public void TryToShoot()
