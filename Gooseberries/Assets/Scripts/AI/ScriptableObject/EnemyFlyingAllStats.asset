@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1fa66f93f6757754aaefd19507cb3941, type: 3}
-  m_Name: FlyingEnemyStats1
+  m_Name: EnemyFlyingAllStats
   m_EditorClassIdentifier: 
   <shootCooldown>k__BackingField: 2
-  <ammo>k__BackingField: 3
-  <arrowDmg>k__BackingField: 1
+  <ammo>k__BackingField: 0
+  <arrowDmg>k__BackingField: 0
   <suicideDmg>k__BackingField: 1
   <disableDuration>k__BackingField: 2

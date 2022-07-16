@@ -17,6 +17,7 @@ public class FlyingEnemy : Enemy
     private bool exited = false;
     private Transform seekTarget;
     private AIDestinationSetter destinationSetter;
+    private int arrowShot = 0;
     //private bool inDetection = false;
     //private bool inRange = false;
     //private bool inMelee= false;
@@ -64,7 +65,7 @@ public class FlyingEnemy : Enemy
         }
         else if (curState == EnemyAIState.RangeAtk)
         {
-            seekTarget.position = playerTrf.position;
+            seekTarget.position = transform.position;
             aim.transform.right = playerTrf.position - transform.position;
             TryToShoot();
         }
@@ -119,6 +120,7 @@ public class FlyingEnemy : Enemy
     {
         Debug.Log("State: InDetectionExit");
         lastPlayerDetectedTime = Time.time;
+        curState = EnemyAIState.Chase;
         exited = true;
     }
 
@@ -128,7 +130,15 @@ public class FlyingEnemy : Enemy
 
         if (curState == EnemyAIState.Chase || curState == EnemyAIState.Idle)
         {
-            curState = EnemyAIState.RangeAtk;
+            if(stats.ammo - arrowShot > 0)
+            {
+                curState = EnemyAIState.RangeAtk;
+            }
+            else
+            {
+                curState = EnemyAIState.MeleeAtk;
+            }
+
         }
     }
 
@@ -165,7 +175,14 @@ public class FlyingEnemy : Enemy
 
         if (curState == EnemyAIState.MeleeAtk)
         {
-            curState = EnemyAIState.RangeAtk;
+            if (stats.ammo - arrowShot > 0)
+            {
+                curState = EnemyAIState.RangeAtk;
+            }
+            else
+            {
+                curState = EnemyAIState.MeleeAtk;
+            }
         }
     }
 }
