@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyFlyingMeleeStats
   m_EditorClassIdentifier: 
   <shootCooldown>k__BackingField: 2
-  <ammo>k__BackingField: 3
-  <arrowDmg>k__BackingField: 1
+  <ammo>k__BackingField: 0
+  <arrowDmg>k__BackingField: 0
   <suicideDmg>k__BackingField: 1
   <disableDuration>k__BackingField: 2
