@@ -23,20 +23,22 @@ public class PlayerController : MonoBehaviour
 
     //might need states to keep track of like shooting arrow, deploying shield etc
     private enum playerState {Idle, Walking, Aiming, Shooting, Reloading};
-    //gonna need to set up a seperate smaller collider below the player collider to keep track of grounded
-    [SerializeField] private bool isGrounded;
 
     private playerState pState;
     private Vector2 force = new Vector2();
     private Vector3 mousePos = new Vector3();
+    private bool facingRight = true;
 
-    private int hp = 3;
+    [SerializeField] private int hp = 3;
+    [SerializeField] private int arrows = 3;
     [SerializeField] private float moveSpeed = 2f;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
+    [SerializeField] private bool isGrounded;//gonna need to set up a seperate smaller collider below the player collider to keep track of grounded
 
 
-    private bool facingRight = true;
+    //polish
+    //reset aim after moving, maybe add some delay after aiming so wont moonwalk
 
     // Start is called before the first frame update
     void Start()
@@ -46,22 +48,12 @@ public class PlayerController : MonoBehaviour
 
         pState = playerState.Idle;
         isGrounded = true;
-
-        Debug.Log("bow pivot pos: " + bowPivot.transform.position);
     }
 
     // Update is called once per frame
     void Update()
     {
         GetPlayerInput();
-
-        ////test quick deceleration
-        //if (moveSpeed != 0)
-        //    moveSpeed = Mathf.Lerp(moveSpeed, 0, 1f);
-
-        //if (pState == playerState.Aiming)
-        //    FlipWithMouseAim();
-
         StateMachine();
     }
 
@@ -83,7 +75,6 @@ public class PlayerController : MonoBehaviour
             {
                 pState = playerState.Aiming;
                 animator.SetTrigger("aim");
-                Debug.Log("aiming");
             }
         }
 
@@ -111,28 +102,25 @@ public class PlayerController : MonoBehaviour
                 moveSpeed = -2f;
                 rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
 
+                ////ACTUALLY DONT REALLY NEED THIS COZ CAN JUST CHANGE TO IDLE OR WALK SPRITE////
+                //reset bow sprite here
+                //do bowpivot transforms
+                bowPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
+                if (bowPivot.transform.localPosition.x > 0)
+                {
+                    bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                }
+
+                if (bowPivot.transform.localScale.y > 0)
+                {
+                    bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                }
+
                 //temp anim test
                 if (facingRight)
                 {
                     sprite.flipX = true;
                     facingRight = false;
-
-                    ////ACTUALLY DONT REALLY NEED THIS COZ CAN JUST CHANGE TO IDLE OR WALK SPRITE////
-                    //reset bow sprite here
-                    //do bowpivot transforms
-                    bowPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
-                    if (bowPivot.transform.localPosition.x > 0)
-                    {
-                        bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
-                        Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
-                    }
-
-                    Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
-                    if (bowPivot.transform.localScale.y > 0)
-                    {
-                        bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
-                        Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
-                    }
                 }
             }
             else if(Input.GetKeyUp(KeyCode.A))
@@ -148,27 +136,24 @@ public class PlayerController : MonoBehaviour
                 moveSpeed = 2f;
                 rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
 
+                //reset bow sprite here also
+                //then do bowpivot transforms
+                bowPivot.transform.rotation = Quaternion.identity;
+                if (bowPivot.transform.localPosition.x < 0)
+                {
+                    bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
+                }
+
+                if (bowPivot.transform.localScale.y < 0)
+                {
+                    bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
+                }
+
                 //temp anim test
                 if (!facingRight)
                 {
                     sprite.flipX = false;
                     facingRight = true;
-
-                    //reset bow sprite here also
-                    //then do bowpivot transforms
-                    bowPivot.transform.rotation = Quaternion.identity;
-                    if (bowPivot.transform.localPosition.x < 0)
-                    {
-                        bowPivot.transform.localPosition = new Vector3(0 - bowPivot.transform.localPosition.x, bowPivot.transform.localPosition.y);
-                        Debug.Log("bow pivot pos2 : " + bowPivot.transform.localPosition.x);
-                    }
-
-                    Debug.Log("bow pivot y1 : " + bowPivot.transform.localScale.y);
-                    if (bowPivot.transform.localScale.y < 0)
-                    {
-                        bowPivot.transform.localScale = new Vector3(bowPivot.transform.localScale.x, bowPivot.transform.localScale.y * -1, bowPivot.transform.localScale.z);
-                        Debug.Log("bow pivot y2 : " + bowPivot.transform.localScale.y);
-                    }
                 }
             }
             else if (Input.GetKeyUp(KeyCode.D))
@@ -195,7 +180,6 @@ public class PlayerController : MonoBehaviour
     void Shoot()
     {
         //do shooting, handle anims then set to reloading
-        Debug.Log("shooting");
         pState = playerState.Reloading;
         Reload();
     }
@@ -203,7 +187,6 @@ public class PlayerController : MonoBehaviour
     void Reload()
     {
         //reload then go back to idle
-        Debug.Log("reloading");
         animator.SetTrigger("idle");
         pState = playerState.Idle;
     }
@@ -212,7 +195,6 @@ public class PlayerController : MonoBehaviour
     //try local position
     void FlipWithMouseAim()
     {
-        Debug.Log("flip here");
         mousePos = Input.mousePosition;
         //need to set z to 10f because https://answers.unity.com/questions/331558/screentoworldpoint-not-working.html
         mousePos.z = 10f;
