@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum StationaryAIState { 
-    Search,
+    Idle,
     Attack
 }
 
@@ -11,12 +11,14 @@ public enum StationaryAIState {
 public class StationaryAI : MonoBehaviour
 {
     [SerializeField] private AISearchCollider searchCollider;
-    [SerializeField] private ProjectileData projectileData;
+    //[SerializeField] private ProjectileData projectileData;
     [SerializeField] private AISearchPatternData aiSearchPatternData;
     [SerializeField] private float shootCooldown;
+    [SerializeField] private GameObject arrowPrefab;
+
     private float lastShootTime;
 
-    private StationaryAIState curState = StationaryAIState.Search;
+    private StationaryAIState curState = StationaryAIState.Idle;
     private Transform playerTrf;
 
     public void Start()
@@ -27,9 +29,9 @@ public class StationaryAI : MonoBehaviour
 
     public void Update()
     {
-        if (curState == StationaryAIState.Search)
+        if (curState == StationaryAIState.Idle)
         {
-            LerpToAngle();
+            //LerpToAngle();
         }
         else if (curState == StationaryAIState.Attack)
         {
@@ -59,6 +61,8 @@ public class StationaryAI : MonoBehaviour
     {
         Debug.Log("Shoot");
         Debug.DrawLine(transform.position, transform.position + (transform.forward)*10);
+        var arrow = Instantiate(arrowPrefab, transform.position, searchCollider.transform.rotation);
+        //.transform.right = searchCollider.transform.right;
     }
 
     public void PlayerInSightEnter(Transform _playerTrf)
@@ -74,8 +78,7 @@ public class StationaryAI : MonoBehaviour
     public void PlayerInSightExit(Transform _playerTrf)
     {
         Debug.Log("PLAYER Exit SIGHT");
-
-        curState = StationaryAIState.Search;
+        curState = StationaryAIState.Idle;
     }
 
     //public bool FoundPlayer(out Transform hitPlayer)
