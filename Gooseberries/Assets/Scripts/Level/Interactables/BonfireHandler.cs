@@ -44,7 +44,6 @@ namespace Interactables
                     Debug.Log("activeate bon fire");
                     //levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
                 }
-                Debug.Log("STATS" + player.GetPlayerSavedData().hp);
                 levelManager.TriggerUpgrade();
                 levelManager.ActivateBonfireZone(this);
                 UpdateLatestCheckpoint();
