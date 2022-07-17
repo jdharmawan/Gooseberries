@@ -20,7 +20,6 @@ namespace Interactables
         //Counters
         float lerpTime = 0f;
 
-        [SerializeField] List<GameObject> enemies;
         [SerializeField] List<EnemySpawnPoint> spawnPoints;
 
         [HideInInspector] public List<GameObject> spawnedEnemies = new List<GameObject>();
