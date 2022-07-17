@@ -46,4 +46,18 @@ public static class ZoneCounter
             zoneClear.Invoke();
         }
     }
+
+    public static string GetConditionMessage()
+    {
+        string message = "";
+        if(numOfZoneEnemykilled < zoneEnemyNumber && zoneClear != null)
+        {
+            message += "<color=#FF2E00>" + (zoneEnemyNumber - numOfZoneEnemykilled) + "</color> Enemies Left to be killed\n";
+        }
+        if(totalDiceCollected < (curZoneIndex + 1) * 2)
+        {
+            message += "Collect <color=#38E500>" + ((curZoneIndex + 1) * 2 - totalDiceCollected) + "</color> more dice face";
+        }
+        return message;
+    }
 }
