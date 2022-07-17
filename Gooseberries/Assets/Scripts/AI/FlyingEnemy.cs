@@ -100,7 +100,6 @@ public class FlyingEnemy : Enemy
         else if (curState == EnemyAIState.RangeAtk)
         {
             seekTarget.position = transform.position;
-            aim.transform.right = playerTrf.position - transform.position;
             if(stats.ammo - arrowShot <= 0)
             {
                 curState = EnemyAIState.MeleeAtk;
@@ -112,8 +111,7 @@ public class FlyingEnemy : Enemy
                 animator.SetBool("Chasing", false);
                 animator.SetBool("Range", true);
                 animator.SetBool("Melee", false);
-            }
-            
+            } 
         }
         else if (curState == EnemyAIState.MeleeAtk)
         {
@@ -123,6 +121,8 @@ public class FlyingEnemy : Enemy
             animator.SetBool("Melee", true);
             seekTarget.position = playerTrf.position;
         }
+        aim.transform.right = playerTrf.position - transform.position;
+        
     }
 
     public void StateChangeCheck()
@@ -223,7 +223,7 @@ public class FlyingEnemy : Enemy
     {
         Debug.Log("SUICIDE on enter");
         var suicideObj = Instantiate(suicide.gameObject, transform.position, transform.rotation);
-        suicideObj.GetComponent<Suicide>()?.StartSuicide(Exploded, stats.suicideDmg, stats.disableDuration);
+        suicideObj.GetComponent<Suicide>()?.StartSuicide(Exploded, stats.suicideDmg, stats.shieldDmg);
         Destroy(gameObject);
         
     }
@@ -257,7 +257,7 @@ public class FlyingEnemy : Enemy
 
     public void Die(Vector2 flyDirection)
     {
-        EnemyManager.EnemyDied();
+        ZoneEnemyCounter.EnemyDied();
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, .7f);
         for (int i = 0; i < objectsToDisableOnDeath.Length; i++)
         {

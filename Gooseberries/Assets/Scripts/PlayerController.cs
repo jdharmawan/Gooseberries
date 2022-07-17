@@ -13,10 +13,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private BoxCollider2D groundedCol;
+    //[SerializeField] private BoxCollider2D groundedCol;
     public GameObject bowPivot;
     public Transform bowstringTop, bowstringBottom, pullbackPos;
     public LineRenderer lineRenderer;
+    public LayerMask layerMask;
 
     private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
@@ -31,10 +32,14 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos = new Vector3();
     private bool facingRight = true;
     private GameObject tempArrow;
+    private KnightController knight;
+    int temp = 0;
 
     public int skillPoints = 0;
-    public int hp = 3;
-    public int arrows = 3;
+    public int maxHP = 3;
+    public int currHP = 3;
+    public int maxArrows = 3;
+    public int currArrows = 3;
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int vitalityLevel = 1;
     [HideInInspector] public int quiverLevel = 1;
@@ -58,6 +63,8 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         moveSpeed = 2f;
         lineRenderer.gameObject.SetActive(false);
+
+        knight = FindObjectOfType<KnightController>();
     }
 
     // Update is called once per frame
@@ -68,11 +75,14 @@ public class PlayerController : MonoBehaviour
             if (!GameManager_Level.isPlayerLocked) GetPlayerInput();
             StateMachine();
 
+            isGrounded = IsGrounded();
             //dunno what to do, just do jump check here
             if(!isGrounded)
             {
                 animator.SetTrigger("jump");
             }
+            
+            CloseToKnight(knight.transform);
         }
 
         SetRenderLines();
@@ -108,8 +118,13 @@ public class PlayerController : MonoBehaviour
             //check just in case i guess
             if (pState == playerState.Aiming)
             {
-                pState = playerState.Shooting;
-                Shoot();
+                ////check arrow count
+                //if(currArrows > 0)
+                //{
+                    pState = playerState.Shooting;
+                    Shoot();
+                //}
+
                 bowPivot.SetActive(false);
                 lineRenderer.gameObject.SetActive(false);
             }
@@ -204,7 +219,8 @@ public class PlayerController : MonoBehaviour
     void SpawnArrow()
     {
         //tempArrow = Instantiate(arrow, arrowSpawner.transform.position, arrowSpawner.transform.rotation);
-        tempArrow = Instantiate(arrow, arrowSpawner);
+        if(currArrows > 0)
+            tempArrow = Instantiate(arrow, arrowSpawner);
     }
 
     //below 2 functions might be enumerator, coz need to deal with eventual animations
@@ -212,8 +228,12 @@ public class PlayerController : MonoBehaviour
     {
         //do shooting, handle anims then set to reloading
         //Instantiate(arrow, arrowSpawner, true);
-        tempArrow.GetComponent<PlayerArrow>().Fire();
-        tempArrow.transform.parent = null;
+        if (currArrows > 0)
+        {
+            tempArrow.GetComponent<PlayerArrow>().Fire();
+            tempArrow.transform.parent = null;
+            currArrows--;
+        }
         pState = playerState.Reloading;
         Reload();
     }
@@ -329,14 +349,61 @@ public class PlayerController : MonoBehaviour
         lineRenderer.SetPositions(points);
     }
 
-    public void SetIsGrounded(bool b)
+    //maybe no need anymore
+    //public void SetIsGrounded(bool b)
+    //{
+    //    isGrounded = b;
+    //}
+
+    private bool IsGrounded()
     {
-        isGrounded = b;
+        float extraHeight = 0.1f;
+
+        //RaycastHit2D raycasthit = Physics2D.Raycast(col.bounds.center, Vector2.down, col.bounds.extents.y + extraHeight, layerMask);
+
+        //change to circlecast?
+        RaycastHit2D raycasthit = Physics2D.CircleCast(col.bounds.center, (col.size.x/2), Vector2.down, extraHeight + (col.size.y/2), layerMask);
+
+        Color raycolor;
+
+        if (raycasthit.collider != null)
+        {
+            Debug.Log(raycasthit.collider.name);
+            raycolor = Color.green;
+            //if (transform.position.y - raycasthit.point.y > col.size.y / 2)
+            //{
+            //    return false;
+            //}
+            //else
+            //    return true;
+        }
+        else
+        {
+            raycolor = Color.red;
+            //return false;
+        }
+
+        Debug.DrawRay(col.bounds.center, Vector2.down * (extraHeight + (col.size.y / 2)), raycolor);
+        Debug.Log(raycasthit.collider);
+
+        return raycasthit.collider != null;
     }
 
     public void TakeDamage(int dmg)
     {
-        hp -= dmg;
-        Debug.Log("HP: " + hp);
+        currHP -= dmg;
+        Debug.Log("HP: " + currHP);
+    }
+
+    //check range to knight with distance
+    void CloseToKnight(Transform t)
+    {
+        if(Vector3.Distance(transform.position, t.position) < 1f)
+        {
+            if (currArrows < maxArrows)
+            {
+                currArrows += knight.RefillArrows(maxArrows - currArrows);
+            } 
+        }
     }
 }

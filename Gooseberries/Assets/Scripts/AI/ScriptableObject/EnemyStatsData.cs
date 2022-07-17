@@ -9,5 +9,5 @@ public class EnemyStatsData : ScriptableObject
     [field: SerializeField] public int ammo {get; private set;}
     [field: SerializeField] public int arrowDmg {get; private set;}
     [field: SerializeField] public int suicideDmg {get; private set;}
-    [field: SerializeField] public float disableDuration {get; private set;}
+    [field: SerializeField] public float shieldDmg {get; private set;}
 }

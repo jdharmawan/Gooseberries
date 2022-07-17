@@ -29,6 +29,7 @@ public class KnightController : MonoBehaviour
     private bool facingRight = true;
     private enum KnightState {Follow, ShieldOut, Platform};
     private KnightState knightState = KnightState.Follow;
+    private List<GameObject> arrowStock = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
@@ -38,6 +39,9 @@ public class KnightController : MonoBehaviour
 
         shieldPlatform.SetActive(false);
         shieldObject.SetActive(false);
+
+        arrowStock.Clear();
+        arrowCount = arrowStock.Count;
     }
 
     // Update is called once per frame
@@ -193,5 +197,61 @@ public class KnightController : MonoBehaviour
                 shieldPivot.transform.localScale = new Vector3(shieldPivot.transform.localScale.x, shieldPivot.transform.localScale.y * -1, shieldPivot.transform.localScale.z);
             }
         }
+    }
+
+    public bool InsertArrow(GameObject arrow)
+    {
+        Debug.Log("insert arrow");
+        //call this func from enemy arrow
+        //inserts arrow into array to keep track
+        //when princess comes near, autorefill and destroy arrows from array
+        if (arrowStock.Count < 5)
+        {
+            arrowStock.Add(arrow);
+            //arrowCount = arrowStock.Count;
+            return true;
+        }
+        //else do bounce arrow, dunno if wnat to do here
+        else
+            return false;
+    }
+
+    public int RefillArrows(int arrowsNeeded)
+    {
+        int arrowsReturned = 0;
+        //refill arrows for princess
+        //if got enough or less, clear all and return amount
+        if (arrowStock.Count == 0)
+            return 0;
+        else if (arrowStock.Count <= arrowsNeeded)
+        {
+            arrowsReturned = arrowStock.Count;
+            Debug.Log("arrows returned 1: " + arrowsReturned);
+
+            foreach (GameObject arrow in arrowStock)
+                Destroy(arrow);
+
+            Debug.Log("arrow stock 1: " + arrowStock.Count);
+            arrowStock.Clear();
+            Debug.Log("arrow stock 2: " + arrowStock.Count);
+        }
+        //if got too much, return until enough
+        else
+        {
+            //get num arrows to return
+            arrowsReturned = arrowsNeeded;
+            Debug.Log("arrows returned 2: " + arrowsReturned);
+
+            for (int i = 0; i < arrowsNeeded; i++)
+                Destroy(arrowStock[i]);
+
+            Debug.Log("arrow stock 3: " + arrowStock.Count);
+            arrowStock.RemoveRange(0, arrowsNeeded);
+            Debug.Log("arrow stock 4: " + arrowStock.Count);
+        }
+
+        Debug.Log("RELOAD!");
+        Debug.Log("arrowstock: " + arrowStock.Count);
+        return arrowsReturned;
     }
 }
