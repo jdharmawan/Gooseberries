@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace Interactables
 {
@@ -9,6 +11,12 @@ namespace Interactables
         public int diceFaceValue;
 
         [HideInInspector] public GameManager_Level levelManager;
+        [SerializeField] TextMeshProUGUI value;
+
+        private void Start()
+        {
+            value.text = diceFaceValue.ToString();
+        }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
