@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 7701175277560003845}
   m_Layer: 9
   m_Name: Flying Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -252,8 +252,12 @@ MonoBehaviour:
   arrowPrefab: {fileID: 4278440316033852836, guid: 121eef775b3835c48be887f9eb305d44, type: 3}
   suicideTrigger: {fileID: 8997468182973999048}
   suicide: {fileID: 7518239795071631208, guid: 9ae0c2d834bcf6540bb15662b95ecac3, type: 3}
+  spriteRenderer: {fileID: 7701175277885750831}
+  aiPath: {fileID: 7701175277560003840}
   loseInterestDuration: 1
-  aiPlatformMovement: {fileID: 0}
+  objectsToDisableOnDeath:
+  - {fileID: 7701175278169701673}
+  - {fileID: 946142166990126374}
 --- !u!114 &7701175277560003847
 MonoBehaviour:
   m_ObjectHideFlags: 0

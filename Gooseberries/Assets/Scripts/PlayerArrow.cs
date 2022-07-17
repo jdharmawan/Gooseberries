@@ -24,6 +24,7 @@ public class PlayerArrow : Arrow
         {
             //minus enemy hp
             Debug.Log("Hit enemy");
+            collision.GetComponent<FlyingEnemy>()?.TakeDamage(damage, collision.transform.position - transform.position);
         }
     }
 }
