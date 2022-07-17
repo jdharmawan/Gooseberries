@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class SpriteDirectionFilpUsingVelocity : MonoBehaviour
 {
-    [SerializeField] Rigidbody2D rb;
     [SerializeField] SpriteRenderer spriteRenderer;
     private void Update()
     {
-        spriteRenderer.flipX = rb.velocity.x < 0;
+        spriteRenderer.flipX = Vector2.Dot(transform.right, Vector2.right) < 0;
     }
 }

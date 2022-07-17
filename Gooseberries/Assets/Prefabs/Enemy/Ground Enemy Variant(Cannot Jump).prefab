@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1319604177125199343, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 7114e09010348d74e94e1dc1c07f76dd, type: 2}
     - target: {fileID: 2744910336020756705, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -53,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2744910336020756731, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: m_Name
-      value: Ground Enemy
+      value: Ground Enemy Variant(Cannot Jump)
       objectReference: {fileID: 0}
     - target: {fileID: 4044690693672009853, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: jumpModifier

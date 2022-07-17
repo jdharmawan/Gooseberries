@@ -11,7 +11,7 @@ public static class ZoneEnemyCounter
     public static void EnemyDied()
     {
         numOfZoneEnemykilled += 1;
-        if(numOfZoneEnemykilled>= zoneEnemyNumber)
+        if(numOfZoneEnemykilled>= zoneEnemyNumber && allZoneEnemiesKilled!=null)
         {
             allZoneEnemiesKilled.Invoke();
         }

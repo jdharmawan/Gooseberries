@@ -24,6 +24,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7701175277560003844, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
+      propertyPath: suicide
+      value: 
+      objectReference: {fileID: 7518239795071631208, guid: 9ae0c2d834bcf6540bb15662b95ecac3, type: 3}
+    - target: {fileID: 7701175277560003844, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
@@ -77,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7701175277560003868, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
       propertyPath: m_Name
-      value: Ground Enemy Variant
+      value: Ground Enemy Base
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}

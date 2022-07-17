@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: C_GroundGoblinIdle
+  m_Name: FlyingGoblinIdle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -22,7 +22,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 89388947c15d867408e755b3b0c67b7d, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7a336eae03cd0af4fb3ad70895a5b018, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -59,7 +59,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: AC_GroundGoblin
+  m_Name: AC_SkyGoblin
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Idle
@@ -112,7 +112,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Running With Bomb
+  m_Name: Flying With Bomb
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -127,7 +127,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 53addbf74290a504fbd095246fc83359, type: 2}
+  m_Motion: {fileID: 7400000, guid: dc1992afa0b39f44da03cb5aef3dbe08, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -215,7 +215,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Running With Bow
+  m_Name: Flying With Bow
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -230,7 +230,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 53addbf74290a504fbd095246fc83359, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7a336eae03cd0af4fb3ad70895a5b018, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

@@ -100,7 +100,6 @@ public class FlyingEnemy : Enemy
         else if (curState == EnemyAIState.RangeAtk)
         {
             seekTarget.position = transform.position;
-            aim.transform.right = playerTrf.position - transform.position;
             if(stats.ammo - arrowShot <= 0)
             {
                 curState = EnemyAIState.MeleeAtk;
@@ -112,8 +111,7 @@ public class FlyingEnemy : Enemy
                 animator.SetBool("Chasing", false);
                 animator.SetBool("Range", true);
                 animator.SetBool("Melee", false);
-            }
-            
+            } 
         }
         else if (curState == EnemyAIState.MeleeAtk)
         {
@@ -123,6 +121,8 @@ public class FlyingEnemy : Enemy
             animator.SetBool("Melee", true);
             seekTarget.position = playerTrf.position;
         }
+        aim.transform.right = playerTrf.position - transform.position;
+        
     }
 
     public void StateChangeCheck()
