@@ -14,7 +14,7 @@ public class FlyingEnemy : Enemy
     [SerializeField] private Suicide suicide;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private AIPath aiPath;
-
+    [SerializeField] private Animator animator;
     private Transform playerTrf;
     private EnemyAIState curState = EnemyAIState.Idle;
     private float lastPlayerDetectedTime;
@@ -83,10 +83,18 @@ public class FlyingEnemy : Enemy
 
         if (curState == EnemyAIState.Idle)
         {
+            animator.SetBool("Idle", true);
+            animator.SetBool("Chasing", false);
+            animator.SetBool("Range", false);
+            animator.SetBool("Melee", false);
             seekTarget.position = transform.position;
         }
         else if(curState == EnemyAIState.Chase)
         {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Chasing", true);
+            animator.SetBool("Range", false);
+            animator.SetBool("Melee", false);
             seekTarget.position = playerTrf.position;
         }
         else if (curState == EnemyAIState.RangeAtk)
@@ -100,11 +108,19 @@ public class FlyingEnemy : Enemy
             else
             {
                 TryToShoot();
+                animator.SetBool("Idle", false);
+                animator.SetBool("Chasing", false);
+                animator.SetBool("Range", true);
+                animator.SetBool("Melee", false);
             }
             
         }
         else if (curState == EnemyAIState.MeleeAtk)
         {
+            animator.SetBool("Idle", false);
+            animator.SetBool("Chasing", false);
+            animator.SetBool("Range", false);
+            animator.SetBool("Melee", true);
             seekTarget.position = playerTrf.position;
         }
     }

@@ -254,6 +254,7 @@ MonoBehaviour:
   suicide: {fileID: 7518239795071631208, guid: 9ae0c2d834bcf6540bb15662b95ecac3, type: 3}
   spriteRenderer: {fileID: 7701175277885750831}
   aiPath: {fileID: 7701175277560003840}
+  animator: {fileID: 6820664756387448840}
   loseInterestDuration: 2
   objectsToDisableOnDeath:
   - {fileID: 7701175278169701673}
@@ -409,6 +410,7 @@ GameObject:
   - component: {fileID: 7701175277885750825}
   - component: {fileID: 7701175277885750831}
   - component: {fileID: 7701175277885750824}
+  - component: {fileID: 6820664756387448840}
   m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
@@ -472,7 +474,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 31
-  m_Sprite: {fileID: 21300000, guid: 623f992d5e67a84498e3b190a55f444c, type: 3}
+  m_Sprite: {fileID: -159155089, guid: abcd4d9c2bb53324391e88d6ff972cd3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -499,6 +501,26 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.97
+--- !u!95 &6820664756387448840
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7701175277885750826}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 7114e09010348d74e94e1dc1c07f76dd, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7701175278152773671
 GameObject:
   m_ObjectHideFlags: 0

@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 4370702154468738989}
   - component: {fileID: 4370702154468738988}
   m_Layer: 8
-  m_Name: Ground Enemy original
+  m_Name: Ground Enemy old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
