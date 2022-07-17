@@ -21,7 +21,7 @@ public class SceneReload : MonoBehaviour
     public void B_RestartScene()
     {
         DestroyImmediate(FindObjectOfType<ZoneCounter>().gameObject);
-        SceneManager.LoadScene("Title Screen");
+        SceneManager.LoadScene("Scene_LevelMain");
     }
 
     public void B_Help()

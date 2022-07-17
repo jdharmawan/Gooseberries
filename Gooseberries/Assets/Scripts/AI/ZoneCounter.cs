@@ -9,7 +9,7 @@ public class ZoneCounter : MonoBehaviour
     public int totalDiceCollected = 0;
     public int curZoneIndex;
     private UnityAction zoneClear;
-    public static int zoneEnemyNumber { get; private set; }
+    public int zoneEnemyNumber { get; private set; }
 
     private void Awake()
     {
