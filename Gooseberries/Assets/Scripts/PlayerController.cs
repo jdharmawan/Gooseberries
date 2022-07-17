@@ -33,7 +33,7 @@ public struct SavedPlayer
     }
 }
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IReceiveExplosion
 {
     //[SerializeField] private BoxCollider2D groundedCol;
     public GameObject bowPivot;
@@ -54,8 +54,12 @@ public class PlayerController : MonoBehaviour
     private Vector3 mousePos = new Vector3();
     private bool facingRight = true;
     private GameObject tempArrow;
-
+    private KnightController knight;
     #region Saved player
+    public int maxHP = 3;
+    public int currHP = 3;
+    public int maxArrows = 3;
+    public int currArrows = 3;
     public int skillPoints = 0;
     public int hp = 3;
     public int arrows = 3;
@@ -84,6 +88,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         moveSpeed = 2f;
         lineRenderer.gameObject.SetActive(false);
+        knight = FindObjectOfType<KnightController>();
     }
     // Update is called once per frame
     void Update()
@@ -99,6 +104,8 @@ public class PlayerController : MonoBehaviour
             {
                 animator.SetTrigger("jump");
             }
+
+            CloseToKnight(knight.transform);
         }
 
         SetRenderLines();
@@ -141,14 +148,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             //when release mouse, shoot arrow and maybe idle, or reload
             //check just in case i guess
             if (pState == playerState.Aiming)
             {
+                ////check arrow count
+                //if(currArrows > 0)
+                //{
                 pState = playerState.Shooting;
                 Shoot();
+                //}
                 bowPivot.SetActive(false);
                 lineRenderer.gameObject.SetActive(false);
             }
@@ -242,16 +253,22 @@ public class PlayerController : MonoBehaviour
     void SpawnArrow()
     {
         //tempArrow = Instantiate(arrow, arrowSpawner.transform.position, arrowSpawner.transform.rotation);
-        tempArrow = Instantiate(arrow, arrowSpawner);
+        if (currArrows > 0)
+            tempArrow = Instantiate(arrow, arrowSpawner);
     }
+
 
     //below 2 functions might be enumerator, coz need to deal with eventual animations
     void Shoot()
     {
         //do shooting, handle anims then set to reloading
         //Instantiate(arrow, arrowSpawner, true);
-        tempArrow.GetComponent<PlayerArrow>().Fire();
-        tempArrow.transform.parent = null;
+        if (currArrows > 0)
+        {
+            tempArrow.GetComponent<PlayerArrow>().Fire();
+            tempArrow.transform.parent = null;
+            currArrows--;
+        }
         pState = playerState.Reloading;
         Reload();
     }
@@ -407,9 +424,33 @@ public class PlayerController : MonoBehaviour
         return raycasthit.collider != null;
     }
 
+
     public void TakeDamage(int dmg)
     {
-        hp -= dmg;
-        Debug.Log("HP: " + hp);
+        currHP -= dmg;
+        Debug.Log("HP: " + currHP);
+    }
+
+    //check range to knight with distance
+    void CloseToKnight(Transform t)
+    {
+        if (Vector3.Distance(transform.position, t.position) < 1f)
+        {
+            if (currArrows < maxArrows)
+            {
+                currArrows += knight.RefillArrows(maxArrows - currArrows);
+            }
+        }
+    }
+
+    public void ExplodedOnPlayer(int dmg, float shieldDmg)
+    {
+        TakeDamage(dmg);
+        Debug.Log("player hit by explosion");
+    }
+
+    void Death()
+    {
+        //
     }
 }
