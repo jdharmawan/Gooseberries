@@ -34,6 +34,11 @@ public class UpgradingUIDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI projQuiverAmt;
     [SerializeField] TextMeshProUGUI projMovementSpeed;
 
+    [Header("Cost")]
+    [SerializeField] TextMeshProUGUI vitalitySPCost;
+    [SerializeField] TextMeshProUGUI quiverSPCost;
+    [SerializeField] TextMeshProUGUI speedSPCost;
+
     [SerializeField] List<Sprite> diceFaces;
 
     public void BeginUpgradeSession(PlayerController _player, List<int> diceFacePool)
@@ -58,6 +63,9 @@ public class UpgradingUIDisplay : MonoBehaviour
         projVitalityAmt.text = $"{player.vitalityLevel + 1}";
         projQuiverAmt.text = $"{player.quiverLevel + 1}";
         projMovementSpeed.text = $"{player.speedLevel + 1}";
+        vitalitySPCost.text = $"{player.vitalityLevel} SP";
+        quiverSPCost.text = $"{player.quiverLevel} SP";
+        speedSPCost.text = $"{player.speedLevel} SP";
     }
 
     IEnumerator StartRolling(List<int> diceFacePool, PlayerController player)
@@ -137,8 +145,6 @@ public class UpgradingUIDisplay : MonoBehaviour
         lerpTime = 0f;
         isEnemyRolled = false;
         isSkillRolled = false;
-        levelManager.enemyRolled = 0;
-        levelManager.skillRolled = 0;
         enemyDiceValueTmp.alpha = 0f;
         skillDiceValueTmp.alpha = 0f;
         raycastBlocker.SetActive(true);
@@ -164,6 +170,7 @@ public class UpgradingUIDisplay : MonoBehaviour
                     levelManager.enemyRolled = levelManager.checkPoint.enemyRolled;
                     //enemyDiceValueTmp.alpha = 1f;
                     //enemyDiceValueTmp.text = levelManager.enemyRolled.ToString();
+                    Debug.Log("enemy roll " + (levelManager.enemyRolled - 1));
                     enemyDice.GetComponent<Image>().sprite = diceFaces[levelManager.enemyRolled - 1];
                     isEnemyRolled = true;
                     lerpTime = 0f;
@@ -201,8 +208,6 @@ public class UpgradingUIDisplay : MonoBehaviour
             yield return null;
         }
     }
-
-
 
     #region Upgrade Buttons
     public void B_UpgradeVitality()
