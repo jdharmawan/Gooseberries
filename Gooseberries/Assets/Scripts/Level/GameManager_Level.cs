@@ -42,6 +42,7 @@ public class GameManager_Level : MonoBehaviour
         Initialise_Interactables();
         Initialise_UIComponents();
         ZoneCounter.SetZoneClearEvent(CurrentBonfireCleared);
+        AudioManager.instance.Play("Level 1 BGM");
     }
 
     private void Update()
@@ -166,5 +167,6 @@ public class GameManager_Level : MonoBehaviour
         upgradingUi.SetActive(false);
         isPlayerLocked = false;
         SpawnEnemy();
+        player.currHP = player.maxHP;
     }
 }

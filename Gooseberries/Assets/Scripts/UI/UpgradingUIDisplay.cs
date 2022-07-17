@@ -152,15 +152,19 @@ public class UpgradingUIDisplay : MonoBehaviour
             {
                 if (lerpTime < 1f)
                 {
-                    enemyDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
+                    System.Random rand = new System.Random();
+                    int index = rand.Next(0, diceFaces.Count);
+                    enemyDice.GetComponent<Image>().sprite = diceFaces[index];
+                    //enemyDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
                 }
                 else
                 {
 
-                    enemyDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+                    //enemyDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
                     levelManager.enemyRolled = levelManager.checkPoint.enemyRolled;
-                    enemyDiceValueTmp.alpha = 1f;
-                    enemyDiceValueTmp.text = levelManager.enemyRolled.ToString();
+                    //enemyDiceValueTmp.alpha = 1f;
+                    //enemyDiceValueTmp.text = levelManager.enemyRolled.ToString();
+                    enemyDice.GetComponent<Image>().sprite = diceFaces[levelManager.enemyRolled - 1];
                     isEnemyRolled = true;
                     lerpTime = 0f;
                 }
@@ -169,15 +173,19 @@ public class UpgradingUIDisplay : MonoBehaviour
             {
                 if (lerpTime < 1f)
                 {
-                    skillPointDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
+                    System.Random rand = new System.Random();
+                    int index = rand.Next(0, diceFaces.Count);
+                    skillPointDice.GetComponent<Image>().sprite = diceFaces[index];
+                    //skillPointDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
                 }
                 else
                 {
-                    skillPointDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+                    //skillPointDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
                     levelManager.skillRolled = levelManager.checkPoint.skillRolled;
                     player.skillPoints += levelManager.skillRolled;
-                    skillDiceValueTmp.alpha = 1f;
-                    skillDiceValueTmp.text = levelManager.skillRolled.ToString();
+                    //skillDiceValueTmp.alpha = 1f;
+                    //skillDiceValueTmp.text = levelManager.skillRolled.ToString();
+                    skillPointDice.GetComponent<Image>().sprite = diceFaces[levelManager.skillRolled - 1];
                     isSkillRolled = true;
                 }
             }
@@ -188,9 +196,13 @@ public class UpgradingUIDisplay : MonoBehaviour
                 levelManager.UpdateDiceCollection();
                 StopCoroutine(cor);
             }
+            levelManager.checkPoint.enemyRolled = levelManager.enemyRolled;
+            levelManager.checkPoint.skillRolled = levelManager.skillRolled;
             yield return null;
         }
     }
+
+
 
     #region Upgrade Buttons
     public void B_UpgradeVitality()
