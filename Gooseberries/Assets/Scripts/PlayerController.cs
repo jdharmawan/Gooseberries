@@ -11,7 +11,7 @@ using UnityEngine;
 //keep track of last input so that the latest one will override the previous one, can A D then move to D etc
 //figure out knight collider and shield rotation
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IReceiveExplosion
 {
     //[SerializeField] private BoxCollider2D groundedCol;
     public GameObject bowPivot;
@@ -405,5 +405,16 @@ public class PlayerController : MonoBehaviour
                 currArrows += knight.RefillArrows(maxArrows - currArrows);
             } 
         }
+    }
+
+    public void ExplodedOnPlayer(int dmg, float shieldDmg)
+    {
+        TakeDamage(dmg);
+        Debug.Log("player hit by explosion");
+    }
+
+    void Death()
+    {
+        //
     }
 }
