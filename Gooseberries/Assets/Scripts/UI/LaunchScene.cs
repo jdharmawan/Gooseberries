@@ -7,6 +7,6 @@ public class LaunchScene : MonoBehaviour
 {
     public void LaunchSceneF(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(1);
     }
 }
