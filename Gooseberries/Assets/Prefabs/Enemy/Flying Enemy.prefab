@@ -249,7 +249,7 @@ MonoBehaviour:
   rangeTrigger: {fileID: 7701175277087589152}
   meleeTrigger: {fileID: 7701175278152773668}
   aim: {fileID: 7701175278370719977}
-  arrowPrefab: {fileID: 4278440316033852836, guid: 121eef775b3835c48be887f9eb305d44, type: 3}
+  arrowPrefab: {fileID: 4278440316033852836, guid: 8c0718173381fc64e8ed35c6c4938375, type: 3}
   suicideTrigger: {fileID: 8997468182973999048}
   suicide: {fileID: 7518239795071631208, guid: c4fdbea3ea4d71c48b688b8d132bf881, type: 3}
   spriteRenderer: {fileID: 7701175277885750831}

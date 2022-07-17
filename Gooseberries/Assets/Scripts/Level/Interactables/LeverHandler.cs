@@ -13,6 +13,7 @@ namespace Interactables
         [Header("UI Elements")]
         [SerializeField] GameObject inputPromptTag;
         [SerializeField] Sprite activeSprite;
+        [SerializeField] Sprite inactiveSprite;
 
         [HideInInspector] public bool isActive = false;
         bool isPlayerWithinCollider = false;
@@ -25,11 +26,12 @@ namespace Interactables
         private void Update()
         {
             GetPlayerInput();
+            if (isPlayerWithinCollider) inputPromptTag.SetActive(true);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Player" && !isActive)
+            if (collision.tag == "Player")
             {
                 inputPromptTag.SetActive(true);
                 isPlayerWithinCollider = true;
@@ -49,11 +51,17 @@ namespace Interactables
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (isPlayerWithinCollider)
+                if (isPlayerWithinCollider && !isActive)
                 {
                     isActive = true;
                     inputPromptTag.SetActive(false);
                     GetComponent<SpriteRenderer>().sprite = activeSprite;
+                }
+                else if (isPlayerWithinCollider && isActive)
+                {
+                    isActive = false;
+                    inputPromptTag.SetActive(false);
+                    GetComponent<SpriteRenderer>().sprite = inactiveSprite;
                 }
             }
         }

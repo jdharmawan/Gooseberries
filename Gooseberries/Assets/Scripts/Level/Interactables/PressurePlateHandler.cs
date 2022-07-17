@@ -29,7 +29,6 @@ namespace Interactables
             {
                 isActive = false;
                 elevatorHandler.ResetLerpTime();
-                elevatorHandler.Disengage();
             }
         }
     }
