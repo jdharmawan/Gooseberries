@@ -90,7 +90,7 @@ public class GameManager_Level : MonoBehaviour
     }
 
     [ContextMenu("Respawn")]
-    public void TriggerRespawn()
+    public void ResetToLastCheckpoint()
     {
         player.SetPlayerSavedData(checkPoint.savedPlayer);
         UpgradingUIDisplay display = upgradingUi.GetComponent<UpgradingUIDisplay>();
@@ -99,6 +99,7 @@ public class GameManager_Level : MonoBehaviour
         display.RespawnUpgrateSession();
         player.transform.position = curBonFire.transform.position;
         player.knight.transform.position = curBonFire.transform.position;
+        player.knight.ResetKnight();
         for (int i = 0; i < curBonFire.spawnedEnemies.Count; i++)
         {
             if (curBonFire.spawnedEnemies[i] != null)
