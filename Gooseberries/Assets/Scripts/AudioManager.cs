@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
         }
 
-        Play("Possible Credits BGM");
+        //Play("Possible Credits BGM");
     }
 
     public void Play(string name)
@@ -47,6 +47,7 @@ public class AudioManager : MonoBehaviour
 
     public void StopAllSounds()
     {
-
+        foreach (Sound s in sounds)
+            s.source.Stop();
     }
 }
