@@ -59,8 +59,8 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Level 1 BGM
     clip: {fileID: 8300000, guid: 5efcfa5a4f3a5f042849977f38ea4801, type: 3}
-    volume: 1
-    pitch: 1
+    volume: 0.5
+    pitch: 0.5
     loop: 1
     source: {fileID: 0}
   - name: Credits BGM
