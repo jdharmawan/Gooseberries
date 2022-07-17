@@ -18,7 +18,7 @@ namespace Interactables
         //Counters
         float lerpTime = 0f;
 
-        [SerializeField] List<Enemy> enemies;
+        [SerializeField] List<GameObject> enemies;
 
         private void Start()
         {
@@ -32,8 +32,7 @@ namespace Interactables
                 levelManager.TriggerUpgrade();
                 levelManager.UpdateBonfireData(bonfireIndex);
                 UpdateLatestCheckpoint();
-                Time.timeScale = 0f;
-                GameManager_Level.isGamePaused = true;
+                GameManager_Level.isPlayerLocked = true;
             }
             if (bonfireIndex == 0) isActive = true;
         }
@@ -61,7 +60,7 @@ namespace Interactables
         {
             for (int i = 0; i < numberOfEnemies; i++)
             {
-                enemies[i].gameObject.SetActive(true);
+                enemies[i].SetActive(true);
             }
         }
 
