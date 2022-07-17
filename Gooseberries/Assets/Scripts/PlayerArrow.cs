@@ -11,7 +11,10 @@ public class PlayerArrow : Arrow
         damage = 1;
         rb2d = GetComponent<Rigidbody2D>();
         boxCol = GetComponent<BoxCollider2D>();
+    }
 
+    public void Fire()
+    {
         //move bullet according to heading
         rb2d.velocity = transform.right * speed;
     }
