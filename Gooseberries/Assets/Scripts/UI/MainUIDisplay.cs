@@ -53,7 +53,7 @@ public class MainUIDisplay : MonoBehaviour
         {
             arrows.GetChild(i).GetComponent<Image>().sprite = emptyArrow;
         }
-        for (int i = 0; i < player.currHP; i++)
+        for (int i = 0; i < player.currArrows; i++)
         {
             arrows.GetChild(i).GetComponent<Image>().sprite = filledArrow;
         }

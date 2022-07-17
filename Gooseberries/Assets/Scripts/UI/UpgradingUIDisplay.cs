@@ -34,6 +34,8 @@ public class UpgradingUIDisplay : MonoBehaviour
     [SerializeField] TextMeshProUGUI projQuiverAmt;
     [SerializeField] TextMeshProUGUI projMovementSpeed;
 
+    [SerializeField] List<Sprite> diceFaces;
+
     public void BeginUpgradeSession(PlayerController _player, List<int> diceFacePool)
     {
         player = _player;
@@ -50,12 +52,12 @@ public class UpgradingUIDisplay : MonoBehaviour
     void DisplayUpgrades()
     {
         playerSkillPoints.text = player.skillPoints.ToString();
-        playerVitalityAmt.text = $"x{player.maxHP}";
-        playerQuiverAmt.text = $"x{player.maxArrows}";
-        playerMovementSpeed.text = $"x{player.moveSpeed}";
-        projVitalityAmt.text = $"x{player.maxHP + 1}";
-        projQuiverAmt.text = $"x{player.maxArrows + 1}";
-        projMovementSpeed.text = $"x{player.moveSpeed + 0.7f}";
+        playerVitalityAmt.text = $"{player.vitalityLevel}";
+        playerQuiverAmt.text = $"{player.quiverLevel}";
+        playerMovementSpeed.text = $"{player.speedLevel}";
+        projVitalityAmt.text = $"{player.vitalityLevel + 1}";
+        projQuiverAmt.text = $"{player.quiverLevel + 1}";
+        projMovementSpeed.text = $"{player.speedLevel + 1}";
     }
 
     IEnumerator StartRolling(List<int> diceFacePool, PlayerController player)
@@ -78,16 +80,20 @@ public class UpgradingUIDisplay : MonoBehaviour
             {
                 if (lerpTime < 1f)
                 {
-                    enemyDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
+                    System.Random rand = new System.Random();
+                    int index = rand.Next(0, diceFaces.Count);
+                    enemyDice.GetComponent<Image>().sprite = diceFaces[index];
+                    //enemyDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
                 }
                 else
                 {
                     
-                    enemyDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+                    //enemyDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
                     levelManager.enemyRolled = Utility.DiceHandler.Roll(diceFacePool);
                     diceFacePool.Remove(levelManager.enemyRolled);
-                    enemyDiceValueTmp.alpha = 1f;
-                    enemyDiceValueTmp.text = levelManager.enemyRolled.ToString();
+                    //enemyDiceValueTmp.alpha = 1f;
+                    //enemyDiceValueTmp.text = levelManager.enemyRolled.ToString();
+                    enemyDice.GetComponent<Image>().sprite = diceFaces[levelManager.enemyRolled - 1];
                     isEnemyRolled = true;
                     lerpTime = 0f;
                 }
@@ -96,16 +102,20 @@ public class UpgradingUIDisplay : MonoBehaviour
             {
                 if (lerpTime < 1f)
                 {
-                    skillPointDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
+                    System.Random rand = new System.Random();
+                    int index = rand.Next(0, diceFaces.Count);
+                    skillPointDice.GetComponent<Image>().sprite = diceFaces[index];
+                    //skillPointDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
                 }
                 else
                 {
-                    skillPointDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+                    //skillPointDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
                     levelManager.skillRolled = Utility.DiceHandler.Roll(diceFacePool);
                     diceFacePool.Remove(levelManager.skillRolled);
                     player.skillPoints += levelManager.skillRolled;
-                    skillDiceValueTmp.alpha = 1f;
-                    skillDiceValueTmp.text = levelManager.skillRolled.ToString();
+                    //skillDiceValueTmp.alpha = 1f;
+                    //skillDiceValueTmp.text = levelManager.skillRolled.ToString();
+                    skillPointDice.GetComponent<Image>().sprite = diceFaces[levelManager.skillRolled - 1];
                     isSkillRolled = true;
                 }
             }
