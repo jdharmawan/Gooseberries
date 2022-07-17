@@ -4,10 +4,14 @@ using UnityEngine;
 
 namespace Interactables
 {
+    [RequireComponent(typeof(SpriteRenderer))]
     public class PressurePlateHandler : MonoBehaviour
     {
         [HideInInspector] public bool isActive = false;
         [HideInInspector] public ElevatorHandler elevatorHandler;
+
+        [SerializeField] Sprite activeSprite;
+        [SerializeField] Sprite inactiveSprite;
 
         bool isPlayerWithinCollider = false;
         bool isKnightWithinCollider = false;
@@ -19,6 +23,7 @@ namespace Interactables
             if (collision.tag == "Knight") isKnightWithinCollider = true;
             isActive = true;
             elevatorHandler.ResetLerpTime();
+            GetComponent<SpriteRenderer>().sprite = activeSprite;
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -29,6 +34,8 @@ namespace Interactables
             {
                 isActive = false;
                 elevatorHandler.ResetLerpTime();
+                GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+
             }
         }
     }

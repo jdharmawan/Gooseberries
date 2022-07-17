@@ -132,3 +132,4 @@ MonoBehaviour:
   - {fileID: 0}
   pressurePlateToActivate: []
   isCameraZoom: 1
+  isOneWay: 1

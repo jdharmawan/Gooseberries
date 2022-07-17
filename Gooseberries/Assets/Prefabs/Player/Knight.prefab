@@ -106,7 +106,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: a0286c7eef787554b991abc733b83613, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -373,8 +373,11 @@ MonoBehaviour:
   shieldPlatform: {fileID: 5428145603287153528}
   sprite: {fileID: 5428145603986782323}
   animator: {fileID: 2898904433185740866}
-  moveSpeed: 2
+  shieldStaminaRegen: 0.001
   arrowCount: 0
+  moveSpeed: 2
+  maxShieldStamina: 5
+  currShieldStamina: 0
 --- !u!95 &2898904433185740866
 Animator:
   serializedVersion: 4
