@@ -32,9 +32,21 @@ public class EnemyArrow : Arrow
 
         switch (collision.tag)
         {
+            //parent 3 above
             case "TargetBoard":
-                rb2d.velocity = Vector2.zero;
-                transform.parent = collision.transform;
+                Debug.Log("targetboard");
+                if(collision.GetComponentInParent<KnightController>().InsertArrow(gameObject))
+                {
+                    rb2d.velocity = Vector2.zero;
+                    transform.parent = collision.transform;
+                    boxCol.enabled = false;
+                }
+                else
+                {
+                    Debug.Log("break arrow");
+                    //break arrow or smth, for now destroy
+                    Destroy(gameObject);
+                }
                 break;
             case "Player":
                 //minus player hp

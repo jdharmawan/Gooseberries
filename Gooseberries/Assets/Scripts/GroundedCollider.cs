@@ -40,6 +40,7 @@ public class GroundedCollider : MonoBehaviour
         Debug.DrawRay(col.bounds.center, Vector2.down * (col.bounds.extents.y + extraHeight), raycolor);
         Debug.Log(raycasthit.collider);
 
+        //player.SetIsGrounded(raycasthit.collider != null);
         return raycasthit.collider != null;
     }
 

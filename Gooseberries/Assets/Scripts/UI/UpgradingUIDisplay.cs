@@ -50,11 +50,11 @@ public class UpgradingUIDisplay : MonoBehaviour
     void DisplayUpgrades()
     {
         playerSkillPoints.text = player.skillPoints.ToString();
-        playerVitalityAmt.text = $"x{player.hp}";
-        playerQuiverAmt.text = $"x{player.arrows}";
+        playerVitalityAmt.text = $"x{player.maxHP}";
+        playerQuiverAmt.text = $"x{player.maxArrows}";
         playerMovementSpeed.text = $"x{player.moveSpeed}";
-        projVitalityAmt.text = $"x{player.hp + 1}";
-        projQuiverAmt.text = $"x{player.arrows + 1}";
+        projVitalityAmt.text = $"x{player.maxHP + 1}";
+        projQuiverAmt.text = $"x{player.maxArrows + 1}";
         projMovementSpeed.text = $"x{player.moveSpeed + 0.7f}";
     }
 
@@ -187,7 +187,7 @@ public class UpgradingUIDisplay : MonoBehaviour
     {
         if (player.skillPoints >= player.vitalityLevel)
         {
-            player.hp++;
+            player.maxHP++;
             player.skillPoints -= player.vitalityLevel;
             player.vitalityLevel++;
             DisplayUpgrades();
@@ -198,7 +198,7 @@ public class UpgradingUIDisplay : MonoBehaviour
     {
         if (player.skillPoints >= player.quiverLevel)
         {
-            player.arrows++;
+            player.maxArrows++;
             player.skillPoints -= player.quiverLevel;
             player.quiverLevel++;
             DisplayUpgrades();
