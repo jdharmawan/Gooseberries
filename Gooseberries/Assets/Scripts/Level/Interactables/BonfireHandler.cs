@@ -46,10 +46,14 @@ namespace Interactables
                     levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
                 }
                 if (!doNotTriggerUpgrade)
+                {
                     levelManager.TriggerUpgrade();
+                    GameManager_Level.isPlayerLocked = true;
+
+                }
                 levelManager.ActivateBonfireZone(this);
                 UpdateLatestCheckpoint();
-                GameManager_Level.isPlayerLocked = true;
+                
             }
             //if (bonfireIndex == 0) isActive = true;
         }

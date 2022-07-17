@@ -34,7 +34,7 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
     private bool facingRight = true;
     private enum KnightState {Follow, ShieldOut, Platform, Disabled};
     private KnightState knightState = KnightState.Follow;
-    private List<GameObject> arrowStock = new List<GameObject>();
+    [HideInInspector] public List<GameObject> arrowStock = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
