@@ -42,7 +42,7 @@ public class GameManager_Level : MonoBehaviour
     {
         Initialise_Interactables();
         Initialise_UIComponents();
-        ZoneCounter.SetZoneClearEvent(CurrentBonfireCleared);
+        FindObjectOfType<ZoneCounter>().SetZoneClearEvent(CurrentBonfireCleared);
         AudioManager.instance.Play("Level 1 BGM");
         tutorial.SetActive(true);
     }
@@ -125,7 +125,7 @@ public class GameManager_Level : MonoBehaviour
         {
             bonfires[_curBonFire.bonfireIndex + 1].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(true);
         }
-        ZoneCounter.SetCurZoneIndex(_curBonFire.bonfireIndex);
+        FindObjectOfType<ZoneCounter>().SetCurZoneIndex(_curBonFire.bonfireIndex);
     }
     void SpawnEnemy()
     {

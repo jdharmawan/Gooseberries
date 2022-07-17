@@ -27,7 +27,7 @@ namespace Interactables
                 levelManager.diceFacesValue.Add(diceFaceValue);
                 levelManager.UpdateDiceCollection();
                 Destroy(this.gameObject);
-                ZoneCounter.DiceCollected();
+                FindObjectOfType<ZoneCounter>().DiceCollected();
             }
         }
     }

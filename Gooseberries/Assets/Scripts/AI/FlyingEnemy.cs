@@ -258,7 +258,7 @@ public class FlyingEnemy : Enemy
     public void Die(Vector2 flyDirection)
     {
         AudioManager.instance.Play("EnemyDeath");
-        ZoneCounter.EnemyDied();
+        FindObjectOfType<ZoneCounter>().EnemyDied();
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, .7f);
         for (int i = 0; i < objectsToDisableOnDeath.Length; i++)
         {
