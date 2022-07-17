@@ -896,6 +896,67 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &186944346
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998972, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998973, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: data.dataString
+      value: UEsDBBQAAAgIAABAIexoAtczhQIAADsFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoXxBzh1b61DSA9JmNBOLr4Ia401yJJHkgMkw3/vSrYxoVyQ3n69fbvyJ+HSNFBYpVeasyfFgPyYEHcm3yaj8RGOdKfkhn/A4PPGma2cE/U+r9RyhXjowoyqwWpe/JQ74ZwDBFvJS6XrJdtBpow1CJdUGECTVtZFS4Q+J+SIf9PUhZzwFN250wee0mByxmMB0oIeXaN4Fi3mwd087COm8SxNkruwD5uGszhehIsoSJfTIPE5WlkIWjfAXENjqu/hLO2TzONZmOIvSX2AxKZ732A2XzgaSghuetLEnhovSkYb02LL6MA4RRE80wivFfBdZfvLJfilLA3YXiFNT/dco5ZdVvJLdQLX1Ow7ku9UtK5OMvesupxP/5mnoTeXWtWPQ9kwcCVsxYv9Kz0V1NirAVzD9yPv0Et1oGJPtwLeKpDPaqVVKxkarW5daGsguh+vl86yCor9iHdUb8C2GbUf5h1cxjY5n33zx0zwetsp3wEbobzcfklA42x+I2G/QqZPgahj8dfAH7q73rXe8MC1sWjqu5SO3la12rmSpdfMddPaTGkJHu5JNyCpsKc1prG3E7yxXZW9sTxQ96r64r1teCw3IR4e/YPgxrRWh8uwTKUOT2Cql9YKLmEk7QzPqFOmpOwWzHw1uqhNq0taXEXtWs6+bhYJopAylqSLpIhKFhZTFsdJRCFgaRxDEc6JXz0usU0q1h3PXh0cmhyTS1yz4VszWWna+F1nmh5W/KNWV/y4LNWm0ADypcswKGRAYxF8lmzJOOqzAWu59OMmnzkRqtgDyy+Jct/p8mg1zccsOWn4u7IOyUnmPy45cfBlldca3jkcXPEh2Zmc/wFQSwMEFAAACAgAAEAh7PwDTCttAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJKBkWFiSoqZpalZslFaimGyboqxsZlRYqpBiqWxcWqyoYlSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAEAh7GgC1zOFAgAAOwUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAEAh7PwDTCttAAAAeAAAAAkAJAAAAAAAAAAAAAAA0gIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAACKAwAAAAA=
+      objectReference: {fileID: 0}
+    - target: {fileID: 6197048310363998974, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
+      propertyPath: m_Name
+      value: Pathfinder
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 508a7ffadfccbd6418fa229a23af935d, type: 3}
 --- !u!1 &187097355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5147,7 +5208,7 @@ GameObject:
   - component: {fileID: 1150624892}
   - component: {fileID: 1150624891}
   - component: {fileID: 1150624893}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tilemap
   m_TagString: Ground
   m_Icon: {fileID: 0}

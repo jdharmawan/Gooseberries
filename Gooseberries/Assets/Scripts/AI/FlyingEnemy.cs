@@ -270,10 +270,13 @@ public class FlyingEnemy : Enemy
         var capsule = GetComponent<CapsuleCollider2D>();
         if (capsule != null)
             capsule.enabled = false;
+        StartCoroutine(DieEnumerator());
     }
 
-    //IEnumerator DieEnumerator()
-    //{
-
-    //}
+    IEnumerator DieEnumerator()
+    {
+        yield return new WaitForSeconds(7f);
+        Destroy(gameObject);
+        
+    }
 }
