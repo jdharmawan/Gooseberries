@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     [SerializeField] private GameObject arrow;
     [SerializeField] private Transform arrowSpawner;
     private GameManager_Level gameLevel;
-
+    private bool deathAnimation = false;
     //polish
     //reset aim after moving, maybe add some delay after aiming so wont moonwalk
 
@@ -97,6 +97,8 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     // Update is called once per frame
     void Update()
     {
+        if (deathAnimation)
+            return;
         if (!GameManager_Level.isGamePaused)
         {
             if (!GameManager_Level.isPlayerLocked) GetPlayerInput();
@@ -458,10 +460,61 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
         TakeDamage(dmg);
         Debug.Log("player hit by explosion");
     }
-
+    [ContextMenu("death")]
+    private void TestDeath()
+    {
+        StartCoroutine(Death());
+    }
     IEnumerator Death()
     {
-        yield return null;
+        deathAnimation = true;
+        float duration = 2f;
+        float startTime = Time.time;
+        var princessRenderer = GetComponent<SpriteRenderer>();
+        var knightRenderer = knight.GetComponent<SpriteRenderer>();
+        while (Time.time - startTime < duration)
+        {
+            yield return null;
+            princessRenderer.color = new Color(princessRenderer.color.r, princessRenderer.color.g, princessRenderer.color.b, 1-(Time.time - startTime)/duration);
+            knightRenderer.color = new Color(knightRenderer.color.r, knightRenderer.color.g, knightRenderer.color.b, 1-(Time.time - startTime)/duration);
+        }
+        princessRenderer.color = new Color(princessRenderer.color.r, princessRenderer.color.g, princessRenderer.color.b, 1);
+        knightRenderer.color = new Color(knightRenderer.color.r, knightRenderer.color.g, knightRenderer.color.b, 1);      
+        //var princessRb = GetComponent<Rigidbody2D>();
+        //var knightRb = GetComponent<Rigidbody2D>();
+        //Debug.Log("RB: " + princessRb);
+        //if (princessRb != null)
+        //{
+        //    princessRb.constraints = RigidbodyConstraints2D.None;
+        //    princessRb.AddForce(new Vector2(Random.Range(-100, 100), 200), ForceMode2D.Impulse);
+        //    knightRb.constraints = RigidbodyConstraints2D.None;
+        //    knightRb.AddForce(new Vector2(Random.Range(-100, 100), 200), ForceMode2D.Impulse);
+        //    if (Random.Range(-1, 1) > 0)
+        //    {
+        //        princessRb.AddTorque(40);
+        //        knightRb.AddTorque(40);
+        //    }
+        //    else
+        //    {
+        //        princessRb.AddTorque(-40);
+        //        knightRb.AddTorque(-40);
+        //    }
+        //}
+        //var knightCol = knight.GetComponent<CapsuleCollider2D>();
+        //var princessCol = GetComponent<CapsuleCollider2D>();
+        //knightCol.enabled = false;
+        //princessCol.enabled = false;
+        //yield return new WaitForSeconds(1f);
+        //princessCol.enabled = true;
+        //princessRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //princessRb.velocity = new Vector2(0, 0);
+        //princessRb.transform.rotation = new Quaternion();
+
+        //knightCol.enabled = true;
+        //knightRb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //knightRb.velocity = new Vector2(0, 0);
+        //knightRb.transform.rotation = new Quaternion();
+        deathAnimation = false;
         gameLevel.ResetToLastCheckpoint();
     }
 }
