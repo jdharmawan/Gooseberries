@@ -19,4 +19,11 @@ public class BonFireBlockPrompt : MonoBehaviour
             tmp.gameObject.SetActive(false);
         }
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            tmp.gameObject.SetActive(false);
+        }
+    }
 }
