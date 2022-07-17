@@ -535,7 +535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &956924500
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrowLauncher: {fileID: 1219197217}
-  arrow: {fileID: 4278440316033852836, guid: 121eef775b3835c48be887f9eb305d44, type: 3}
+  arrow: {fileID: 4278440316033852836, guid: 8c0718173381fc64e8ed35c6c4938375, type: 3}
 --- !u!212 &956924501
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1041,6 +1041,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5428145602693936717, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428145602909092095, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428145603116373097, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428145603287153528, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5428145603986782322, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -1089,9 +1105,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Knight
       objectReference: {fileID: 0}
+    - target: {fileID: 5428145603986782326, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5428145603986782333, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
       propertyPath: princess
       value: 
       objectReference: {fileID: 1282262141}
+    - target: {fileID: 5428145604183209871, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428145604279703287, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5428145604298372825, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
