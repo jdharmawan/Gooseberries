@@ -21,7 +21,8 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
     
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
-    [SerializeField] private float shieldStaminaRegen = 0.001f;
+    [SerializeField] private float shieldStaminaRegen = 0.1f;
+    [SerializeField] private float shieldStaminaReduce = 0.3f;
     [SerializeField] private int arrowCount = 0;
 
     public float moveSpeed = 2f;
@@ -110,11 +111,12 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
                 FlipWithMouseAim();
 
                 //half shield regen
-                RegenShieldStamina(shieldStaminaRegen / 2);
+                //RegenShieldStamina(shieldStaminaRegen / 2);
+                ReduceShieldStamina(shieldStaminaReduce);
                 break;
             case KnightState.Platform:
                 animator.SetTrigger("shield up");
-                RegenShieldStamina(shieldStaminaRegen);
+                //RegenShieldStamina(shieldStaminaRegen);
                 break;
             case KnightState.Disabled:
                 RegenShieldStamina(shieldStaminaRegen * 2);
@@ -293,6 +295,14 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
     {
         if (currShieldStamina < maxShieldStamina)
             currShieldStamina += f;
+
+        Debug.Log("currShieldStamina: " + currShieldStamina);
+    }
+
+    void ReduceShieldStamina(float f)
+    {
+        if (currShieldStamina > 0)
+            currShieldStamina -= f;
 
         Debug.Log("currShieldStamina: " + currShieldStamina);
     }
