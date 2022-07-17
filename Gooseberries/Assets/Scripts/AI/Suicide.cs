@@ -5,11 +5,17 @@ using UnityEngine.Events;
 
 public class Suicide : MonoBehaviour
 {
+    public Transform[] explosionRadius;
+    public GameObject ExplosionVfx;
     public void StartSuicide(UnityAction exploded, int dmg, float stunDuration,  float delay = 2, float radius = 3)
     {
         StartCoroutine(SuicideEnemy(exploded, dmg,  stunDuration,  delay, radius));
         var animator = GetComponent<Animator>();
         animator.speed = 1 / delay;
+        for (int i = 0; i < explosionRadius.Length; i++)
+        {
+            explosionRadius[i].localScale = new Vector3(radius, radius, radius);
+        }
     }
     
     IEnumerator SuicideEnemy(UnityAction exploded, int dmg, float stunDuration,  float delay, float radius)
@@ -24,8 +30,14 @@ public class Suicide : MonoBehaviour
             }
         }
         exploded.Invoke();
-        EnemyManager.EnemyDied();
-        Destroy(this.gameObject);
+        ZoneEnemyCounter.EnemyDied();
+        PlayExplosionVfx();
         //EnemyManager.Destroy(this.gameObject);
+    }
+
+    public void PlayExplosionVfx()
+    {
+        ExplosionVfx.SetActive(true);
+        Destroy(this.gameObject,.5f);
     }
 }
