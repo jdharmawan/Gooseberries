@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 81536fe8ada49994c99c625ac29b394a
+guid: 8136a50dfa7f9d4468940d71abd67368
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Knight_Idle_Shield_0
+      name: Knight_Idle_Shield 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3c3ba18486e549469a67d208d0f4c4d
-      internalID: -1470992691
+      spriteID: 4a49c21c5ec482b47b5a094195a53c5c
+      internalID: 1236424731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight_Idle_Shield_1
+      name: Knight_Idle_Shield 1_1
       rect:
         serializedVersion: 2
         x: 256
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e6a0be049f8555a41a3a582426f8c1fb
-      internalID: 1964666872
+      spriteID: 499517690005d0243b5b7a6d81da3808
+      internalID: -548916029
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight_Idle_Shield_2
+      name: Knight_Idle_Shield 1_2
       rect:
         serializedVersion: 2
         x: 512
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d4b658a8493ad504aa2164d36d14ec4c
-      internalID: -117697023
+      spriteID: d94d8c5d0e09a4b4f96209a0808b3215
+      internalID: 1033236506
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight_Idle_Shield_3
+      name: Knight_Idle_Shield 1_3
       rect:
         serializedVersion: 2
         x: 768
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e3e703450a51c2940a9bacfd8cf76ddf
-      internalID: -1076649378
+      spriteID: d6523670715118344b8a3db8d0499ac4
+      internalID: 328808071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight_Idle_Shield_4
+      name: Knight_Idle_Shield 1_4
       rect:
         serializedVersion: 2
         x: 1024
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c2d43812151d924d86305f8cd31b838
-      internalID: 1254104336
+      spriteID: a9679841cc313c04eb6c02f459ee4a77
+      internalID: -470614195
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Knight_Idle_Shield_5
+      name: Knight_Idle_Shield 1_5
       rect:
         serializedVersion: 2
         x: 1280
@@ -223,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4935815b1d74c8248a5a5920c4aec3b4
-      internalID: 564067561
+      spriteID: 5c2a0f32415b44c40854b6dfc45ff26e
+      internalID: -87302767
       vertices: []
       indices: 
       edges: []
@@ -232,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 16664daa589f438449d295cb1ddabc1a
+    spriteID: 187ed3686b91db6469734540c88d7e9d
     internalID: 0
     vertices: []
     indices: 
@@ -240,12 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Knight_Idle_Shield_0: -1470992691
-      Knight_Idle_Shield_5: 564067561
-      Knight_Idle_Shield_2: -117697023
-      Knight_Idle_Shield_4: 1254104336
-      Knight_Idle_Shield_3: -1076649378
-      Knight_Idle_Shield_1: 1964666872
+      Knight_Idle_Shield 1_4: -470614195
+      Knight_Idle_Shield 1_2: 1033236506
+      Knight_Idle_Shield 1_0: 1236424731
+      Knight_Idle_Shield 1_3: 328808071
+      Knight_Idle_Shield 1_1: -548916029
+      Knight_Idle_Shield 1_5: -87302767
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
