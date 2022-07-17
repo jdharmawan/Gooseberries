@@ -69,7 +69,7 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: arrow hit
+  - name: arrow hit shield
     clip: {fileID: 8300000, guid: 9f9aad2843e2eef41b158d103a7adada, type: 3}
     volume: 1
     pitch: 1
@@ -89,6 +89,12 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: explosion
     clip: {fileID: 8300000, guid: a1bfdbfa2f4042448ae68c7d1b116e4c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: fire
+    clip: {fileID: 8300000, guid: 09c098e188f7c344285bca0f0aa1a6a8, type: 3}
     volume: 1
     pitch: 1
     loop: 0

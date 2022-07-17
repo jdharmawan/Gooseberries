@@ -40,6 +40,7 @@ public class EnemyArrow : Arrow
                     rb2d.velocity = Vector2.zero;
                     transform.parent = collision.transform;
                     boxCol.enabled = false;
+                    AudioManager.instance.Play("arrow hit shield");
                 }
                 else
                 {

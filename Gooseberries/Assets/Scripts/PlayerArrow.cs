@@ -17,6 +17,8 @@ public class PlayerArrow : Arrow
     {
         //move bullet according to heading
         rb2d.velocity = transform.right * speed;
+        Debug.Log("ASDOIJNASLDKNASJDOLASD");
+        AudioManager.instance.Play("bow shoot");
     }
 
     //try smth funny
