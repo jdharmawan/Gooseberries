@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneReload : MonoBehaviour
 {
     private GameManager_Level level;
+    [SerializeField] private GameObject tutorial;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,17 @@ public class SceneReload : MonoBehaviour
     public void B_RestartScene()
     {
         SceneManager.LoadScene("Scene_LevelMain");
+    }
+
+    public void B_Help()
+    {
+        if(tutorial.activeSelf == false)
+        {
+            tutorial.SetActive(true);
+        }
+        else
+        {
+            tutorial.SetActive(false);
+        }
     }
 }
