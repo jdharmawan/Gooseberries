@@ -401,11 +401,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5428145603986782322, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.455
+      value: 31.08
       objectReference: {fileID: 0}
     - target: {fileID: 5428145603986782322, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.2000002
+      value: 2.75
       objectReference: {fileID: 0}
     - target: {fileID: 5428145603986782322, guid: 42ec655ebede4c040b7610b98fe145bc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6088,7 +6088,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.4540817, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -6105,7 +6105,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 760666689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4549931, y: -0.37000024, z: -10}
+  m_LocalPosition: {x: 31.080008, y: 3.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -27154,7 +27154,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309337500}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4549931, y: -0.37000024, z: -10}
+  m_LocalPosition: {x: 31.080008, y: 3.58, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31756,11 +31756,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 683739876103559264, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.4549928
+      value: 31.080008
       objectReference: {fileID: 0}
     - target: {fileID: 683739876103559264, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.57
+      value: 2.38
       objectReference: {fileID: 0}
     - target: {fileID: 683739876103559264, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
       propertyPath: m_LocalPosition.z
@@ -31902,6 +31902,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c4e744cabd9c04a9f76264c4fd65ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  numOfZoneEnemykilled: 0
+  totalDiceCollected: 0
+  curZoneIndex: 0
 --- !u!4 &1978014375
 Transform:
   m_ObjectHideFlags: 0
