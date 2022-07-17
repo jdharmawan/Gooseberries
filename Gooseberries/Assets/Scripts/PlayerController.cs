@@ -14,17 +14,19 @@ using UnityEngine;
 public struct SavedPlayer
 {
     public int skillPoints ;
-    public int hp ;
+    public int maxHP;
+    public int currHP;
     public int arrows ;
     public float moveSpeed;
     public int vitalityLevel ;
     public int quiverLevel ;
     public int speedLevel;
 
-    public SavedPlayer (int _skillPoints, int _hp, int _arrows, float _moveSpeed, int _vitalityLevel, int _quiverLevel, int _speedLevel)
+    public SavedPlayer (int _skillPoints, int _maxHP, int _currHP, int _arrows, float _moveSpeed, int _vitalityLevel, int _quiverLevel, int _speedLevel)
     {
         skillPoints = _skillPoints;
-        hp = _hp;
+        maxHP = _maxHP;
+        currHP = _currHP;
         arrows = _arrows;
         moveSpeed = _moveSpeed;
         vitalityLevel = _vitalityLevel;
@@ -61,7 +63,6 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     public int maxArrows = 3;
     public int currArrows = 3;
     public int skillPoints = 0;
-    public int hp = 3;
     public int arrows = 3;
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int vitalityLevel = 1;
@@ -113,7 +114,8 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     public void SetPlayerSavedData(SavedPlayer savePlayer)
     {
         skillPoints = savePlayer.skillPoints;
-        hp = savePlayer.hp;
+        maxHP = savePlayer.maxHP;
+        currHP = savePlayer.currHP;
         arrows = savePlayer.arrows;
         moveSpeed = savePlayer.moveSpeed;
         vitalityLevel = savePlayer.vitalityLevel;
@@ -122,7 +124,7 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     }
     public SavedPlayer GetPlayerSavedData()
     {
-        return new SavedPlayer(skillPoints, hp, arrows, moveSpeed, vitalityLevel, quiverLevel, speedLevel);
+        return new SavedPlayer(skillPoints, maxHP, currHP, arrows, moveSpeed, vitalityLevel, quiverLevel, speedLevel);
     }
     private void GetPlayerInput()
     {
