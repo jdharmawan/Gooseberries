@@ -106,8 +106,6 @@ public class GameManager_Level : MonoBehaviour
             }
         }
         curBonFire.spawnedEnemies.Clear();
-
-
     }
 
     public void ActivateBonfireZone(Interactables.BonfireHandler _curBonFire)

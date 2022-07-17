@@ -42,7 +42,7 @@ namespace Interactables
                 {
                     isVisited = true;
                     Debug.Log("activeate bon fire");
-                    //levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
+                    levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
                 }
                 levelManager.TriggerUpgrade();
                 levelManager.ActivateBonfireZone(this);
