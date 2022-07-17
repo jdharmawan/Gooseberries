@@ -116,6 +116,6 @@ public class GameManager_Level : MonoBehaviour
     {
         upgradingUi.SetActive(false);
         isPlayerLocked = false;
-        //SpawnEnemy();
+        SpawnEnemy();
     }
 }
