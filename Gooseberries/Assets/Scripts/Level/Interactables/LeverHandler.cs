@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace Interactables
 {
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(SpriteRenderer))]
     public class LeverHandler : MonoBehaviour
     {
-        Collider2D leverCollider;
 
         [HideInInspector] public GameManager_Level levelManager;
 
         [Header("UI Elements")]
         [SerializeField] GameObject inputPromptTag;
+        [SerializeField] Sprite activeSprite;
 
         [HideInInspector] public bool isActive = false;
         bool isPlayerWithinCollider = false;
 
         private void Start()
         {
-            leverCollider = GetComponent<Collider2D>();
+            
         }
 
         private void Update()
@@ -53,6 +53,7 @@ namespace Interactables
                 {
                     isActive = true;
                     inputPromptTag.SetActive(false);
+                    GetComponent<SpriteRenderer>().sprite = activeSprite;
                 }
             }
         }
