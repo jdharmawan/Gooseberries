@@ -12,7 +12,8 @@ public class FlyingEnemy : Enemy
     [SerializeField] private GameObject arrowPrefab;
     [SerializeField] private SuicideTrigger suicideTrigger;
     [SerializeField] private Suicide suicide;
-
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private AIPath aiPath;
 
     private Transform playerTrf;
     private EnemyAIState curState = EnemyAIState.Idle;
@@ -26,8 +27,13 @@ public class FlyingEnemy : Enemy
     //private bool inRange = false;
     //private bool inMelee= false;
     private bool IsExploding = false;
+    private bool isDead = false;
+    [SerializeField] private GameObject[] objectsToDisableOnDeath;
+
+
     [Header("Ground enemies")]
     private AIPlatformMovement aiPlatformMovement;
+
     private void Start()
     {
         detectionTrigger.Instantiate(InDetectionEnter, InDetectionStay, InDetectionExit);
@@ -65,6 +71,14 @@ public class FlyingEnemy : Enemy
 
     private void Update()
     {
+        if (isDead)
+        {
+            aiPlatformMovement.enabled = false;
+            var aipath = GetComponent<AIPath>();
+            if (aipath != null)
+                aipath.enabled = false;
+            return;
+        }
         StateChangeCheck();
 
         if (curState == EnemyAIState.Idle)
@@ -201,5 +215,68 @@ public class FlyingEnemy : Enemy
     public void Exploded()
     {
 
+    }
+
+    public void TakeDamage(int dmg, Vector2 flyDirection)
+    {
+        health -= dmg;
+        StartCoroutine(FlashRedEnumerator(1));
+        if (health <= 0)
+            Die(flyDirection);
+    }
+
+    IEnumerator FlashRedEnumerator(float duration)
+    {
+        var startTime = Time.time;
+        Debug.Log(Time.time - startTime < duration);
+        while(Time.time - startTime < duration)
+        {
+            float redvalue = Mathf.PingPong((Time.time - startTime) * 2, duration);
+            spriteRenderer.color = new Color(spriteRenderer.color.r, redvalue, redvalue, spriteRenderer.color.a);
+            Debug.Log(spriteRenderer.color.r);
+            yield return null;
+        }
+        spriteRenderer.color = new Color(1, 1, 1, spriteRenderer.color.a);
+    }
+
+    public void Die(Vector2 flyDirection)
+    {
+        EnemyManager.EnemyDied();
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, .7f);
+        for (int i = 0; i < objectsToDisableOnDeath.Length; i++)
+        {
+            objectsToDisableOnDeath[i].SetActive(false);
+        }
+        aiPath.enabled = false;
+        //detectionTrigger.enabled = false;
+        //meleeTrigger.enabled = false;
+        //rangeTrigger.enabled = false;
+        //suicideTrigger.enabled = false;
+        var rb = GetComponent<Rigidbody2D>();
+        if (rb != null)
+        {
+            rb.constraints = RigidbodyConstraints2D.None;
+            rb.AddForce(new Vector2(flyDirection.normalized.x*5, 10), ForceMode2D.Impulse);
+            if (Random.Range(-1, 1) > 0)
+            {
+                rb.AddTorque(40);
+            }
+            else
+            {
+                rb.AddTorque(-40);
+            }
+            
+        }
+        var capsule = GetComponent<CapsuleCollider2D>();
+        if (capsule != null)
+            capsule.enabled = false;
+        StartCoroutine(DieEnumerator());
+    }
+
+    IEnumerator DieEnumerator()
+    {
+        yield return new WaitForSeconds(7f);
+        Destroy(gameObject);
+        
     }
 }
