@@ -22,7 +22,7 @@ namespace Interactables
         [SerializeField] List<GameObject> enemies;
         [SerializeField] List<EnemySpawnPoint> spawnPoints;
 
-        public List<GameObject> spawnedEnemies = new List<GameObject>();
+        [HideInInspector] public List<GameObject> spawnedEnemies = new List<GameObject>();
 
         private PlayerController player;
 
