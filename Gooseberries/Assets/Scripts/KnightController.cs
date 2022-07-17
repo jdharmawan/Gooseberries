@@ -95,22 +95,26 @@ public class KnightController : MonoBehaviour
             //case KnightState.Follow:
             //    break;
             case KnightState.ShieldOut:
+                animator.SetTrigger("shield up");
                 shieldPivot.GetComponent<AimToMouse>().AimTowardMouse();
                 FlipWithMouseAim();
                 break;
             case KnightState.Platform:
+                animator.SetTrigger("shield up");
                 break;
             default:
                 //revert to default rotation
                 //again, actually not required, just doing this for now coz we dont have the sprites
-                if (facingRight)
-                {
-                    shieldPivot.transform.rotation = Quaternion.identity;
-                }
-                else
-                {
-                    shieldPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
-                }
+                //if (facingRight)
+                //{
+                //    shieldPivot.transform.rotation = Quaternion.identity;
+                //}
+                //else
+                //{
+                //    shieldPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
+                //}
+
+                animator.SetTrigger("idle");
 
                 FollowPrincess();
                 break;

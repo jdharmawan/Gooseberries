@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6309c1221c3499245914c9de529089aa
+guid: cdac29389f0ce24419464172651bb092
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PrincessIDLE-Sheet_0
+      name: PrincessIDLEAIM_0
       rect:
         serializedVersion: 2
         x: 0
@@ -118,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d96bd76e4ba1f3249b7a89d91c81a6a6
-      internalID: 605869009
+      spriteID: da38768633f82c64b8a4d7e56750aeaa
+      internalID: 1587003539
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrincessIDLE-Sheet_1
+      name: PrincessIDLEAIM_1
       rect:
         serializedVersion: 2
         x: 128
@@ -139,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 630986a03c8abbb42b9a3219d8c0d316
-      internalID: -79739294
+      spriteID: 3450d92432f8a2641b46f5b9a0a29df1
+      internalID: 1579961099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrincessIDLE-Sheet_2
+      name: PrincessIDLEAIM_2
       rect:
         serializedVersion: 2
         x: 256
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2790280ed9d656f46b72e69f046eeaf5
-      internalID: 1807541113
+      spriteID: d9103d66658f3a044979a8b5acf57f1b
+      internalID: 2017107009
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrincessIDLE-Sheet_3
+      name: PrincessIDLEAIM_3
       rect:
         serializedVersion: 2
         x: 384
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bdc718d0e26f1149b5c055a51117b2c
-      internalID: -1977445419
+      spriteID: 6ae068ca3b18031438e7fc8c9586424e
+      internalID: -676932693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrincessIDLE-Sheet_4
+      name: PrincessIDLEAIM_4
       rect:
         serializedVersion: 2
         x: 512
@@ -202,14 +202,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 75a6d9fbd0aa700418ef1c3728ee7a6e
-      internalID: -321100191
+      spriteID: d60167bbb46cdf742989740be55b82de
+      internalID: 1363375734
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PrincessIDLE-Sheet_5
+      name: PrincessIDLEAIM_5
       rect:
         serializedVersion: 2
         x: 640
@@ -223,8 +223,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3bb1f6423cf61084fb8717e9cc128122
-      internalID: 69200883
+      spriteID: 16411eb01b2e28243892c25562aa8f9a
+      internalID: -1143264955
       vertices: []
       indices: 
       edges: []
@@ -232,7 +232,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 279b6fe5f5c3d9d4db0536f20aa759fa
+    spriteID: 53c882dd790213e41acde1f2fa69fb56
     internalID: 0
     vertices: []
     indices: 
@@ -240,12 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      PrincessIDLE-Sheet_4: -321100191
-      PrincessIDLE-Sheet_3: -1977445419
-      PrincessIDLE-Sheet_0: 605869009
-      PrincessIDLE-Sheet_2: 1807541113
-      PrincessIDLE-Sheet_5: 69200883
-      PrincessIDLE-Sheet_1: -79739294
+      PrincessIDLEAIM_0: 1587003539
+      PrincessIDLEAIM_2: 2017107009
+      PrincessIDLEAIM_5: -1143264955
+      PrincessIDLEAIM_1: 1579961099
+      PrincessIDLEAIM_3: -676932693
+      PrincessIDLEAIM_4: 1363375734
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

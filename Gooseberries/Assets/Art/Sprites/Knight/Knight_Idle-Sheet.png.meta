@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 17f58775d00071f43b834c24b585cd7c
+guid: f481dadcc0c35334f981eac254f79dba
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -104,13 +104,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Princess_center_center-Sheet_0
+      name: Knight_Idle-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,41 +118,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98434991c25860e49abafe2e625955ec
-      internalID: 1825908634
+      spriteID: 8896d953d8ee1e942bd4ba3b35d4f3ce
+      internalID: -1906293724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Princess_center_center-Sheet_1
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 48f369bb4fec4b14885d361f7553f409
-      internalID: 543904383
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Princess_center_center-Sheet_2
+      name: Knight_Idle-Sheet_1
       rect:
         serializedVersion: 2
         x: 256
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,41 +139,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc5cb3e107425ef4ab675859ffdf2b1e
-      internalID: -1460834186
+      spriteID: 812b664ce5e16cd439fb68ad46b51ae9
+      internalID: 463970941
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Princess_center_center-Sheet_3
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 0
-        width: 128
-        height: 128
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 426f69074d07f7c4597448180ffe5004
-      internalID: 730143457
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Princess_center_center-Sheet_4
+      name: Knight_Idle-Sheet_2
       rect:
         serializedVersion: 2
         x: 512
         y: 0
-        width: 128
-        height: 128
+        width: 256
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -202,8 +160,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 84c42368c14a27b4eb10fca6f06127e2
-      internalID: -1390478371
+      spriteID: fd7c6e58fa28f434d9b4d5aedcc890ed
+      internalID: -1998931504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Idle-Sheet_3
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c78d9cd6e5acc6458176b6dee7d798a
+      internalID: 2140352322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Idle-Sheet_4
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 0
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f86f2d8576c39e242830058ec118617b
+      internalID: 355220674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_Idle-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 256
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e831559a535a2054eba18e7c61e699d3
+      internalID: -963071789
       vertices: []
       indices: 
       edges: []
@@ -219,11 +240,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Princess_center_center-Sheet_0: 1825908634
-      Princess_center_center-Sheet_2: -1460834186
-      Princess_center_center-Sheet_1: 543904383
-      Princess_center_center-Sheet_3: 730143457
-      Princess_center_center-Sheet_4: -1390478371
+      Knight_Idle-Sheet_0: -1906293724
+      Knight_Idle-Sheet_4: 355220674
+      Knight_Idle-Sheet_5: -963071789
+      Knight_Idle-Sheet_3: 2140352322
+      Knight_Idle-Sheet_1: 463970941
+      Knight_Idle-Sheet_2: -1998931504
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 5428145603986782320}
   - component: {fileID: 5428145603986782321}
   - component: {fileID: 5428145603986782333}
+  - component: {fileID: 2898904433185740866}
   m_Layer: 8
   m_Name: Knight
   m_TagString: Untagged
@@ -330,8 +331,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2700706}
-  m_Size: {x: 1, y: 1.4598588}
+  m_Offset: {x: 0, y: -0.25058973}
+  m_Size: {x: 1, y: 1.420897}
   m_Direction: 0
 --- !u!50 &5428145603986782321
 Rigidbody2D:
@@ -371,9 +372,29 @@ MonoBehaviour:
   shieldObject: {fileID: 5428145604279703287}
   shieldPlatform: {fileID: 5428145603287153528}
   sprite: {fileID: 5428145603986782323}
-  animator: {fileID: 0}
+  animator: {fileID: 2898904433185740866}
   moveSpeed: 2
   arrowCount: 0
+--- !u!95 &2898904433185740866
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5428145603986782326}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52f1066f7eb7ab84980c7451bdb701ff, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5428145604183209871
 GameObject:
   m_ObjectHideFlags: 0

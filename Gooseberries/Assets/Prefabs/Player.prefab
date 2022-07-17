@@ -373,10 +373,10 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!70 &683739876103559267
@@ -452,6 +452,7 @@ MonoBehaviour:
   bowPivot: {fileID: 683739876039322316}
   sprite: {fileID: 683739876103559295}
   animator: {fileID: 683739876103559266}
+  skillPoints: 0
   hp: 1
   arrows: 1
   moveSpeed: 0
