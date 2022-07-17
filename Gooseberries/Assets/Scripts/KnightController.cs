@@ -33,8 +33,8 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
     private Vector3 mousePos = new Vector3();
     private float distToPrincess = 0f;
     private bool facingRight = true;
-    private enum KnightState {Follow, ShieldOut, Platform, Disabled};
-    private KnightState knightState = KnightState.Follow;
+    public enum KnightState {Follow, ShieldOut, Platform, Disabled};
+    public KnightState knightState = KnightState.Follow;
     [HideInInspector] public List<GameObject> arrowStock = new List<GameObject>();
 
     // Start is called before the first frame update

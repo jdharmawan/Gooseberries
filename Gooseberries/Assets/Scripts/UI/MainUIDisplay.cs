@@ -9,6 +9,8 @@ public class MainUIDisplay : MonoBehaviour
     public PlayerController player;
     public KnightController knight;
 
+    [SerializeField] Image knightIcon;
+
     [SerializeField] Transform health;
     [SerializeField] Transform arrows;
 
@@ -18,11 +20,14 @@ public class MainUIDisplay : MonoBehaviour
     [SerializeField] Sprite filledHeart;
     [SerializeField] Sprite emptyArrow;
     [SerializeField] Sprite filledArrow;
+    [SerializeField] Sprite angryKnight;
+    [SerializeField] Sprite idleKnight;
 
     private void Update()
     {
         UpdateHealth();
         UpdateArrows();
+        UpdateKnight();
         arrowPool.text = knight.arrowStock.Count.ToString();
     }
 
@@ -57,5 +62,13 @@ public class MainUIDisplay : MonoBehaviour
         {
             arrows.GetChild(i).GetComponent<Image>().sprite = filledArrow;
         }
+    }
+
+    void UpdateKnight()
+    {
+        if (knight.knightState == KnightController.KnightState.Platform)
+            knightIcon.sprite = angryKnight;
+        else
+            knightIcon.sprite = idleKnight;
     }
 }

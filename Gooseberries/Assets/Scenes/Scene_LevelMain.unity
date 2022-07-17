@@ -2442,6 +2442,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1958827497}
   knight: {fileID: 1299720398}
+  knightIcon: {fileID: 1039943122}
   health: {fileID: 1800033021}
   arrows: {fileID: 1083139423}
   arrowPool: {fileID: 369256449}
@@ -2449,6 +2450,8 @@ MonoBehaviour:
   filledHeart: {fileID: 21300000, guid: aafc09221d9445d40a7754c3dd692fc9, type: 3}
   emptyArrow: {fileID: 21300000, guid: ae74ae2fee3b50a42a5dfb977b82b7cf, type: 3}
   filledArrow: {fileID: 21300000, guid: 45052d844b9e0564dae493c6173de5d3, type: 3}
+  angryKnight: {fileID: 21300000, guid: 0d029f49d9f5f4e47b06da6ea66a2d14, type: 3}
+  idleKnight: {fileID: 21300000, guid: 6ba2cf6ab4b48894ab7226136fd128e4, type: 3}
 --- !u!1 &279495606 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8204621668787698652, guid: a4b014064da46a243a5bad7be2456470, type: 3}
@@ -5738,7 +5741,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4214184618390797252, guid: 621a128a310d63e48b8a04bc15ef9e96, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -15.15
+      value: -13.14
       objectReference: {fileID: 0}
     - target: {fileID: 4214184618390797252, guid: 621a128a310d63e48b8a04bc15ef9e96, type: 3}
       propertyPath: m_LocalPosition.z
@@ -30469,7 +30472,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6578457890804398139, guid: aa91d8fb34334ec4787b0456c037014c, type: 3}
       propertyPath: sounds.Array.data[2].volume
-      value: 0.5
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6578457890804398140, guid: aa91d8fb34334ec4787b0456c037014c, type: 3}
       propertyPath: m_RootOrder
