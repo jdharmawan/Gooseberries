@@ -32,7 +32,10 @@ public class PlayerController : MonoBehaviour
     public int skillPoints = 0;
     public int hp = 3;
     public int arrows = 3;
-    public float moveSpeed = 2f;
+    [HideInInspector] public float moveSpeed;
+    [HideInInspector] public int vitalityLevel = 1;
+    [HideInInspector] public int quiverLevel = 1;
+    [HideInInspector] public int speedLevel = 1;
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
     [SerializeField] private bool isGrounded;//gonna need to set up a seperate smaller collider below the player collider to keep track of grounded
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour
 
         pState = playerState.Idle;
         isGrounded = true;
+        moveSpeed = 2f;
     }
 
     // Update is called once per frame
@@ -57,7 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!GameManager_Level.isGamePaused)
         {
-            GetPlayerInput();
+            if (!GameManager_Level.isPlayerLocked) GetPlayerInput();
             StateMachine();
 
             //dunno what to do, just do jump check here
@@ -111,8 +115,8 @@ public class PlayerController : MonoBehaviour
                     pState = playerState.Walking;
 
                 //move left
-                moveSpeed = -2f;
-                rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
+                //moveSpeed = -2f;
+                rb2d.velocity = new Vector2(-moveSpeed, rb2d.velocity.y);
 
                 ////ACTUALLY DONT REALLY NEED THIS COZ CAN JUST CHANGE TO IDLE OR WALK SPRITE////
                 //reset bow sprite here
@@ -146,7 +150,7 @@ public class PlayerController : MonoBehaviour
                     pState = playerState.Walking;
 
                 //move right
-                moveSpeed = 2f;
+                //moveSpeed = 2f;
                 rb2d.velocity = new Vector2(moveSpeed, rb2d.velocity.y);
 
                 //reset bow sprite here also

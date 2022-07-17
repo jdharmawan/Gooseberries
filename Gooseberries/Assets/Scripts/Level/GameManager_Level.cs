@@ -6,6 +6,7 @@ public class GameManager_Level : MonoBehaviour
 {
     
     public static bool isGamePaused = false;
+    public static bool isPlayerLocked = false;
 
     int lastBonfireIndex = 0;
 
@@ -25,6 +26,7 @@ public class GameManager_Level : MonoBehaviour
     [SerializeField] Transform diceFacesDisplayGroup;
 
     [HideInInspector] public List<int> diceFacesValue = new List<int>();
+    [HideInInspector] public int enemyRolled, skillRolled;
 
     private void Start()
     {
@@ -73,12 +75,18 @@ public class GameManager_Level : MonoBehaviour
     {
         UpgradingUIDisplay display = upgradingUi.GetComponent<UpgradingUIDisplay>();
         upgradingUi.SetActive(true);
-        display.DisplayUpgrades(player);
+        display.levelManager = this;
+        display.BeginUpgradeSession(player, diceFacesValue);
     }
 
     public void UpdateBonfireData(int index)
     {
         lastBonfireIndex = index;
+    }
+
+    void SpawnEnemy()
+    {
+        bonfires[lastBonfireIndex].GetComponent<Interactables.BonfireHandler>().SpawnEnemies(enemyRolled);
     }
     #endregion
 
@@ -107,7 +115,7 @@ public class GameManager_Level : MonoBehaviour
     public void B_ProceedLevel()
     {
         upgradingUi.SetActive(false);
-        Time.timeScale = 1f;
-        isGamePaused = false;
+        isPlayerLocked = false;
+        //SpawnEnemy();
     }
 }
