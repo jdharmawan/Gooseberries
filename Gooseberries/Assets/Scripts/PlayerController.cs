@@ -11,6 +11,28 @@ using UnityEngine;
 //keep track of last input so that the latest one will override the previous one, can A D then move to D etc
 //figure out knight collider and shield rotation
 
+public struct SavedPlayer
+{
+    public int skillPoints ;
+    public int hp ;
+    public int arrows ;
+    public float moveSpeed;
+    public int vitalityLevel ;
+    public int quiverLevel ;
+    public int speedLevel;
+
+    public SavedPlayer (int _skillPoints, int _hp, int _arrows, float _moveSpeed, int _vitalityLevel, int _quiverLevel, int _speedLevel)
+    {
+        skillPoints = _skillPoints;
+        hp = _hp;
+        arrows = _arrows;
+        moveSpeed = _moveSpeed;
+        vitalityLevel = _vitalityLevel;
+        quiverLevel = _quiverLevel;
+        speedLevel = _speedLevel;
+    }
+}
+
 public class PlayerController : MonoBehaviour
 {
     //[SerializeField] private BoxCollider2D groundedCol;
@@ -33,6 +55,7 @@ public class PlayerController : MonoBehaviour
     private bool facingRight = true;
     private GameObject tempArrow;
 
+    #region Saved player
     public int skillPoints = 0;
     public int hp = 3;
     public int arrows = 3;
@@ -40,6 +63,8 @@ public class PlayerController : MonoBehaviour
     [HideInInspector] public int vitalityLevel = 1;
     [HideInInspector] public int quiverLevel = 1;
     [HideInInspector] public int speedLevel = 1;
+    #endregion
+
     [SerializeField] private float jumpForce = 5f;
     [SerializeField] private float bowCharge;//temp, not sure if gonna use in the end
     [SerializeField] private bool isGrounded;//gonna need to set up a seperate smaller collider below the player collider to keep track of grounded
@@ -60,7 +85,6 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 2f;
         lineRenderer.gameObject.SetActive(false);
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -79,7 +103,20 @@ public class PlayerController : MonoBehaviour
 
         SetRenderLines();
     }
-
+    public void SetPlayerSavedData(SavedPlayer savePlayer)
+    {
+        skillPoints = savePlayer.skillPoints;
+        hp = savePlayer.hp;
+        arrows = savePlayer.arrows;
+        moveSpeed = savePlayer.moveSpeed;
+        vitalityLevel = savePlayer.vitalityLevel;
+        quiverLevel = savePlayer.quiverLevel;
+        speedLevel = savePlayer.speedLevel;
+    }
+    public SavedPlayer GetPlayerSavedData()
+    {
+        return new SavedPlayer(skillPoints, hp, arrows, moveSpeed, vitalityLevel, quiverLevel, speedLevel);
+    }
     private void GetPlayerInput()
     {
         //technically dont need W S unless got ladder
@@ -202,7 +239,6 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
     void SpawnArrow()
     {
         //tempArrow = Instantiate(arrow, arrowSpawner.transform.position, arrowSpawner.transform.rotation);
@@ -350,7 +386,7 @@ public class PlayerController : MonoBehaviour
 
         if (raycasthit.collider != null)
         {
-            Debug.Log(raycasthit.collider.name);
+            //Debug.Log(raycasthit.collider.name);
             raycolor = Color.green;
             //if (transform.position.y - raycasthit.point.y > col.size.y / 2)
             //{
@@ -365,8 +401,8 @@ public class PlayerController : MonoBehaviour
             //return false;
         }
 
-        Debug.DrawRay(col.bounds.center, Vector2.down * (extraHeight + (col.size.y / 2)), raycolor);
-        Debug.Log(raycasthit.collider);
+        //Debug.DrawRay(col.bounds.center, Vector2.down * (extraHeight + (col.size.y / 2)), raycolor);
+        //Debug.Log(raycasthit.collider);
 
         return raycasthit.collider != null;
     }
