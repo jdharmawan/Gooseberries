@@ -13,10 +13,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private BoxCollider2D groundedCol;
+    //[SerializeField] private BoxCollider2D groundedCol;
     public GameObject bowPivot;
     public Transform bowstringTop, bowstringBottom, pullbackPos;
     public LineRenderer lineRenderer;
+    public LayerMask layerMask;
 
     private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
             if (!GameManager_Level.isPlayerLocked) GetPlayerInput();
             StateMachine();
 
+            isGrounded = IsGrounded();
             //dunno what to do, just do jump check here
             if(!isGrounded)
             {
@@ -329,9 +331,44 @@ public class PlayerController : MonoBehaviour
         lineRenderer.SetPositions(points);
     }
 
-    public void SetIsGrounded(bool b)
+    //maybe no need anymore
+    //public void SetIsGrounded(bool b)
+    //{
+    //    isGrounded = b;
+    //}
+
+    private bool IsGrounded()
     {
-        isGrounded = b;
+        float extraHeight = 0.1f;
+
+        //RaycastHit2D raycasthit = Physics2D.Raycast(col.bounds.center, Vector2.down, col.bounds.extents.y + extraHeight, layerMask);
+
+        //change to circlecast?
+        RaycastHit2D raycasthit = Physics2D.CircleCast(col.bounds.center, (col.size.x/2), Vector2.down, extraHeight + (col.size.y/2), layerMask);
+
+        Color raycolor;
+
+        if (raycasthit.collider != null)
+        {
+            Debug.Log(raycasthit.collider.name);
+            raycolor = Color.green;
+            //if (transform.position.y - raycasthit.point.y > col.size.y / 2)
+            //{
+            //    return false;
+            //}
+            //else
+            //    return true;
+        }
+        else
+        {
+            raycolor = Color.red;
+            //return false;
+        }
+
+        Debug.DrawRay(col.bounds.center, Vector2.down * (extraHeight + (col.size.y / 2)), raycolor);
+        Debug.Log(raycasthit.collider);
+
+        return raycasthit.collider != null;
     }
 
     public void TakeDamage(int dmg)

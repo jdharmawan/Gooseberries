@@ -132,7 +132,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &683739875458905462
 Transform:
   m_ObjectHideFlags: 0
@@ -187,6 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 683739876103559265}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &683739876039322316
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +207,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &683739876039322317
 Transform:
   m_ObjectHideFlags: 0
@@ -455,6 +458,9 @@ MonoBehaviour:
   bowstringBottom: {fileID: 5601384020487944618}
   pullbackPos: {fileID: 334413838812584577}
   lineRenderer: {fileID: 6621653444528041044}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
   sprite: {fileID: 683739876103559295}
   animator: {fileID: 683739876103559266}
   skillPoints: 0
@@ -609,11 +615,11 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
-  - {x: 0, y: 0, z: 1}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.01
     widthCurve:
       serializedVersion: 2
       m_Curve:
