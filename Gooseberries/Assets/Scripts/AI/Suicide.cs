@@ -7,9 +7,9 @@ public class Suicide : MonoBehaviour
 {
     public Transform[] explosionRadius;
     public GameObject ExplosionVfx;
-    public void StartSuicide(UnityAction exploded, int dmg, float stunDuration,  float delay = 2, float radius = 3)
+    public void StartSuicide(UnityAction exploded, int dmg, float shieldDmg,  float delay = 2, float radius = 3)
     {
-        StartCoroutine(SuicideEnemy(exploded, dmg,  stunDuration,  delay, radius));
+        StartCoroutine(SuicideEnemy(exploded, dmg,  shieldDmg,  delay, radius));
         var animator = GetComponent<Animator>();
         animator.speed = 1 / delay;
         for (int i = 0; i < explosionRadius.Length; i++)
@@ -18,7 +18,7 @@ public class Suicide : MonoBehaviour
         }
     }
     
-    IEnumerator SuicideEnemy(UnityAction exploded, int dmg, float stunDuration,  float delay, float radius)
+    IEnumerator SuicideEnemy(UnityAction exploded, int dmg, float shieldDmg,  float delay, float radius)
     {
         yield return new WaitForSeconds(delay);
         var colliders = Physics2D.OverlapCircleAll(transform.position, radius);
@@ -26,7 +26,7 @@ public class Suicide : MonoBehaviour
         {
             if (collider.CompareTag("Player") || collider.CompareTag("Knight"))
             {
-                collider.GetComponent<IEnemySuicide>()?.ExplodedOnPlayer(dmg, stunDuration);
+                collider.GetComponent<IReceiveExplosion>()?.ExplodedOnPlayer(dmg, shieldDmg);
             }
         }
         exploded.Invoke();

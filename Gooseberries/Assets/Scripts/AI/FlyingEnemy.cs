@@ -223,7 +223,7 @@ public class FlyingEnemy : Enemy
     {
         Debug.Log("SUICIDE on enter");
         var suicideObj = Instantiate(suicide.gameObject, transform.position, transform.rotation);
-        suicideObj.GetComponent<Suicide>()?.StartSuicide(Exploded, stats.suicideDmg, stats.disableDuration);
+        suicideObj.GetComponent<Suicide>()?.StartSuicide(Exploded, stats.suicideDmg, stats.shieldDmg);
         Destroy(gameObject);
         
     }
