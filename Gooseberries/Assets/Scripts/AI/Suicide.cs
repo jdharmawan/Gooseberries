@@ -38,6 +38,7 @@ public class Suicide : MonoBehaviour
     public void PlayExplosionVfx()
     {
         ExplosionVfx.SetActive(true);
+        AudioManager.instance.Play("explosion");
         Destroy(this.gameObject,.5f);
     }
 }

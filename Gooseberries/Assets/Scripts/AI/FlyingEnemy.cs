@@ -196,6 +196,8 @@ public class FlyingEnemy : Enemy
         {
             curState = EnemyAIState.MeleeAtk;
         }
+        //AudioManager.instance.Play("EnemyDeath");
+
     }
 
     public void InMeleeStay(Transform player)
@@ -205,7 +207,6 @@ public class FlyingEnemy : Enemy
 
     public void InMeleeExit(Transform player)
     {
-
         if (curState == EnemyAIState.MeleeAtk)
         {
             if (stats.ammo - arrowShot > 0)
@@ -225,7 +226,6 @@ public class FlyingEnemy : Enemy
         var suicideObj = Instantiate(suicide.gameObject, transform.position, transform.rotation);
         suicideObj.GetComponent<Suicide>()?.StartSuicide(Exploded, stats.suicideDmg, stats.shieldDmg);
         Destroy(gameObject);
-        
     }
 
     public void Exploded()
@@ -257,6 +257,7 @@ public class FlyingEnemy : Enemy
 
     public void Die(Vector2 flyDirection)
     {
+        AudioManager.instance.Play("EnemyDeath");
         ZoneCounter.EnemyDied();
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, .7f);
         for (int i = 0; i < objectsToDisableOnDeath.Length; i++)

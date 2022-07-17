@@ -441,8 +441,21 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
             StartCoroutine(Death());
         }
         Debug.Log("HP: " + currHP);
+        StartCoroutine(FlashRedEnumerator(.5f));
     }
-
+    IEnumerator FlashRedEnumerator(float duration)
+    {
+        var startTime = Time.time;
+        Debug.Log(Time.time - startTime < duration);
+        while (Time.time - startTime < duration)
+        {
+            float redvalue = Mathf.PingPong((Time.time - startTime) * 2, duration);
+            sprite.color = new Color(sprite.color.r, redvalue, redvalue, sprite.color.a);
+            Debug.Log(sprite.color.r);
+            yield return null;
+        }
+        sprite.color = new Color(1, 1, 1, sprite.color.a);
+    }
     //check range to knight with distance
     void CloseToKnight(Transform t)
     {
