@@ -9,7 +9,7 @@ using UnityEngine;
 //current undesired interactions: shield collides with princess, and princess can move knight because of this
 //might need to kinematic him while shield is out
 //fk im dumb, can just apply counter force or just set his velocity to 0
-public class KnightController : MonoBehaviour
+public class KnightController : MonoBehaviour, IReceiveExplosion
 {
     public GameObject princess;
     public GameObject shieldPivot;
@@ -18,16 +18,20 @@ public class KnightController : MonoBehaviour
 
     private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
+    
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
-    [SerializeField] private float moveSpeed = 2f;
+    [SerializeField] private float shieldStaminaRegen = 0.001f;
     [SerializeField] private int arrowCount = 0;
+
+    public float moveSpeed = 2f;
+    public float maxShieldStamina = 5f;
+    public float currShieldStamina = 0f;
 
     private Vector3 mousePos = new Vector3();
     private float distToPrincess = 0f;
-
     private bool facingRight = true;
-    private enum KnightState {Follow, ShieldOut, Platform};
+    private enum KnightState {Follow, ShieldOut, Platform, Disabled};
     private KnightState knightState = KnightState.Follow;
     private List<GameObject> arrowStock = new List<GameObject>();
 
@@ -42,6 +46,7 @@ public class KnightController : MonoBehaviour
 
         arrowStock.Clear();
         arrowCount = arrowStock.Count;
+        currShieldStamina = 0f;
     }
 
     // Update is called once per frame
@@ -102,9 +107,18 @@ public class KnightController : MonoBehaviour
                 animator.SetTrigger("shield up");
                 shieldPivot.GetComponent<AimToMouse>().AimTowardMouse();
                 FlipWithMouseAim();
+
+                //half shield regen
+                RegenShieldStamina(shieldStaminaRegen / 2);
                 break;
             case KnightState.Platform:
                 animator.SetTrigger("shield up");
+                RegenShieldStamina(shieldStaminaRegen);
+                break;
+            case KnightState.Disabled:
+                RegenShieldStamina(shieldStaminaRegen * 2);
+                if (currShieldStamina >= maxShieldStamina)
+                    knightState = KnightState.Follow;
                 break;
             default:
                 //revert to default rotation
@@ -117,10 +131,9 @@ public class KnightController : MonoBehaviour
                 //{
                 //    shieldPivot.transform.rotation = Quaternion.Euler(0, 180f, 0);
                 //}
-
                 animator.SetTrigger("idle");
-
                 FollowPrincess();
+                RegenShieldStamina(shieldStaminaRegen);
                 break;
         }
     }
@@ -253,5 +266,33 @@ public class KnightController : MonoBehaviour
         Debug.Log("RELOAD!");
         Debug.Log("arrowstock: " + arrowStock.Count);
         return arrowsReturned;
+    }
+
+    public void ExplodedOnPlayer(int dmg, float shieldDmg)
+    {
+        if(knightState == KnightState.ShieldOut)
+        {
+            currShieldStamina -= shieldDmg;
+            Debug.Log("knight hit by explosion");
+
+            if (currShieldStamina <= 0)
+            {
+                knightState = KnightState.Disabled;
+            }
+        }
+        else
+        {
+            //if not shield, explosion will immediately stun
+            currShieldStamina = 0f;
+            knightState = KnightState.Disabled;
+        }
+    }
+
+    void RegenShieldStamina(float f)
+    {
+        if(currShieldStamina < maxShieldStamina)
+            currShieldStamina += f;
+
+        Debug.Log("currShieldStamina: " + currShieldStamina);
     }
 }
