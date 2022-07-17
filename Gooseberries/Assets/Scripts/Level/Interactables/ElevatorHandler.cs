@@ -16,8 +16,17 @@ namespace Interactables
 
         [SerializeField] Vector2 targetPosition;
         [SerializeField] List<LeverHandler> leversToActivate;
+        [SerializeField] List<PressurePlateHandler> pressurePlateToActivate;
 
         float lerpTime = 0f;
+        Vector2 curPosition;
+
+        public bool isCameraZoom = true;
+
+        private void Start()
+        {
+            Initialise_Activators();
+        }
 
         private void Update()
         {
@@ -25,6 +34,19 @@ namespace Interactables
             {
                 if (IsActivated() && !isEngaged)
                     cor = StartCoroutine(ElevatorActivating());
+            }
+            if (!IsActivated())
+            {
+                Disengage();
+            }
+                
+        }
+
+        void Initialise_Activators()
+        {
+            for (int i = 0; i < pressurePlateToActivate.Count; i++)
+            {
+                pressurePlateToActivate[i].elevatorHandler = this;
             }
         }
 
@@ -35,7 +57,22 @@ namespace Interactables
                 if (!leversToActivate[i].isActive)
                     return false;
             }
+            for (int i = 0; i < pressurePlateToActivate.Count; i++)
+            {
+                if (!pressurePlateToActivate[i].isActive)
+                    return false;
+            }
             return true;
+        }
+
+        public void Disengage()
+        {
+            isEngaged = false;
+        }
+        public void ResetLerpTime()
+        {
+            lerpTime = 0f;
+            curPosition = transform.localPosition;
         }
 
         IEnumerator ElevatorActivating()
@@ -43,7 +80,7 @@ namespace Interactables
             lerpTime = 0f;
             Vector2 initial = transform.localPosition;
             isActivating = true;
-            virtualCamera.Follow = transform;
+            if (isCameraZoom) virtualCamera.Follow = transform;
             while (true)
             {
                 lerpTime += Time.deltaTime;
@@ -51,12 +88,19 @@ namespace Interactables
                 if (lerpTime < 1.5f)
                 {
                     transform.localPosition = Vector2.Lerp(initial, targetPosition, t);
+                    if (isActivating)
+                    {
+                        if (!IsActivated())
+                        {
+                            transform.localPosition = Vector2.Lerp(curPosition, initial, t);
+                        }
+                    }
                 }
                 else
                 {
-                    transform.localPosition = targetPosition;
+                    //transform.localPosition = targetPosition;
                     isActivating = false;
-                    isEngaged = true;
+                    if (IsActivated()) isEngaged = true;
                     virtualCamera.Follow = levelManager.player.transform;
                     StopCoroutine(cor);
                 }
