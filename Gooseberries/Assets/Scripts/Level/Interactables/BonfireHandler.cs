@@ -7,6 +7,7 @@ namespace Interactables
     [RequireComponent(typeof(Collider2D))]
     public class BonfireHandler : MonoBehaviour
     {
+        public bool doNotTriggerUpgrade = false;
         Collider2D bonfireCollider;
 
         [HideInInspector] public GameManager_Level levelManager;
@@ -44,7 +45,8 @@ namespace Interactables
                     Debug.Log("activeate bon fire");
                     levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
                 }
-                levelManager.TriggerUpgrade();
+                if (!doNotTriggerUpgrade)
+                    levelManager.TriggerUpgrade();
                 levelManager.ActivateBonfireZone(this);
                 UpdateLatestCheckpoint();
                 GameManager_Level.isPlayerLocked = true;
@@ -81,7 +83,8 @@ namespace Interactables
                 //enemies[i].SetActive(true);
                 spawnedEnemies.Add(Instantiate(spawnPoints[i].enemyPrefab, spawnPoints[i].transform.position, spawnPoints[i].transform.rotation));
             }
-            ZoneEnemyCounter.SetZoneEnemyNumber(levelManager.CurrentBonfireCleared,numberOfEnemies);
+            ZoneCounter.SetZoneEnemyNumber(numberOfEnemies);
+            Debug.Log("Spawn: " + numberOfEnemies);
         }
 
         #endregion

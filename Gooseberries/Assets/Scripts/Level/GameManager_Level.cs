@@ -41,6 +41,7 @@ public class GameManager_Level : MonoBehaviour
     {
         Initialise_Interactables();
         Initialise_UIComponents();
+        ZoneCounter.SetZoneClearEvent(CurrentBonfireCleared);
     }
 
     private void Update()
@@ -118,6 +119,7 @@ public class GameManager_Level : MonoBehaviour
         {
             bonfires[_curBonFire.bonfireIndex + 1].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(true);
         }
+        ZoneCounter.SetCurZoneIndex(_curBonFire.bonfireIndex);
     }
     void SpawnEnemy()
     {

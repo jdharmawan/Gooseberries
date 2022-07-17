@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5428145602693936716}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Shield Container
   m_TagString: Knight
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 5428145602909092088}
   - component: {fileID: 5428145602909092089}
   - component: {fileID: 5428145602909092091}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: ShieldPlatform
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5428145603116373096}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldPlatformPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5428145603287153531}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Shield Platform Container
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 5428145603986782321}
   - component: {fileID: 5428145603986782333}
   - component: {fileID: 2898904433185740866}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Knight
   m_TagString: Knight
   m_Icon: {fileID: 0}
@@ -373,8 +373,11 @@ MonoBehaviour:
   shieldPlatform: {fileID: 5428145603287153528}
   sprite: {fileID: 5428145603986782323}
   animator: {fileID: 2898904433185740866}
-  moveSpeed: 2
+  shieldStaminaRegen: 0.001
   arrowCount: 0
+  moveSpeed: 2
+  maxShieldStamina: 5
+  currShieldStamina: 0
 --- !u!95 &2898904433185740866
 Animator:
   serializedVersion: 4
@@ -407,7 +410,7 @@ GameObject:
   - component: {fileID: 5428145604183209865}
   - component: {fileID: 5428145604183209864}
   - component: {fileID: 5428145604183209867}
-  m_Layer: 6
+  m_Layer: 12
   m_Name: ShieldPlatform
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -537,7 +540,7 @@ GameObject:
   - component: {fileID: 5428145604279703286}
   - component: {fileID: 5428145604279703281}
   - component: {fileID: 5428145604279703280}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldSprite
   m_TagString: TargetBoard
   m_Icon: {fileID: 0}
@@ -647,7 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5428145604298372824}
   - component: {fileID: 5428145604298372827}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ShieldPivot
   m_TagString: Knight
   m_Icon: {fileID: 0}
