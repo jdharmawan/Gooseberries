@@ -52,7 +52,7 @@ public class KnightController : MonoBehaviour
                 //if right click do shield
                 knightState = KnightState.ShieldOut;
                 rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
-                rb2d.isKinematic = true;
+                rb2d.isKinematic = false;
                 shieldObject.SetActive(true);
             }
         }
@@ -76,15 +76,15 @@ public class KnightController : MonoBehaviour
             {
                 knightState = KnightState.Platform;
                 //activate shield platform
-                rb2d.velocity = Vector3.zero;
-                rb2d.isKinematic = true;
+                rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
+                rb2d.isKinematic = false;
                 shieldPlatform.SetActive(true);
             }
             else if(knightState == KnightState.Platform)
             {
                 knightState = KnightState.Follow;
                 //deactivate shield platform
-                rb2d.velocity = Vector3.zero;
+                rb2d.velocity = new Vector2(0f, rb2d.velocity.y);
                 rb2d.isKinematic = false;
                 shieldPlatform.SetActive(false);
             }
