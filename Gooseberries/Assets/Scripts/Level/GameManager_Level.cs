@@ -2,13 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct Checkpoint
+{
+    public SavedPlayer savedPlayer;
+    public int enemyRolled;
+    public int skillRolled;
+}
+
 public class GameManager_Level : MonoBehaviour
 {
     
     public static bool isGamePaused = false;
     public static bool isPlayerLocked = false;
 
-    int lastBonfireIndex = 0;
+    public Interactables.BonfireHandler curBonFire = null;
+
+    public Checkpoint checkPoint = new Checkpoint();
 
     [SerializeField] Cinemachine.CinemachineVirtualCamera virtualCamera;
     public PlayerController player;
@@ -79,15 +88,54 @@ public class GameManager_Level : MonoBehaviour
         display.BeginUpgradeSession(player, diceFacesValue);
     }
 
-    public void UpdateBonfireData(int index)
+    [ContextMenu("Respawn")]
+    public void TriggerRespawn()
     {
-        lastBonfireIndex = index;
+        player.SetPlayerSavedData(checkPoint.savedPlayer);
+        UpgradingUIDisplay display = upgradingUi.GetComponent<UpgradingUIDisplay>();
+        upgradingUi.SetActive(true);
+        display.levelManager = this;
+        display.RespawnUpgrateSession();
+        player.transform.position = curBonFire.transform.position;
+        player.knight.transform.position = curBonFire.transform.position;
+        for (int i = 0; i < curBonFire.spawnedEnemies.Count; i++)
+        {
+            if (curBonFire.spawnedEnemies[i] != null)
+            {
+                Destroy(curBonFire.spawnedEnemies[i]);
+            }
+        }
+        curBonFire.spawnedEnemies.Clear();
+
+
     }
 
+    public void ActivateBonfireZone(Interactables.BonfireHandler _curBonFire)
+    {
+        curBonFire = _curBonFire;
+        bonfires[_curBonFire.bonfireIndex].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(true);
+        Debug.Log("INDEX: " + _curBonFire.bonfireIndex + 1);
+        Debug.Log("INDEX: " + (_curBonFire.bonfireIndex + 1 <= bonfires.Count));
+        if (_curBonFire.bonfireIndex + 1 < bonfires.Count)
+        {
+            bonfires[_curBonFire.bonfireIndex + 1].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(true);
+        }
+    }
     void SpawnEnemy()
     {
-        bonfires[lastBonfireIndex].GetComponent<Interactables.BonfireHandler>().SpawnEnemies(enemyRolled);
+        curBonFire.SpawnEnemies(enemyRolled);
+        //bonfires[lastBonfireIndex].GetComponent<Interactables.BonfireHandler>().SpawnEnemies(enemyRolled);
     }
+
+    public void CurrentBonfireCleared()
+    {
+        if (curBonFire.bonfireIndex + 1 <= bonfires.Count)
+        {
+            bonfires[curBonFire.bonfireIndex + 1].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(false);
+        }
+    }
+
+
     #endregion
 
     #region Dice-Related Functions

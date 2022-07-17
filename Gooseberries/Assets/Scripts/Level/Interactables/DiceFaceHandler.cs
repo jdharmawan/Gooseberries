@@ -14,6 +14,8 @@ namespace Interactables
         {
             if (collision.tag == "Player")
             {
+                if (levelManager == null)
+                    levelManager = FindObjectOfType<GameManager_Level>();
                 levelManager.diceFacesValue.Add(diceFaceValue);
                 levelManager.UpdateDiceCollection();
                 Destroy(this.gameObject);

@@ -7,11 +7,12 @@ namespace Interactables
     [RequireComponent(typeof(Collider2D))]
     public class BonfireHandler : MonoBehaviour
     {
-
         Collider2D bonfireCollider;
 
         [HideInInspector] public GameManager_Level levelManager;
         [HideInInspector] public int bonfireIndex;
+        public bool isVisited { get; private set; }
+        [SerializeField] public GameObject beforeCollider;
 
         bool isActive = false;
 
@@ -19,22 +20,36 @@ namespace Interactables
         float lerpTime = 0f;
 
         [SerializeField] List<GameObject> enemies;
+        [SerializeField] List<EnemySpawnPoint> spawnPoints;
+
+        public List<GameObject> spawnedEnemies = new List<GameObject>();
+
+        private PlayerController player;
 
         private void Start()
         {
             bonfireCollider = GetComponent<Collider2D>();
+            SetBlockerActive(false);
+            player = FindObjectOfType<PlayerController>();
+            isVisited = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == "Player" && isActive == false && bonfireIndex != 0)
+            if (collision.tag == "Player" && isActive == false && bonfireIndex >= 0)
             {
+                if(isVisited == false)
+                {
+                    isVisited = true;
+                    Debug.Log("activeate bon fire");
+                    //levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
+                }
                 levelManager.TriggerUpgrade();
-                levelManager.UpdateBonfireData(bonfireIndex);
+                levelManager.ActivateBonfireZone(this);
                 UpdateLatestCheckpoint();
                 GameManager_Level.isPlayerLocked = true;
             }
-            if (bonfireIndex == 0) isActive = true;
+            //if (bonfireIndex == 0) isActive = true;
         }
 
         private void OnTriggerExit2D(Collider2D collision)
@@ -58,10 +73,15 @@ namespace Interactables
 
         public void SpawnEnemies(int numberOfEnemies)
         {
+            spawnedEnemies = new List<GameObject>();
+            //Debug.Log(transform.name);
             for (int i = 0; i < numberOfEnemies; i++)
             {
-                enemies[i].SetActive(true);
+                //Debug.Log(enemies[i].name, enemies[i].gameObject);
+                //enemies[i].SetActive(true);
+                spawnedEnemies.Add(Instantiate(spawnPoints[i].enemyPrefab, spawnPoints[i].transform.position, spawnPoints[i].transform.rotation));
             }
+            ZoneEnemyCounter.SetZoneEnemyNumber(levelManager.CurrentBonfireCleared,numberOfEnemies);
         }
 
         #endregion
@@ -81,6 +101,11 @@ namespace Interactables
 
                 }
             }
+        }
+
+        public void SetBlockerActive(bool isActive)
+        {
+            beforeCollider.SetActive(isActive);
         }
     }
 }
