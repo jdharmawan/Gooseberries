@@ -20,7 +20,8 @@ public class SceneReload : MonoBehaviour
 
     public void B_RestartScene()
     {
-        SceneManager.LoadScene("Scene_LevelMain");
+        DestroyImmediate(FindObjectOfType<ZoneCounter>().gameObject);
+        SceneManager.LoadScene("Title Screen");
     }
 
     public void B_Help()

@@ -3,40 +3,48 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public static class ZoneCounter
+public class ZoneCounter : MonoBehaviour
 {
-    public static int numOfZoneEnemykilled = 0;
-    public static int totalDiceCollected = 0;
-    public static int curZoneIndex;
-    private static UnityAction zoneClear;
+    public int numOfZoneEnemykilled = 0;
+    public int totalDiceCollected = 0;
+    public int curZoneIndex;
+    private UnityAction zoneClear;
     public static int zoneEnemyNumber { get; private set; }
-    public static void EnemyDied()
+
+    private void Awake()
+    {
+        numOfZoneEnemykilled = 0;
+        totalDiceCollected = 0;
+        curZoneIndex = 0;
+    }
+
+    public void EnemyDied()
     {
         numOfZoneEnemykilled += 1;
         CheckIfConditionClear();
     }
 
-    public static void SetZoneClearEvent(UnityAction _zoneClear)
+    public void SetZoneClearEvent(UnityAction _zoneClear)
     {
         zoneClear = _zoneClear;
     }
     
-    public static void SetZoneEnemyNumber(int _zoneEnemyNumber)
+    public void SetZoneEnemyNumber(int _zoneEnemyNumber)
     {
         numOfZoneEnemykilled = 0;
         zoneEnemyNumber = _zoneEnemyNumber;
     }
-    public static void SetCurZoneIndex(int _curZoneIndex)
+    public void SetCurZoneIndex(int _curZoneIndex)
     {
         curZoneIndex = _curZoneIndex;
     }
-    public static void DiceCollected()
+    public void DiceCollected()
     {
         totalDiceCollected += 1;
         CheckIfConditionClear();
     }
 
-    public static void CheckIfConditionClear()
+    public void CheckIfConditionClear()
     {
         Debug.Log("COUNTER, Enemies:  " + numOfZoneEnemykilled + " Targe enemies count : " + zoneEnemyNumber);
         if (numOfZoneEnemykilled >= zoneEnemyNumber && zoneClear != null
@@ -47,7 +55,7 @@ public static class ZoneCounter
         }
     }
 
-    public static string GetConditionMessage()
+    public string GetConditionMessage()
     {
         string message = "";
         if(numOfZoneEnemykilled < zoneEnemyNumber && zoneClear != null)

@@ -86,7 +86,7 @@ namespace Interactables
                 //enemies[i].SetActive(true);
                 spawnedEnemies.Add(Instantiate(spawnPoints[i].enemyPrefab, spawnPoints[i].transform.position, spawnPoints[i].transform.rotation));
             }
-            ZoneCounter.SetZoneEnemyNumber(numberOfEnemies);
+            FindObjectOfType<ZoneCounter>().SetZoneEnemyNumber(numberOfEnemies);
             Debug.Log("Spawn: " + numberOfEnemies);
         }
 

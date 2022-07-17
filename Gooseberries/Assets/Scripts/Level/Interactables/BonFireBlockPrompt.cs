@@ -12,7 +12,7 @@ public class BonFireBlockPrompt : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             tmp.gameObject.SetActive(true);
-            tmp.text = ZoneCounter.GetConditionMessage();
+            tmp.text = FindObjectOfType<ZoneCounter>().GetConditionMessage();
         }
         else
         {

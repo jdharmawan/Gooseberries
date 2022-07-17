@@ -30,7 +30,7 @@ public class Suicide : MonoBehaviour
             }
         }
         exploded.Invoke();
-        ZoneCounter.EnemyDied();
+        FindObjectOfType<ZoneCounter>().EnemyDied();
         PlayExplosionVfx();
         //EnemyManager.Destroy(this.gameObject);
     }
