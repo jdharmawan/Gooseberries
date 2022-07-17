@@ -20,6 +20,9 @@ namespace Interactables
         float lerpTime = 0f;
 
         [SerializeField] List<GameObject> enemies;
+        [SerializeField] List<EnemySpawnPoint> spawnPoints;
+
+        private List<GameObject> spawnedEnemy = new List<GameObject>();
 
         private PlayerController player;
 
@@ -64,10 +67,13 @@ namespace Interactables
 
         public void SpawnEnemies(int numberOfEnemies)
         {
+            spawnedEnemy = new List<GameObject>();
+            //Debug.Log(transform.name);
             for (int i = 0; i < numberOfEnemies; i++)
             {
-                Debug.Log(enemies[i].name, enemies[i].gameObject);
-                enemies[i].SetActive(true);
+                //Debug.Log(enemies[i].name, enemies[i].gameObject);
+                //enemies[i].SetActive(true);
+                spawnedEnemy.Add(Instantiate(spawnPoints[i].enemyPrefab, spawnPoints[i].transform.position, spawnPoints[i].transform.rotation));
             }
             ZoneEnemyCounter.SetZoneEnemyNumber(levelManager.CurrentBonfireCleared,numberOfEnemies);
         }

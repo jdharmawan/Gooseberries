@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     private Vector3 mousePos = new Vector3();
     private bool facingRight = true;
     private GameObject tempArrow;
-    private KnightController knight;
+    public KnightController knight;
     #region Saved player
     public int maxHP = 3;
     public int currHP = 3;

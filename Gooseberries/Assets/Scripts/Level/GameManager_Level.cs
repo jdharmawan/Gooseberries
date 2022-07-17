@@ -96,6 +96,8 @@ public class GameManager_Level : MonoBehaviour
         upgradingUi.SetActive(true);
         display.levelManager = this;
         display.RespawnUpgrateSession();
+        player.transform.position = curBonFire.transform.position;
+        player.knight.transform.position = curBonFire.transform.position;
     }
 
     public void ActivateBonfireZone(Interactables.BonfireHandler _curBonFire)
@@ -105,7 +107,7 @@ public class GameManager_Level : MonoBehaviour
         bonfires[_curBonFire.bonfireIndex].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(true);
         Debug.Log("INDEX: " + _curBonFire.bonfireIndex + 1);
         Debug.Log("INDEX: " + (_curBonFire.bonfireIndex + 1 <= bonfires.Count));
-        if (_curBonFire.bonfireIndex + 1 <= bonfires.Count)
+        if (_curBonFire.bonfireIndex + 1 < bonfires.Count)
         {
             bonfires[_curBonFire.bonfireIndex + 1].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(true);
         }
