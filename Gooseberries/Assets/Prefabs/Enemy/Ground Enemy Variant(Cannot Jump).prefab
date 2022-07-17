@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2744910336020756707, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
+      propertyPath: stats
+      value: 
+      objectReference: {fileID: 11400000, guid: 3819b1f90355aad4abe0fb423c26f563, type: 2}
     - target: {fileID: 2744910336020756731, guid: e6dbf246ed0e88c4fbcced4b48a63504, type: 3}
       propertyPath: m_Name
       value: Ground Enemy Variant(Cannot Jump)
