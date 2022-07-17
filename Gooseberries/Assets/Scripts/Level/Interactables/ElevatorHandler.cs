@@ -22,6 +22,7 @@ namespace Interactables
         Vector2 curPosition;
 
         public bool isCameraZoom = true;
+        public bool isOneWay = false;
 
         Vector2 initial;
 
@@ -43,8 +44,11 @@ namespace Interactables
             {
                 if (IsActivated() && !isEngaged)
                     cor = StartCoroutine(ElevatorActivating());
-                if (!IsActivated() && isEngaged)
-                    cor = StartCoroutine(ElevatorDeactivating());
+                if (!isOneWay)
+                {
+                    if (!IsActivated() && isEngaged)
+                        cor = StartCoroutine(ElevatorDeactivating());
+                }
             }
                 
         }

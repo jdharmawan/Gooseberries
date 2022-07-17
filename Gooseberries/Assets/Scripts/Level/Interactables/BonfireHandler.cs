@@ -20,7 +20,6 @@ namespace Interactables
         //Counters
         float lerpTime = 0f;
 
-        [SerializeField] List<GameObject> enemies;
         [SerializeField] List<EnemySpawnPoint> spawnPoints;
 
         [HideInInspector] public List<GameObject> spawnedEnemies = new List<GameObject>();
@@ -46,10 +45,14 @@ namespace Interactables
                     levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
                 }
                 if (!doNotTriggerUpgrade)
+                {
                     levelManager.TriggerUpgrade();
+                    GameManager_Level.isPlayerLocked = true;
+
+                }
                 levelManager.ActivateBonfireZone(this);
                 UpdateLatestCheckpoint();
-                GameManager_Level.isPlayerLocked = true;
+                
             }
             //if (bonfireIndex == 0) isActive = true;
         }

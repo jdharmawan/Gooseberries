@@ -14,6 +14,9 @@ namespace Interactables
         [SerializeField] GameObject inputPromptTag;
         [SerializeField] Sprite activeSprite;
         [SerializeField] Sprite inactiveSprite;
+        [SerializeField] Transform easterEgg;
+
+        [SerializeField] GameObject flyingEnemy;
 
         [HideInInspector] public bool isActive = false;
         bool isPlayerWithinCollider = false;
@@ -62,6 +65,14 @@ namespace Interactables
                     isActive = false;
                     inputPromptTag.SetActive(false);
                     GetComponent<SpriteRenderer>().sprite = inactiveSprite;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                if (isPlayerWithinCollider)
+                {
+                    Instantiate(flyingEnemy, easterEgg);
                 }
             }
         }
