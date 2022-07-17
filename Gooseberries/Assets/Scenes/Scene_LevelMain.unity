@@ -9206,6 +9206,7 @@ MonoBehaviour:
   - {fileID: 1603324640}
   - {fileID: 952798531}
   upgradingUi: {fileID: 950924892}
+  tutorial: {fileID: 1605324480}
   diceFacesDisplayGroup: {fileID: 169658001}
   diceFacesValue: 
   enemyRolled: 0
@@ -28554,6 +28555,11 @@ SpriteRenderer:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2465850014112961112, guid: 3f15d954c96b7644e8eed62b9746648c, type: 3}
   m_PrefabInstance: {fileID: 1062920065}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1605324480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8047739938987602484, guid: 6b11c8b164e11924cb2f5adce86ea411, type: 3}
+  m_PrefabInstance: {fileID: 1803531472}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1611542384
 PrefabInstance:

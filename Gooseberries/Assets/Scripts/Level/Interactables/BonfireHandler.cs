@@ -46,8 +46,7 @@ namespace Interactables
                 }
                 if (!doNotTriggerUpgrade)
                 {
-                    levelManager.TriggerUpgrade();
-                    GameManager_Level.isPlayerLocked = true;
+                    levelManager.TriggerUpgrade();                  
 
                 }
                 levelManager.ActivateBonfireZone(this);

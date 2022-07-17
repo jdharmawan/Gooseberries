@@ -30,6 +30,7 @@ public class GameManager_Level : MonoBehaviour
 
     [Header("UI Overlay")]
     [SerializeField] GameObject upgradingUi;
+    [SerializeField] GameObject tutorial;
 
     [Header("Main UI Components")]
     [SerializeField] Transform diceFacesDisplayGroup;
@@ -43,6 +44,7 @@ public class GameManager_Level : MonoBehaviour
         Initialise_UIComponents();
         ZoneCounter.SetZoneClearEvent(CurrentBonfireCleared);
         AudioManager.instance.Play("Level 1 BGM");
+        tutorial.SetActive(true);
     }
 
     private void Update()
@@ -88,12 +90,14 @@ public class GameManager_Level : MonoBehaviour
         upgradingUi.SetActive(true);
         display.levelManager = this;
         display.BeginUpgradeSession(player, diceFacesValue);
+        isPlayerLocked = true;
     }
 
     [ContextMenu("Respawn")]
     public void ResetToLastCheckpoint()
     {
         player.SetPlayerSavedData(checkPoint.savedPlayer);
+        isPlayerLocked = true;
         UpgradingUIDisplay display = upgradingUi.GetComponent<UpgradingUIDisplay>();
         upgradingUi.SetActive(true);
         display.levelManager = this;
