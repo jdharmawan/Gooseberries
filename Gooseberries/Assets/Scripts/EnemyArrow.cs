@@ -7,7 +7,7 @@ public class EnemyArrow : Arrow
     void Start()
     {
         //assign values, since parent only decalre
-        speed = 5.0f;
+        speed = 10.0f;
         damage = 1;
         rb2d = GetComponent<Rigidbody2D>();
         boxCol = GetComponent<BoxCollider2D>();
