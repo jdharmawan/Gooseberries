@@ -26,6 +26,7 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
 
     public float moveSpeed = 2f;
     public float maxShieldStamina = 5f;
+    public int maxArrow = 5;
     public float currShieldStamina = 0f;
 
     private Vector3 mousePos = new Vector3();
@@ -218,7 +219,7 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
         //call this func from enemy arrow
         //inserts arrow into array to keep track
         //when princess comes near, autorefill and destroy arrows from array
-        if (arrowStock.Count < 5)
+        if (arrowStock.Count < maxArrow)
         {
             arrowStock.Add(arrow);
             //arrowCount = arrowStock.Count;
@@ -290,9 +291,19 @@ public class KnightController : MonoBehaviour, IReceiveExplosion
 
     void RegenShieldStamina(float f)
     {
-        if(currShieldStamina < maxShieldStamina)
+        if (currShieldStamina < maxShieldStamina)
             currShieldStamina += f;
 
         Debug.Log("currShieldStamina: " + currShieldStamina);
+    }
+
+    public void ResetKnight()
+    {
+        currShieldStamina = maxShieldStamina;
+        for (int i = 0; i < arrowStock.Count; i++)
+        {
+            Destroy(arrowStock[i]);
+        }
+        arrowStock.Clear();
     }
 }

@@ -16,18 +16,20 @@ public struct SavedPlayer
     public int skillPoints ;
     public int maxHP;
     public int currHP;
-    public int arrows ;
+    public int maxArrows;
+    public int currArrows;
     public float moveSpeed;
     public int vitalityLevel ;
     public int quiverLevel ;
     public int speedLevel;
 
-    public SavedPlayer (int _skillPoints, int _maxHP, int _currHP, int _arrows, float _moveSpeed, int _vitalityLevel, int _quiverLevel, int _speedLevel)
+    public SavedPlayer (int _skillPoints, int _maxHP, int _currHP, int _maxArrows, int _currArrows, float _moveSpeed, int _vitalityLevel, int _quiverLevel, int _speedLevel)
     {
         skillPoints = _skillPoints;
         maxHP = _maxHP;
         currHP = _currHP;
-        arrows = _arrows;
+        maxArrows = _maxArrows;
+        currArrows = _currArrows;
         moveSpeed = _moveSpeed;
         vitalityLevel = _vitalityLevel;
         quiverLevel = _quiverLevel;
@@ -63,7 +65,6 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     public int maxArrows = 3;
     public int currArrows = 3;
     public int skillPoints = 0;
-    public int arrows = 3;
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int vitalityLevel = 1;
     [HideInInspector] public int quiverLevel = 1;
@@ -75,6 +76,7 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     [SerializeField] private bool isGrounded;//gonna need to set up a seperate smaller collider below the player collider to keep track of grounded
     [SerializeField] private GameObject arrow;
     [SerializeField] private Transform arrowSpawner;
+    private GameManager_Level gameLevel;
 
     //polish
     //reset aim after moving, maybe add some delay after aiming so wont moonwalk
@@ -90,6 +92,7 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
         moveSpeed = 2f;
         lineRenderer.gameObject.SetActive(false);
         knight = FindObjectOfType<KnightController>();
+        gameLevel = FindObjectOfType<GameManager_Level>();
     }
     // Update is called once per frame
     void Update()
@@ -116,7 +119,8 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
         skillPoints = savePlayer.skillPoints;
         maxHP = savePlayer.maxHP;
         currHP = savePlayer.currHP;
-        arrows = savePlayer.arrows;
+        maxArrows = savePlayer.maxArrows;
+        currArrows = savePlayer.currArrows;
         moveSpeed = savePlayer.moveSpeed;
         vitalityLevel = savePlayer.vitalityLevel;
         quiverLevel = savePlayer.quiverLevel;
@@ -124,7 +128,7 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     }
     public SavedPlayer GetPlayerSavedData()
     {
-        return new SavedPlayer(skillPoints, maxHP, currHP, arrows, moveSpeed, vitalityLevel, quiverLevel, speedLevel);
+        return new SavedPlayer(skillPoints, maxHP, currHP, maxArrows, currArrows, moveSpeed, vitalityLevel, quiverLevel, speedLevel);
     }
     private void GetPlayerInput()
     {
@@ -430,6 +434,10 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     public void TakeDamage(int dmg)
     {
         currHP -= dmg;
+        if (currHP <= 0)
+        {
+            StartCoroutine(Death());
+        }
         Debug.Log("HP: " + currHP);
     }
 
@@ -451,8 +459,9 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
         Debug.Log("player hit by explosion");
     }
 
-    void Death()
+    IEnumerator Death()
     {
-        //
+        yield return null;
+        gameLevel.ResetToLastCheckpoint();
     }
 }
