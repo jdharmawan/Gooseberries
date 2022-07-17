@@ -10,7 +10,7 @@ namespace Interactables
 
         [HideInInspector] public Cinemachine.CinemachineVirtualCamera virtualCamera;
         [HideInInspector] public GameManager_Level levelManager;
-        [HideInInspector] public bool isActivating = false;
+        [HideInInspector] public bool isMoving = false;
 
         bool isEngaged = false;
 
@@ -23,21 +23,28 @@ namespace Interactables
 
         public bool isCameraZoom = true;
 
+        Vector2 initial;
+
+        enum ElevatorState
+        {
+            Ascending,
+            Descending
+        }
+
         private void Start()
         {
+            initial = transform.localPosition;
             Initialise_Activators();
         }
 
         private void Update()
         {
-            if (!isActivating)
+            if (!isMoving)
             {
                 if (IsActivated() && !isEngaged)
                     cor = StartCoroutine(ElevatorActivating());
-            }
-            if (!IsActivated())
-            {
-                Disengage();
+                if (!IsActivated() && isEngaged)
+                    cor = StartCoroutine(ElevatorDeactivating());
             }
                 
         }
@@ -78,8 +85,7 @@ namespace Interactables
         IEnumerator ElevatorActivating()
         {
             lerpTime = 0f;
-            Vector2 initial = transform.localPosition;
-            isActivating = true;
+            isMoving = true;
             if (isCameraZoom) virtualCamera.Follow = transform;
             while (true)
             {
@@ -88,7 +94,7 @@ namespace Interactables
                 if (lerpTime < 1.5f)
                 {
                     transform.localPosition = Vector2.Lerp(initial, targetPosition, t);
-                    if (isActivating)
+                    if (isMoving)
                     {
                         if (!IsActivated())
                         {
@@ -99,8 +105,39 @@ namespace Interactables
                 else
                 {
                     //transform.localPosition = targetPosition;
-                    isActivating = false;
+                    isMoving = false;
                     if (IsActivated()) isEngaged = true;
+                    virtualCamera.Follow = levelManager.player.transform;
+                    StopCoroutine(cor);
+                }
+                yield return null;
+            }
+        }
+
+        IEnumerator ElevatorDeactivating()
+        {
+            lerpTime = 0f;
+            isMoving = true;
+            if (isCameraZoom) virtualCamera.Follow = transform;
+            while (true)
+            {
+                lerpTime += Time.deltaTime;
+                float t = lerpTime / 1.5f;
+                if (lerpTime < 1.5f)
+                {
+                    transform.localPosition = Vector2.Lerp(targetPosition, initial, t);
+                    if (isMoving)
+                    {
+                        if (IsActivated())
+                        {
+                            transform.localPosition = Vector2.Lerp(curPosition, initial, t);
+                        }
+                    }
+                }
+                else
+                {
+                    isMoving = false;
+                    if (!IsActivated()) isEngaged = false;
                     virtualCamera.Follow = levelManager.player.transform;
                     StopCoroutine(cor);
                 }

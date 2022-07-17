@@ -14,18 +14,22 @@ using UnityEngine;
 public struct SavedPlayer
 {
     public int skillPoints ;
-    public int hp ;
-    public int arrows ;
+    public int maxHP;
+    public int currHP;
+    public int maxArrows;
+    public int currArrows;
     public float moveSpeed;
     public int vitalityLevel ;
     public int quiverLevel ;
     public int speedLevel;
 
-    public SavedPlayer (int _skillPoints, int _hp, int _arrows, float _moveSpeed, int _vitalityLevel, int _quiverLevel, int _speedLevel)
+    public SavedPlayer (int _skillPoints, int _maxHP, int _currHP, int _maxArrows, int _currArrows, float _moveSpeed, int _vitalityLevel, int _quiverLevel, int _speedLevel)
     {
         skillPoints = _skillPoints;
-        hp = _hp;
-        arrows = _arrows;
+        maxHP = _maxHP;
+        currHP = _currHP;
+        maxArrows = _maxArrows;
+        currArrows = _currArrows;
         moveSpeed = _moveSpeed;
         vitalityLevel = _vitalityLevel;
         quiverLevel = _quiverLevel;
@@ -61,8 +65,6 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     public int maxArrows = 3;
     public int currArrows = 3;
     public int skillPoints = 0;
-    public int hp = 3;
-    public int arrows = 3;
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public int vitalityLevel = 1;
     [HideInInspector] public int quiverLevel = 1;
@@ -113,8 +115,10 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     public void SetPlayerSavedData(SavedPlayer savePlayer)
     {
         skillPoints = savePlayer.skillPoints;
-        hp = savePlayer.hp;
-        arrows = savePlayer.arrows;
+        maxHP = savePlayer.maxHP;
+        currHP = savePlayer.currHP;
+        maxArrows = savePlayer.maxArrows;
+        currArrows = savePlayer.currArrows;
         moveSpeed = savePlayer.moveSpeed;
         vitalityLevel = savePlayer.vitalityLevel;
         quiverLevel = savePlayer.quiverLevel;
@@ -122,7 +126,7 @@ public class PlayerController : MonoBehaviour, IReceiveExplosion
     }
     public SavedPlayer GetPlayerSavedData()
     {
-        return new SavedPlayer(skillPoints, hp, arrows, moveSpeed, vitalityLevel, quiverLevel, speedLevel);
+        return new SavedPlayer(skillPoints, maxHP, currHP, maxArrows, currArrows, moveSpeed, vitalityLevel, quiverLevel, speedLevel);
     }
     private void GetPlayerInput()
     {

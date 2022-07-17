@@ -22,7 +22,7 @@ namespace Interactables
         [SerializeField] List<GameObject> enemies;
         [SerializeField] List<EnemySpawnPoint> spawnPoints;
 
-        private List<GameObject> spawnedEnemy = new List<GameObject>();
+        [HideInInspector] public List<GameObject> spawnedEnemies = new List<GameObject>();
 
         private PlayerController player;
 
@@ -31,15 +31,21 @@ namespace Interactables
             bonfireCollider = GetComponent<Collider2D>();
             SetBlockerActive(false);
             player = FindObjectOfType<PlayerController>();
+            isVisited = false;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == "Player" && isActive == false && bonfireIndex >= 0)
             {
-                Debug.Log("activeate bon fire");
-                levelManager.ActivateBonfireZone(this);
+                if(isVisited == false)
+                {
+                    isVisited = true;
+                    Debug.Log("activeate bon fire");
+                    levelManager.checkPoint.savedPlayer = player.GetPlayerSavedData();
+                }
                 levelManager.TriggerUpgrade();
+                levelManager.ActivateBonfireZone(this);
                 UpdateLatestCheckpoint();
                 GameManager_Level.isPlayerLocked = true;
             }
@@ -67,13 +73,13 @@ namespace Interactables
 
         public void SpawnEnemies(int numberOfEnemies)
         {
-            spawnedEnemy = new List<GameObject>();
+            spawnedEnemies = new List<GameObject>();
             //Debug.Log(transform.name);
             for (int i = 0; i < numberOfEnemies; i++)
             {
                 //Debug.Log(enemies[i].name, enemies[i].gameObject);
                 //enemies[i].SetActive(true);
-                spawnedEnemy.Add(Instantiate(spawnPoints[i].enemyPrefab, spawnPoints[i].transform.position, spawnPoints[i].transform.rotation));
+                spawnedEnemies.Add(Instantiate(spawnPoints[i].enemyPrefab, spawnPoints[i].transform.position, spawnPoints[i].transform.rotation));
             }
             ZoneEnemyCounter.SetZoneEnemyNumber(levelManager.CurrentBonfireCleared,numberOfEnemies);
         }

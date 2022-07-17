@@ -98,11 +98,18 @@ public class GameManager_Level : MonoBehaviour
         display.RespawnUpgrateSession();
         player.transform.position = curBonFire.transform.position;
         player.knight.transform.position = curBonFire.transform.position;
+        for (int i = 0; i < curBonFire.spawnedEnemies.Count; i++)
+        {
+            if (curBonFire.spawnedEnemies[i] != null)
+            {
+                Destroy(curBonFire.spawnedEnemies[i]);
+            }
+        }
+        curBonFire.spawnedEnemies.Clear();
     }
 
     public void ActivateBonfireZone(Interactables.BonfireHandler _curBonFire)
     {
-        checkPoint.savedPlayer = player.GetPlayerSavedData();
         curBonFire = _curBonFire;
         bonfires[_curBonFire.bonfireIndex].GetComponent<Interactables.BonfireHandler>().SetBlockerActive(true);
         Debug.Log("INDEX: " + _curBonFire.bonfireIndex + 1);
