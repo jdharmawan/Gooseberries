@@ -372,6 +372,12 @@ MonoBehaviour:
     pitch: 0
     loop: 0
     source: {fileID: 0}
+  - name: Level 1 BGM
+    clip: {fileID: 8300000, guid: 5efcfa5a4f3a5f042849977f38ea4801, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
 --- !u!4 &608004444
 Transform:
   m_ObjectHideFlags: 0
