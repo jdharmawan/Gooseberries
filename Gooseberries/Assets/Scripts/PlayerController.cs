@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 force = new Vector2();
     private Vector3 mousePos = new Vector3();
     private bool facingRight = true;
+    private GameObject tempArrow;
 
     public int skillPoints = 0;
     public int hp = 3;
@@ -93,9 +94,11 @@ public class PlayerController : MonoBehaviour
             //if left click
             if (isGrounded)
             {
+                rb2d.velocity = Vector2.zero;
                 bowPivot.SetActive(true);
                 lineRenderer.gameObject.SetActive(true);
                 pState = playerState.Aiming;
+                SpawnArrow();
             }
         }
 
@@ -198,12 +201,19 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void SpawnArrow()
+    {
+        //tempArrow = Instantiate(arrow, arrowSpawner.transform.position, arrowSpawner.transform.rotation);
+        tempArrow = Instantiate(arrow, arrowSpawner);
+    }
+
     //below 2 functions might be enumerator, coz need to deal with eventual animations
     void Shoot()
     {
         //do shooting, handle anims then set to reloading
         //Instantiate(arrow, arrowSpawner, true);
-        Instantiate(arrow, arrowSpawner.transform.position, arrowSpawner.transform.rotation);
+        tempArrow.GetComponent<PlayerArrow>().Fire();
+        tempArrow.transform.parent = null;
         pState = playerState.Reloading;
         Reload();
     }
