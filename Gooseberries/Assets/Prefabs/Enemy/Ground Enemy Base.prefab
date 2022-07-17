@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ground Enemy Base
       objectReference: {fileID: 0}
+    - target: {fileID: 7701175277885750831, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2138006816, guid: 712f87840c9031a42b269e0df1166d21, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dbc0d6ed3a679324385b4b79382d1437, type: 3}
 --- !u!1 &2744910336020756731 stripped

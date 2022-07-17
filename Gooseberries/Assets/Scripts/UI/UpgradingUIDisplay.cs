@@ -41,6 +41,12 @@ public class UpgradingUIDisplay : MonoBehaviour
         DisplayUpgrades();
     }
 
+    public void RespawnUpgrateSession()
+    {
+        DisplayUpgrades();
+        StartCoroutine(StartRespawnReroll());
+    }
+
     void DisplayUpgrades()
     {
         playerSkillPoints.text = player.skillPoints.ToString();
@@ -97,6 +103,68 @@ public class UpgradingUIDisplay : MonoBehaviour
                     skillPointDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
                     levelManager.skillRolled = Utility.DiceHandler.Roll(diceFacePool);
                     diceFacePool.Remove(levelManager.skillRolled);
+                    player.skillPoints += levelManager.skillRolled;
+                    skillDiceValueTmp.alpha = 1f;
+                    skillDiceValueTmp.text = levelManager.skillRolled.ToString();
+                    isSkillRolled = true;
+                }
+            }
+            else if (isEnemyRolled && isSkillRolled)
+            {
+                raycastBlocker.SetActive(false);
+                DisplayUpgrades();
+                levelManager.UpdateDiceCollection();
+                StopCoroutine(cor);
+            }
+            levelManager.checkPoint.enemyRolled = levelManager.enemyRolled;
+            levelManager.checkPoint.skillRolled = levelManager.skillRolled;
+            yield return null;
+        }
+    }
+
+    IEnumerator StartRespawnReroll()
+    {
+        lerpTime = 0f;
+        isEnemyRolled = false;
+        isSkillRolled = false;
+        levelManager.enemyRolled = 0;
+        levelManager.skillRolled = 0;
+        enemyDiceValueTmp.alpha = 0f;
+        skillDiceValueTmp.alpha = 0f;
+        raycastBlocker.SetActive(true);
+
+        while (true)
+        {
+            lerpTime += Time.deltaTime;
+            float t = lerpTime;
+
+            if (!isEnemyRolled)
+            {
+                if (lerpTime < 1f)
+                {
+                    enemyDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
+                }
+                else
+                {
+
+                    enemyDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+                    levelManager.enemyRolled = levelManager.checkPoint.enemyRolled;
+                    enemyDiceValueTmp.alpha = 1f;
+                    enemyDiceValueTmp.text = levelManager.enemyRolled.ToString();
+                    isEnemyRolled = true;
+                    lerpTime = 0f;
+                }
+            }
+            else if (!isSkillRolled)
+            {
+                if (lerpTime < 1f)
+                {
+                    skillPointDice.transform.Rotate(0f, 0f, 1000 * Time.deltaTime);
+                }
+                else
+                {
+                    skillPointDice.transform.localRotation = new Quaternion(0f, 0f, 0f, 0f);
+                    levelManager.skillRolled = levelManager.checkPoint.skillRolled;
                     player.skillPoints += levelManager.skillRolled;
                     skillDiceValueTmp.alpha = 1f;
                     skillDiceValueTmp.text = levelManager.skillRolled.ToString();
