@@ -1012,6 +1012,22 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6621653444528041044, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621653444528041044, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621653444528041044, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0.024456024
+      objectReference: {fileID: 0}
+    - target: {fileID: 6621653444528041044, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.024383545
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 009d50e28bfba1044b7797883fb9ab33, type: 3}
 --- !u!1001 &5428145602732091797

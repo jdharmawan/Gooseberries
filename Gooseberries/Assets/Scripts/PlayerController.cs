@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private BoxCollider2D groundedCol;
     public GameObject bowPivot;
+    public Transform bowstringTop, bowstringBottom, pullbackPos;
+    public LineRenderer lineRenderer;
 
     private CapsuleCollider2D col;
     private Rigidbody2D rb2d;
@@ -54,6 +56,7 @@ public class PlayerController : MonoBehaviour
         pState = playerState.Idle;
         isGrounded = true;
         moveSpeed = 2f;
+        lineRenderer.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -70,6 +73,8 @@ public class PlayerController : MonoBehaviour
                 animator.SetTrigger("jump");
             }
         }
+
+        SetRenderLines();
     }
 
     private void GetPlayerInput()
@@ -89,6 +94,7 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 bowPivot.SetActive(true);
+                lineRenderer.gameObject.SetActive(true);
                 pState = playerState.Aiming;
             }
         }
@@ -102,6 +108,7 @@ public class PlayerController : MonoBehaviour
                 pState = playerState.Shooting;
                 Shoot();
                 bowPivot.SetActive(false);
+                lineRenderer.gameObject.SetActive(false);
             }
         }
 
@@ -296,6 +303,20 @@ public class PlayerController : MonoBehaviour
         {
             //do jump anim
         }
+    }
+    private void SetRenderLines()
+    {
+        var points = new Vector3[3];
+
+        //points[0] = bowstringTop.transform.position;
+        //points[1] = pullbackPos.transform.position;
+        //points[2] = bowstringBottom.transform.position;
+
+        points[0] = new Vector3(bowstringTop.transform.position.x, bowstringTop.transform.position.y, bowstringTop.transform.position.z - 0.01f);
+        points[1] = new Vector3(pullbackPos.transform.position.x, pullbackPos.transform.position.y, pullbackPos.transform.position.z - 0.01f);
+        points[2] = new Vector3(bowstringBottom.transform.position.x, bowstringBottom.transform.position.y, bowstringBottom.transform.position.z - 0.01f);
+
+        lineRenderer.SetPositions(points);
     }
 
     public void SetIsGrounded(bool b)
